@@ -63,7 +63,6 @@
       "type": "number",
       "default": 0
     },
-
     "status": {
       "type": "string",
       "default": "OK"
