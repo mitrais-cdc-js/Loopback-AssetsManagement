@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node .",
-    "posttest": "npm run lint && nsp check"
+    "test": "mocha test/**/*.test.js",
+    "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
     "compression": "^1.0.3",
