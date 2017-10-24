@@ -43,23 +43,31 @@ module.exports = function(Asset) {
 
     Asset.validatesLengthOf('history', {
         max: 100,
+        allowNull: true,
+        allowBlank: true,
         message: {
             max: 'The asset history is to long'
         }
     })
 
     Asset.validatesInclusionOf('riskLevel', {
-        in: ['OK'], message: 'is not allowed' 
+        in: [1], 
+        allowNull: true,
+        allowBlank: true,
+        message: 'is not allowed' 
     });
 
     Asset.validatesInclusionOf('complianceStatus', {
-        in: ['COMPLIANT'], message: 'is not allowed' 
+        in: ['COMPLIANT'], 
+        allowNull: true,
+        allowBlank: true,
+        message: 'is not allowed' 
     });
 
     Asset.validatesInclusionOf('status', {
-        in: ['OK', 'OVERDUE INSPECTITON', 'DO NOT USE'], message: 'is not allowed' 
+        in: ['OK', 'OVERDUE INSPECTITON', 'DO NOT USE'], 
+        allowNull: true,
+        allowBlank: true,
+        message: 'is not allowed' 
     });
-
-
-
 };
