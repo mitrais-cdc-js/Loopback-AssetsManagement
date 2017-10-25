@@ -6,6 +6,18 @@ export class Asset {
         public createDate: string = "",
         public productionDate: string = "",
         public description: string = "",
-        public riskLevel: string = ""
+        public riskLevel: number = 0,
+        public complienceStatus: string = "",
+        public installedDate: string = "",
+        public scheduledReplacementDate: string = "", 
+        public recertificationInterval: number = 0,
+        public lifeSpan: number = 0,
+        public lastRecertificationDate: string = "",
+        public lastRecertificationResult: string = "",
+        public nextRecertificationDate: string = "",
+        public relatedDeliveryOrder: number = 0,
+        public status: string = "",
+        public history: string = "",
+   		public geolocation: string = ""
     ){}
 }
