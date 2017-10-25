@@ -1,4 +1,4 @@
 # Loopback-AssetsManagement
 Asset Management Application using Loopback
 
-... just a test
+... just a test2
