@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Asset, IAsset } from './asset'; 
+//services
+import { DataService } from '../services/data.services';
+
+//module
+import { Asset } from './asset'; 
 
 @Component({
   	selector: 'app-asset',
@@ -9,10 +13,16 @@ import { Asset, IAsset } from './asset';
 })
 export class AssetComponent implements OnInit {
 	
-	title = 'Asset Management Application';
+  title = 'Asset Management Application';
+  
+  assets:Asset[];
 
-  constructor() { 
+  constructor( private dataService:DataService ) { 
     console.log('AssetComponent const called...')
+
+    this.dataService.getAssets().subscribe((assets) => {
+      //this.assets = assets
+    });
   }
 
   ngOnInit() {
