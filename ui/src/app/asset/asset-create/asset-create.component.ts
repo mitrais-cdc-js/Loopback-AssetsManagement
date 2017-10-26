@@ -20,6 +20,7 @@ export class AssetCreateComponent implements OnInit {
 
 	createAsset(){
 		console.log("Hello.... createAsset() method works!");
+		console.log(this.newAsset);
 	}
 
 }
