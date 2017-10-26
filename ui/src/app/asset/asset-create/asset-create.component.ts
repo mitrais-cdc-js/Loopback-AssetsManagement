@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Asset } from './../asset';
+import { Asset, IAsset } from './../asset';
+
 
 @Component({
 	selector: 'app-asset-create',
@@ -10,17 +11,21 @@ import { Asset } from './../asset';
 export class AssetCreateComponent implements OnInit {
 	title = 'Asset Management Application';
 	
-	newAsset = new Asset();
-	constructor() { }
+  newAsset = new Asset();
+  
+	constructor() { 
+    console.log('AssetCreateComponent const called...');
+    console.log(this.newAsset);
+  }
 
 	ngOnInit() {
-	
-	}
-
-
-	createAsset(){
+    console.log('ngOnInit called...')
+  }
+  
+  createAsset(){
 		console.log("Hello.... createAsset() method works!");
 		console.log(this.newAsset);
 	}
-
 }
+
+

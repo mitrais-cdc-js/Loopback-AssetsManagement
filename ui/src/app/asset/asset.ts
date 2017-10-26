@@ -21,3 +21,12 @@ export class Asset {
    		public geolocation: string = ""
     ){}
 }
+
+export interface IAsset {
+    createDate:Date;
+    productionDate:Date;
+    description:string;
+    model:string;
+    serial:string;
+    batchNo:string;
+  }
