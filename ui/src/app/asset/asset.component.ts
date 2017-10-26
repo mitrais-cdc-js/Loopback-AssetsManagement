@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Asset, IAsset } from './asset'; 
+
 @Component({
   	selector: 'app-asset',
   	templateUrl: './asset.component.html',
@@ -9,9 +11,11 @@ export class AssetComponent implements OnInit {
 	
 	title = 'Asset Management Application';
 
-  	constructor() { }
+  constructor() { 
+    console.log('AssetComponent const called...')
+  }
 
-  	ngOnInit() {
-  	}
-
+  ngOnInit() {
+    console.log('ngOnInit called...')
+  }
 }

@@ -5,4 +5,4 @@ export interface Asset{
     model:string;
     serial:string;
     batchNo:string;
-  };
+  }
