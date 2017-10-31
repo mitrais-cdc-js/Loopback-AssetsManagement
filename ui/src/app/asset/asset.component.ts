@@ -18,22 +18,50 @@ export class AssetComponent implements OnInit {
 	assets:Asset[];
 	errorMessage:any;
 
+   	settings = {
+	  	columns: {
+		    description: {
+		    	title: "description"
+		    },
+			model: {
+				title: "model"
+			},
+			serial: {
+				title: "serial"
+			},
+			productionDate: {
+				title: "productionDate",
+				filter: false
+			},
+			createDate: {
+				title: "createDate",
+				filter: false
+			},
+			status: {
+				title: "status",
+				filter: false
+			}
+	  	}
+	};
+
 	constructor( private dataService:DataService ) { 
 		console.log('AssetComponent const called...')
-
-		this.dataService.getAssets().subscribe(
-			data => {
-				console.log(data);
-				this.assets = data;
-			},
-			err => {
-				console.log("Error occured.")
-			});
-			
 	}
+
+	loadAssets() {
+
+        this.dataService.getAssets().subscribe(
+		data => {
+			console.log(data);
+			this.assets = data;
+		},
+		err => {
+			console.log("Error occured.")
+		});
+   	}
 
 	ngOnInit() {
 		console.log('ngOnInit called...');
-
+      	this.loadAssets();
 	}
 }

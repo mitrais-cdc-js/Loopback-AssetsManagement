@@ -34,9 +34,9 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
 	imports: [
 		BrowserModule,
 		FormsModule,
-    HttpModule,
-    AssetsModule,
-    rootRouting,
+    	HttpModule,
+    	AssetsModule,
+    	rootRouting,
 	],
 	providers: [DataService],
 	bootstrap: [AppComponent]
