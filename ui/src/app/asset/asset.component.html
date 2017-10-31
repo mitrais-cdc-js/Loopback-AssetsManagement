@@ -1,3 +1,32 @@
-<p>
-  asset works!
-</p>
+<h4>List of Assets</h4>
+<!-- <table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Description</th>
+			<th>Model</th>
+			<th>Serial</th>
+			<th>Production Date</th>
+			<th>Create Date</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let asset of assets">
+			<td>{{ asset.description }}</td>
+			<td>{{ asset.model }}</td>
+			<td>{{ asset.serial }}</td>
+			<td>{{ asset.productionDate }}</td>
+			<td>{{ asset.createDate }}</td>
+			<td>{{ asset.status }}</td>
+			<td>
+				<a routerLink="/assets/{{ asset.id }}" class="label label-info">view</a>
+				<a routerLink="/assets/edit/{{ asset.id }}" class="label label-warning">edit</a>
+				<a routerLink="/assets/delete{{ asset.id }}" class="label label-danger">delete</a>
+			</td>
+		</tr>
+	</tbody>
+</table> -->
+
+<ng2-smart-table [settings]="settings" [source]="assets" class="test-tlass"></ng2-smart-table>
+
