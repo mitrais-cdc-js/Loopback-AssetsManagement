@@ -2,5 +2,14 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "mongo": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "ng_lb_asset",
+    "password": "",
+    "name": "mongo",
+    "connector": "mongodb",
+    "user": "test"
   }
 }
