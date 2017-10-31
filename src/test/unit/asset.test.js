@@ -71,4 +71,22 @@ describe('It should resolve the routes', function() {
                 "batchNo": "334912",
                 "description": "work-station" }).expect(422, done)
     })
+    
+    it('to get all assets and succeed', function() {
+        return request
+            .get('/api/Assets')
+            .expect(200)
+    })
+
+    it('to get asset that we just added and succeed', function() {
+        return request
+            .get('/api/Assets/1')
+            .expect(res => res === asset)
+    })
+
+    it('to get a non existing asset and failed', function() {
+        return request
+            .get('/api/Assets/2')
+            .expect(404)
+    })
 })
