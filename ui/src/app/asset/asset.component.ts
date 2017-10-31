@@ -16,16 +16,24 @@ export class AssetComponent implements OnInit {
   title = 'Asset Management Application';
   
   assets:Asset[];
+  errorMessage:any;
 
   constructor( private dataService:DataService ) { 
     console.log('AssetComponent const called...')
 
-    this.dataService.getAssets().subscribe((assets) => {
-      //this.assets = assets
-    });
+    this.dataService.getAssets().subscribe(
+      data => {
+        console.log(data);
+        this.assets = data;
+      },
+      err => {
+        console.log("Error occured.")
+      });
+      
   }
 
   ngOnInit() {
-    console.log('ngOnInit called...')
+    console.log('ngOnInit called...');
+
   }
 }

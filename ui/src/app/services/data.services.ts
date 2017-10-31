@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from "@angular/http";
+import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import 'rxjs/add/operator/map';
+
+//module
+import { Asset } from '../asset/asset'; 
 
 @Injectable()
 export class DataService {
@@ -8,6 +11,7 @@ export class DataService {
     constructor( public http:Http ) {
         console.log('DataService const called...')
     }
+
 
     convertStringToDate(string){
         return string.split('/')[1] + "/" + string.split('/')[0] + "/" + string.split('/')[2];
@@ -65,7 +69,7 @@ export class DataService {
     }
 
     getAssets() {
-        return this.http.get('localhost:3000/api/assets')
+        return this.http.get('http://localhost:3000/api/assets')
             .map((res: Response) => res.json());
     }
 }
