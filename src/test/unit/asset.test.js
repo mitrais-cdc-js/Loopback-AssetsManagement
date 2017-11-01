@@ -108,7 +108,7 @@ describe('It should resolve the routes', function() {
     
     it('to get all assets ordered by latest created date first and succeed', function() {
         return request
-            .get('/api/assets/sort_create_date?sort=asc')
+            .get('/api/assets?filter=%7B%22order%22%3A%20%22createDate%20asc%22%7D')
             .expect(200)
     })
 })

@@ -72,7 +72,4 @@ export class DataService {
         return this.http.get('http://localhost:3000/api/assets')
             .map((res: Response) => res.json());
     }
-
-    getSortedAssets() {
-    }
 }
