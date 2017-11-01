@@ -41,6 +41,9 @@ export class AssetComponent implements OnInit {
 				title: "status",
 				filter: false
 			}
+	  	},
+	  	actions: {
+	  		add: false
 	  	}
 	};
 
