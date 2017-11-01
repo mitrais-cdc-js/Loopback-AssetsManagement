@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 
 //services
 import { DataService } from './services/data.services';
+import { NavigationComponent } from './navigation/navigation.component';
 
 //define routes
 const appRoutes:Routes = [
@@ -29,7 +30,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
 	declarations: [
 		AppComponent,
 		HeaderComponent,
-		HomeComponent
+		HomeComponent,
+		NavigationComponent
 	],
 	imports: [
 		BrowserModule,
