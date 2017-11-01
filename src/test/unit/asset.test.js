@@ -105,4 +105,10 @@ describe('It should resolve the routes', function() {
             .get('/api/Assets/2')
             .expect(404)
     })
+    
+    it('to get all assets ordered by latest created date first and succeed', function() {
+        return request
+            .get('/api/assets/sort_create_date?sort=asc')
+            .expect(200)
+    })
 })
