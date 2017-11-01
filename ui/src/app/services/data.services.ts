@@ -72,4 +72,9 @@ export class DataService {
         return this.http.get('http://localhost:3000/api/assets')
             .map((res: Response) => res.json());
     }
+
+    getSortedAssets(order) {
+        return this.http.get(`http://localhost:3000/api/assets/sort_create_date?sort=${order}`)
+            .map((res: Response) => res.json());
+    }
 }
