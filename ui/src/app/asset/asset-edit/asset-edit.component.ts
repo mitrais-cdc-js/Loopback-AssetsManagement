@@ -30,7 +30,8 @@ export class AssetEditComponent implements OnInit {
  			asset.lastRecertificationDate = this.dateFormat(new Date(asset.lastRecertificationDate));
  			asset.nextRecertificationDate = this.dateFormat(new Date(asset.nextRecertificationDate));
  			asset.productionDate = this.dateFormat(new Date(asset.productionDate));
- 			asset.geolocation = asset.geolocation.lat + ',' + asset.geolocation.lng
+ 			asset.geolocation = asset.geolocation.lat + ',' + asset.geolocation.lng;
+ 			
  			this.asset = asset;
  		}).catch(e => console.log(e));
  	}

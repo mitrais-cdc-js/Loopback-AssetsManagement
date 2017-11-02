@@ -98,6 +98,8 @@ export class DataService {
             asset.nextRecertificationDate = new Date(this.convertStringToDate(asset.nextRecertificationDate));
         }
 
+        asset.createDate = new Date();
+        
         console.log(asset);
         return this.http.put('http://localhost:3000/api/assets/'+id, asset)
         .map((res: Response) => res.json()).toPromise();
