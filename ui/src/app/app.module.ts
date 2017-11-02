@@ -15,8 +15,10 @@ import { HomeComponent } from './home/home.component';
 
 //services
 import { DataService } from './services/data.services';
+
 //3rd part
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NavigationComponent } from './navigation/navigation.component';
 
 //define routes
 const appRoutes:Routes = [
@@ -31,15 +33,16 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
 	declarations: [
 		AppComponent,
 		HeaderComponent,
-		HomeComponent
+		HomeComponent,
+		NavigationComponent
 	],
 	imports: [
 		BrowserModule,
 		FormsModule,
 		Ng2SmartTableModule,
-    HttpModule,
-    AssetsModule,
-    rootRouting,
+    	HttpModule,
+    	AssetsModule,
+    	rootRouting,
 	],
 	providers: [DataService],
 	bootstrap: [AppComponent]

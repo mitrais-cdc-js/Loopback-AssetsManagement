@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 //services
 import { DataService } from '../../services/data.services';
@@ -15,31 +16,30 @@ import { Asset } from './../asset';
 export class AssetCreateComponent implements OnInit {
 	title = 'Asset Management Application';
 	
-  newAsset = new Asset();
-  
+	//newAsset = new Asset();
+	
 	constructor( private dataService:DataService ) { 
-    console.log('AssetCreateComponent const called...');
-    console.log(this.newAsset);
-  }
+		console.log('AssetCreateComponent const called...');
+	
+	}
 
 	ngOnInit() {
-    console.log('ngOnInit called...');
+		console.log('ngOnInit called...');
 
-    this.dataService
-  }
-  
-  createAsset(){
-		console.log("Hello.... createAsset() method works!");
-    console.log(this.newAsset);
-    
-    let temp = this.newAsset;
-    this.dataService.createAsset(temp).subscribe(
-      error => {
-        console.error("Error saving food!");
-       // return Observable.throw(error);
-      }
-    )
-  }
+		//this.dataService
+	}
+
+	createAsset(form: NgForm){
+
+		this.dataService.createAsset(form.value)
+		
+		/*this.dataService.createAsset(form.value)
+		.then( asset => {
+			console.log(asset);
+		}).catch( e => {
+			console.log(e);
+		})*/
+	}
 }
 
 

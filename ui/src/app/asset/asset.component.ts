@@ -18,11 +18,6 @@ import { CustomDateRenderComponent } from "./customDateRender.component";
 
 export class AssetComponent implements OnInit {
 	
-  title = 'Asset Management Application';
-  
-  assets:Asset[];
-  errorMessage:any;
-
   settings = {
     columns: {
         model: {
@@ -52,25 +47,30 @@ export class AssetComponent implements OnInit {
 
   source: ServerDataSource;
 
-  constructor( http: Http, protected dataService:DataService ) { 
-    console.log('AssetComponent const called...')
+	title = 'Asset Management Application';
+	
+	assets:Asset[];
+	errorMessage:any;
+
+	constructor( http: Http, protected dataService:DataService ) { 
+    console.log('AssetComponent const called...');
     this.source = new ServerDataSource(http, { endPoint: 'http://localhost:3000/api/assets' });
-  }
- 
-  readAssestBySubcription() {
+	}
 
-    this.dataService.getAssets().subscribe(
-      data => {
-        console.log(data);
-        this.assets = data;
-      },
-      err => {
-        console.log("Error occured.")
-    });
-  }
+	loadAssets() {
 
-  ngOnInit() {
-    console.log('ngOnInit called...');
+        this.dataService.getAssets().subscribe(
+		data => {
+			console.log(data);
+			this.assets = data;
+		},
+		err => {
+			console.log("Error occured.")
+		});
+   	}
 
-  }
+	ngOnInit() {
+		console.log('ngOnInit called...');
+      	this.loadAssets();
+	}
 }

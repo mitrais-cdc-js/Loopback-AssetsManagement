@@ -2,78 +2,84 @@
 	<div class="col-md-6">
 		<div class="asset-form">
 			<h3>Create New Asset</h3>
-			<form (submit)="createAsset()">
+			<form #assetForm="ngForm" (submit)="createAsset(assetForm)">
 				<div class="form-group">
 					<label for="">Risk Level</label>
-					<input type="number" class="form-control" placeholder="Risk Level" name="riskLevel" [(ngModel)]="newAsset.riskLevel">
+					<input type="number" class="form-control" placeholder="Risk Level" name="riskLevel" ngModel>
 				</div>
 				<div class="form-group">
 					<label for="">Complience Status</label>
-					<input type="text" class="form-control" placeholder="Complience Status" name="complienceStatus" [(ngModel)]="newAsset.complienceStatus">
+					<input type="text" class="form-control" placeholder="Complience Status" name="complienceStatus" ngModel>
 				</div>
 				<div class="form-group">
 					<label for="">Installed Date</label>
-					<input type="text" class="form-control datepicker" placeholder="Installed Date" name="installedDate" [(ngModel)]="newAsset.installedDate">
+					<input type="text" class="form-control" placeholder="Installed Date" name="installedDate" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
 					<label for="">Description *</label>
-					<textarea class="form-control" placeholder="Description " name="description" [(ngModel)]="newAsset.description"></textarea>
+					<textarea class="form-control" placeholder="Description " name="description" ngModel></textarea>
 				</div>
 				<div class="form-group">
 					<label for="">Life Span / Warranty (in weeks)</label>
-					<input type="number" class="form-control" placeholder="Life Span / Warranty" name="lifeSpan" [(ngModel)]="newAsset.lifeSpan">
+					<input type="number" class="form-control" placeholder="Life Span / Warranty" name="lifeSpan" ngModel>
 				</div>
 				<div class="form-group">
 					<label for="">Scheduled Replacement Date</label>
-					<input type="text" class="form-control datepicker" placeholder="Scheduled Replacement Date" name="scheduledReplacementDate" [(ngModel)]="newAsset.scheduledReplacementDate">
+					<input type="text" class="form-control" placeholder="Scheduled Replacement Date" name="scheduledReplacementDate" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
 					<label for="">Re-Certification Interval</label>
-					<input type="number" class="form-control" placeholder="Re-Certification Interval" name="recertificationInterval" [(ngModel)]="newAsset.recertificationInterval">
+					<input type="number" class="form-control" placeholder="Re-Certification Interval" name="recertificationInterval" ngModel>
 				</div>
 				<div class="form-group">
 					<label for="">Last Re-Certification Date</label>
-					<input type="text" class="form-control datepicker" placeholder="Last Re-Certification Date" name="lastRecertificationDate" [(ngModel)]="newAsset.lastRecertificationDate">
+					<input type="text" class="form-control" placeholder="Last Re-Certification Date" name="lastRecertificationDate" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
 					<label for="">Last Re-Certification Result</label>
-					<input type="text" class="form-control" placeholder="Last Re-Certification Result" name="lastRecertificationResult" [(ngModel)]="newAsset.lastRecertificationResult">
+					<input type="text" class="form-control" placeholder="Last Re-Certification Result" name="lastRecertificationResult" ngModel>
 				</div>
 				<div class="form-group">
 					<label for="">Next Re-Certification Date</label>
-					<input type="text" class="form-control datepicker" placeholder="Next Re-Certification Date" name="nextRecertificationDate" [(ngModel)]="newAsset.nextRecertificationDate">
+					<input type="text" class="form-control" placeholder="Next Re-Certification Date" name="nextRecertificationDate" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
-					<label for="">Model</label>
-					<input type="text" class="form-control" placeholder="Model" name="model" [(ngModel)]="newAsset.model" required="required">
+					<label for="">Model *</label>
+					<input type="text" class="form-control" placeholder="Model" name="model" ngModel required="required">
 				</div>
 				<div class="form-group">
-					<label for="">Serial</label>
-					<input type="text" class="form-control" placeholder="Serial" name="serial" [(ngModel)]="newAsset.serial" required="required">
+					<label for="">Serial *</label>
+					<input type="text" class="form-control" placeholder="Serial" name="serial" ngModel required="required">
 				</div>
 				<div class="form-group">
-					<label for="">Batch No</label>
-					<input type="text" class="form-control" placeholder="Batch No" name="batchNo" [(ngModel)]="newAsset.batchNo" required="required">
+					<label for="">Batch No *</label>
+					<input type="text" class="form-control" placeholder="Batch No" name="batchNo" ngModel required="required">
 				</div>
 				<div class="form-group">
 					<label for="">Related Delivery Order</label>
-					<input type="number" class="form-control" placeholder="Related Delivery Order" name="relatedDeliveryOrder" [(ngModel)]="newAsset.relatedDeliveryOrder">
+					<input type="number" class="form-control" placeholder="Related Delivery Order" name="relatedDeliveryOrder" ngModel>
 				</div>
 				<div class="form-group">
 					<label for="">Geolocation</label>
-					<input type="text" class="form-control" placeholder="Geolocation" name="geolocation" [(ngModel)]="newAsset.geolocation">
+					<input type="text" class="form-control" placeholder="Geolocation" name="geolocation" ngModel>
+					<p class="help-block">Example: -7.800386,110.3937263 </p>
 				</div>
 				<div class="form-group">
-					<label for="">Production Date</label>
-					<input type="text" class="form-control datepicker" placeholder="Production Date" name="productionDate" [(ngModel)]="newAsset.productionDate">
+					<label for="">Production Date *</label>
+					<input type="text" class="form-control" placeholder="Production Date" name="productionDate" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
 					<label for="">Status</label>
-					<input type="text" class="form-control" placeholder="Status " name="status" [(ngModel)]="newAsset.status">
+					<input type="text" class="form-control" placeholder="Status " name="status" ngModel>
 				</div>
 				<div class="form-group">
 					<label for="">History </label>
-					<textarea class="form-control" placeholder="History " name="history" [(ngModel)]="newAsset.history"></textarea>
+					<textarea class="form-control" placeholder="History " name="history" ngModel></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary btn-block">Create</button>
 			</form>

@@ -77,5 +77,34 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": {}
+  "methods": {
+    "sortByCreateDate": {
+      "accepts": [
+        {
+          "arg": "sort",
+          "type": "string",
+          "required": true,
+          "description": "descending or ascending",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true,
+          "description": "list of assets"
+        }
+      ],
+      "description": "Get list of assets and sort by creation date",
+      "http": [
+        {
+          "path": "/sort_create_date",
+          "verb": "get"
+        }
+      ]
+    }
+  }
 }
