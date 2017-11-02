@@ -22,7 +22,7 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 ]);
 
 @NgModule({
-<<<<<<< HEAD
+
   imports: [
     CommonModule,
     FormsModule,
@@ -32,22 +32,11 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
   entryComponents: [
     CustomDateRenderComponent, 
   ],
-  declarations: [
-    AssetComponent,
-    AssetCreateComponent,
-    CustomDateRenderComponent,
-  ]
-=======
-	imports: [
-		CommonModule,
-		FormsModule,
-		assetRouting,
-		Ng2SmartTableModule
-	],
 	declarations: [
 		AssetComponent,
-		AssetCreateComponent,
+    AssetCreateComponent,
+    CustomDateRenderComponent,
 	]
->>>>>>> 4a5e4dcd87b0e0bd07303c1e87072d0a16840e20
 })
+
 export class AssetsModule { }
