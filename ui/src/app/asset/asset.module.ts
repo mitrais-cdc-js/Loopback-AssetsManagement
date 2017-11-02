@@ -6,6 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { AssetCreateComponent } from './asset-create/asset-create.component';
 import { AssetComponent } from './asset.component';
 
+import { CustomDateRenderComponent } from './customDateRender.component';
+
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 const assetRouting: ModuleWithProviders = RouterModule.forChild([
   {
     path: 'assets',
@@ -22,10 +26,15 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
     CommonModule,
     FormsModule,
     assetRouting,
+    Ng2SmartTableModule,
+  ],
+  entryComponents: [
+    CustomDateRenderComponent, 
   ],
   declarations: [
     AssetComponent,
     AssetCreateComponent,
+    CustomDateRenderComponent,
   ]
 })
 export class AssetsModule { }
