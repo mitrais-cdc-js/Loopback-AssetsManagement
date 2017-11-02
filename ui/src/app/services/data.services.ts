@@ -72,4 +72,9 @@ export class DataService {
         return this.http.get('http://localhost:3000/api/assets')
             .map((res: Response) => res.json());
     }
+
+    getAsset(id){
+        return this.http.get('http://localhost:3000/api/assets/' + id)
+        .map((res: Response) => res.json()).toPromise();
+    }
 }

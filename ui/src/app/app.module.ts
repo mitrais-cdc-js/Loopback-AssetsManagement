@@ -8,8 +8,6 @@ import { AssetsModule } from './asset/asset.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { AssetComponent } from './asset/asset.component';
-import { AssetCreateComponent } from './asset/asset-create/asset-create.component';
 
 import { HomeComponent } from './home/home.component';
 
@@ -19,9 +17,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 //define routes
 const appRoutes:Routes = [
-	{ path: '',	component: HomeComponent },
-	{ path: 'assets', component: AssetComponent },
-	{ path: 'assets/create', component: AssetCreateComponent }
+	{ path: '',	component: HomeComponent }
 ];
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: false });

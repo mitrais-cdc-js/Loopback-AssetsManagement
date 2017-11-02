@@ -1,0 +1,89 @@
+<div class="row">
+	<div class="col-md-6">
+		<div class="asset-form">
+			<h3>Edit Asset</h3>
+			<form #assetForm="ngForm" (submit)="createAsset(assetForm)">
+				<div class="form-group">
+					<label for="">Risk Level</label>
+					<input type="number" class="form-control" placeholder="Risk Level" name="riskLevel" value="{{ asset.riskLevel }}" ngModel>
+				</div>
+				<div class="form-group">
+					<label for="">Complience Status</label>
+					<input type="text" class="form-control" placeholder="Complience Status" name="complienceStatus" value="{{ asset.complienceStatus }}" ngModel>
+				</div>
+				<div class="form-group">
+					<label for="">Installed Date</label>
+					<input type="text" class="form-control" placeholder="Installed Date" name="installedDate" value="{{ asset.installedDate }}" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
+				</div>
+				<div class="form-group">
+					<label for="">Description *</label>
+					<textarea class="form-control" placeholder="Description " name="description" value="{{ asset.description }}" ngModel></textarea>
+				</div>
+				<div class="form-group">
+					<label for="">Life Span / Warranty (in weeks)</label>
+					<input type="number" class="form-control" placeholder="Life Span / Warranty" name="lifeSpan" value="{{ asset.lifeSpan }}" ngModel>
+				</div>
+				<div class="form-group">
+					<label for="">Scheduled Replacement Date</label>
+					<input type="text" class="form-control" placeholder="Scheduled Replacement Date" name="scheduledReplacementDate" value="{{ asset.scheduledReplacementDate }}" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
+				</div>
+				<div class="form-group">
+					<label for="">Re-Certification Interval</label>
+					<input type="number" class="form-control" placeholder="Re-Certification Interval" name="recertificationInterval" value="{{ asset.recertificationInterval }}" ngModel>
+				</div>
+				<div class="form-group">
+					<label for="">Last Re-Certification Date</label>
+					<input type="text" class="form-control" placeholder="Last Re-Certification Date" name="lastRecertificationDate" value="{{ asset.lastRecertificationDate }}" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
+				</div>
+				<div class="form-group">
+					<label for="">Last Re-Certification Result</label>
+					<input type="text" class="form-control" placeholder="Last Re-Certification Result" name="lastRecertificationResult" value="{{ asset.lastRecertificationResult }}" ngModel>
+				</div>
+				<div class="form-group">
+					<label for="">Next Re-Certification Date</label>
+					<input type="text" class="form-control" placeholder="Next Re-Certification Date" name="nextRecertificationDate" value="{{ asset.nextRecertificationDate }}" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
+				</div>
+				<div class="form-group">
+					<label for="">Model</label>
+					<input type="text" class="form-control" placeholder="Model" name="model" value="{{ asset.model }}" ngModel required="required">
+				</div>
+				<div class="form-group">
+					<label for="">Serial</label>
+					<input type="text" class="form-control" placeholder="Serial" name="serial" value="{{ asset.serial }}" ngModel required="required">
+				</div>
+				<div class="form-group">
+					<label for="">Batch No</label>
+					<input type="text" class="form-control" placeholder="Batch No" name="batchNo" value="{{ asset.batchNo }}" ngModel required="required">
+				</div>
+				<div class="form-group">
+					<label for="">Related Delivery Order</label>
+					<input type="number" class="form-control" placeholder="Related Delivery Order" name="relatedDeliveryOrder" value="{{ asset.relatedDeliveryOrder }}" ngModel>
+				</div>
+				<div class="form-group">
+					<label for="">Geolocation</label>
+					<input type="text" class="form-control" placeholder="Geolocation" name="geolocation" value="{{ asset.geolocation }}" ngModel>
+					<p class="help-block">Example: -7.800386,110.3937263 </p>
+				</div>
+				<div class="form-group">
+					<label for="">Production Date</label>
+					<input type="text" class="form-control" placeholder="Production Date" name="productionDate" value="{{ asset.productionDate }}" ngModel>
+					<p class="help-block">Format : DD/MM/YYYY</p>
+				</div>
+				<div class="form-group">
+					<label for="">Status</label>
+					<input type="text" class="form-control" placeholder="Status " name="status" value="{{ asset.status }}" ngModel>
+				</div>
+				<div class="form-group">
+					<label for="">History </label>
+					<textarea class="form-control" placeholder="History " name="history" value="{{ asset.history }}" ngModel></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">Create</button>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-6">&nbsp;</div>
+</div>
