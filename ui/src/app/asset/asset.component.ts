@@ -80,9 +80,23 @@ export class AssetComponent implements OnInit {
     this.dataService.createAsset(event.newData); 
   }
 
-	loadAssets() {
+	onSort(): void {
+		this.loadSortedAssets();
+	}
 
+	loadAssets() {
         this.dataService.getAssets().subscribe(
+		data => {
+			console.log(data);
+			this.assets = data;
+		},
+		err => {
+			console.log("Error occured.")
+		});
+   	}
+
+	loadSortedAssets() {
+        this.dataService.getSortedAssets('desc').subscribe(
 		data => {
 			console.log(data);
 			this.assets = data;
