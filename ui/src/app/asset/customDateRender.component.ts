@@ -14,12 +14,19 @@ export class CustomDateRenderComponent implements ViewCell, OnInit {
   @Input() value: string;
   @Input() rowData: any;
 
+  paddyHelper(n, p, c) {
+    var pad_char = typeof c !== 'undefined' ? c : '0';
+    var pad = new Array(1 + p).join(pad_char);
+    return (pad + n).slice(-pad.length);
+  }
+
   ngOnInit() {
     console.log(this.value);
     var date = new Date(this.value);
     
-    var temp = date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
+    var temp = this.paddyHelper( date.getDate(), 2, '0' ) + '/' +  this.paddyHelper( (date.getMonth() + 1), 2, '0') + '/' +  date.getFullYear();
     this.renderValue = temp;
   }
+
 
 }
