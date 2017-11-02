@@ -70,7 +70,9 @@ export class DataService {
             .map((res: Response) => res.json()).toPromise();
     }
 
-    parseDateFormat(format:string, value:string) : boolean {
+    parseDateFormat(value:string, format:string) : boolean {
+
+        console.log(value);
         let result:boolean = false;
         result = moment(value, format, true).isValid();
 
