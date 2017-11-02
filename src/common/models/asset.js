@@ -71,8 +71,6 @@ module.exports = function(Asset) {
 		message: 'is not allowed' 
 	});
 
-
-
 	/**
 	 * Get list of assets and sort by creation date
 	 * @param {string} sort descending or ascending
@@ -91,10 +89,8 @@ module.exports = function(Asset) {
 	  			assets: assets
 	  		}
 
+			console.log(result)
 	  		callback(null, result);
 	  	}).catch( e => callback(null, e));
-	  	
 	};
-
-
 };
