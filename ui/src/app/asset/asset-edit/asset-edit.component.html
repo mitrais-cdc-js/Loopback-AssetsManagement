@@ -2,7 +2,7 @@
 	<div class="col-md-6">
 		<div class="asset-form">
 			<h3>Edit Asset</h3>
-			<form #assetForm="ngForm" (submit)="createAsset(assetForm)">
+			<form #assetForm="ngForm" (submit)="editAsset(assetForm)">
 				<div class="form-group">
 					<label for="">Risk Level</label>
 					<input type="number" class="form-control" placeholder="Risk Level" name="riskLevel" value="{{ asset.riskLevel }}" ngModel>
@@ -81,7 +81,7 @@
 					<label for="">History </label>
 					<textarea class="form-control" placeholder="History " name="history" value="{{ asset.history }}" ngModel></textarea>
 				</div>
-				<button type="submit" class="btn btn-primary btn-block">Create</button>
+				<button type="submit" class="btn btn-primary btn-block">Update</button>
 			</form>
 		</div>
 	</div>

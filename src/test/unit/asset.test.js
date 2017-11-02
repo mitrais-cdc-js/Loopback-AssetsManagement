@@ -1,12 +1,13 @@
 const { app, expect, request } = require('../common')
 
+const now = new Date()
 const Asset = app.models.Asset
 const asset = new Asset({ 
     "model": "HP Probook", 
     "serial": "2133-3414-111",
     "batchNo": "334912",
-    "description": "work-station",
-    "createDate": "2017-04-23",
+    "description": "MITRAIS work-station",
+    "createDate": now.toString(),
     "productionDate": "2017-03-01" })
 
 describe('It should resolve', function() {
@@ -18,11 +19,7 @@ describe('It should resolve', function() {
 })
 
 describe('It should resolve the routes', function() {
-
-    var Asset
-
     before(function() {
-        Asset = app.models.Asset
     })
 
     beforeEach(function(done) {
@@ -104,5 +101,11 @@ describe('It should resolve the routes', function() {
         return request
             .get('/api/Assets/2')
             .expect(404)
+    })
+    
+    it('to get all assets ordered by latest created date first and succeed', function() {
+        return request
+            .get('/api/assets/sort_create_date?sort=asc')
+            .expect(200)
     })
 })

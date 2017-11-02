@@ -68,6 +68,32 @@ export class DataService {
         .map((res: Response) => res.json()).toPromise();
     }
 
+    updateAsset(asset, id){
+         if (asset.productionDate){
+            asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
+        }
+
+        if (asset.installedDate){
+            asset.installedDate = new Date(this.convertStringToDate(asset.installedDate));
+        }
+
+        if (asset.scheduledReplacementDate){
+            asset.scheduledReplacementDate = new Date(this.convertStringToDate(asset.scheduledReplacementDate));
+        }
+
+        if (asset.lastRecertificationDate){
+            asset.lastRecertificationDate = new Date(this.convertStringToDate(asset.lastRecertificationDate));
+        }
+
+        if (asset.nextRecertificationDate){
+            asset.nextRecertificationDate = new Date(this.convertStringToDate(asset.nextRecertificationDate));
+        }
+
+        console.log(asset);
+        return this.http.put('http://localhost:3000/api/assets/'+id, asset)
+        .map((res: Response) => res.json()).toPromise();
+    }
+
     getAssets() {
         return this.http.get('http://localhost:3000/api/assets')
             .map((res: Response) => res.json());
@@ -76,5 +102,10 @@ export class DataService {
     getAsset(id){
         return this.http.get('http://localhost:3000/api/assets/' + id)
         .map((res: Response) => res.json()).toPromise();
+    }
+    
+    getSortedAssets(order) {
+        return this.http.get(`http://localhost:3000/api/assets/sort_create_date?sort=${order}`)
+            .map((res: Response) => res.json());
     }
 }

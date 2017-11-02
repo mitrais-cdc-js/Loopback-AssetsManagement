@@ -1,5 +1,7 @@
 <h4>List of Assets</h4>
 <p>
+  <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+  
 	<a routerLink="/assets/create" class="pull-right">New Asset</a>
 </p>
 <table class="table table-bordered">
@@ -30,5 +32,6 @@
 		</tr>
 	</tbody>
 </table>
+<button type="submit" class="btn btn-default" (click)='onSort()'>Sort</button>
 <!-- <ng2-smart-table [settings]="settings" [source]="assets" class="test-tlass"></ng2-smart-table> -->
 
