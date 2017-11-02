@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import 'rxjs/add/operator/map';
 
+import * as moment from 'moment';
+
 //module
 import { Asset } from '../asset/asset'; 
 
@@ -9,7 +11,7 @@ import { Asset } from '../asset/asset';
 export class DataService {
 
     constructor( public http:Http ) {
-        console.log('DataService const called...')
+        console.log('DataService const called...');
     }
 
 
@@ -22,50 +24,57 @@ export class DataService {
         //let options = new RequestOptions({ headers: headers });
         //let body = JSON.stringify(asset);
         
-        console.log("halloo");
-
         asset.createDate = new Date();
         
-        console.log(asset.installedDate);
-
-        if (asset.productionDate){
-            asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
+        if (asset.productionDate) {
+            if( this.parseDateFormat(asset.productionDate, "DD/MM/YYYY") ) {
+                asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
+            } else {
+                throw new TypeError("Production Date is not valid formated in DD/MM/YYYY"); 
+            }
         }
 
-        if (asset.installedDate){
-            asset.installedDate = new Date(this.convertStringToDate(asset.installedDate));
+        if (asset.installedDate) {
+            if( this.parseDateFormat(asset.installedDate, "DD/MM/YYYY") ) {
+                asset.installedDate = new Date(this.convertStringToDate(asset.installedDate));
+            } else {
+                throw new TypeError("Installation Date is not valid formated in DD/MM/YYYY"); 
+            }
         }
 
-        if (asset.scheduledReplacementDate){
-            asset.scheduledReplacementDate = new Date(this.convertStringToDate(asset.scheduledReplacementDate));
+        if (asset.scheduledReplacementDate) {
+            if( this.parseDateFormat(asset.scheduledReplacementDate, "DD/MM/YYYY") ) {
+                asset.scheduledReplacementDate = new Date(this.convertStringToDate(asset.scheduledReplacementDate));
+            } else {
+                throw new TypeError("Schedule Replacement Date is not valid formated in DD/MM/YYYY"); 
+            }
         }
 
-        if (asset.lastRecertificationDate){
-            asset.lastRecertificationDate = new Date(this.convertStringToDate(asset.lastRecertificationDate));
+        if (asset.lastRecertificationDate) {
+            if( this.parseDateFormat(asset.lastRecertificationDate, "DD/MM/YYYY") ) {
+                asset.lastRecertificationDate = new Date(this.convertStringToDate(asset.lastRecertificationDate));
+            } else {
+                throw new TypeError("Last Recertification Date is not valid formated in DD/MM/YYYY"); 
+            }
         }
 
-        if (asset.nextRecertificationDate){
-            asset.nextRecertificationDate = new Date(this.convertStringToDate(asset.nextRecertificationDate));
+        if (asset.nextRecertificationDate) {
+            if( this.parseDateFormat(asset.nextRecertificationDate, "DD/MM/YYYY") ) {
+                asset.nextRecertificationDate = new Date(this.convertStringToDate(asset.nextRecertificationDate));
+            } else {
+                throw new TypeError("Next Recertification Date is not valid formated in DD/MM/YYYY"); 
+            }
         }
 
-
-        /* sample data
-        asset.riskLevel = 1;
-        asset.geolocation = '-7.800386,110.3937263'; 
-        asset.model = 'Model Test';
-        asset.serial = 'Serial Test2';
-        asset.batchNo = 'Batch No32432';
-        asset.productionDate = new Date();
-        asset.description = 'asasdasd';
-        asset.installedDate = new Date();
-        asset.scheduledReplacementDate = new Date();
-        asset.lastRecertificationDate = new Date();
-        asset.nextRecertificationDate = new Date();
-        */ 
-
-        console.log(asset);
         return this.http.post('http://localhost:3000/api/assets/', asset)
-        .map((res: Response) => res.json()).toPromise();
+            .map((res: Response) => res.json()).toPromise();
+    }
+
+    parseDateFormat(format:string, value:string) : boolean {
+        let result:boolean = false;
+        result = moment(value, format, true).isValid();
+
+        return result;
     }
 
     updateAsset(asset, id){
