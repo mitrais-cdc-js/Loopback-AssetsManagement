@@ -90,7 +90,7 @@ module.exports = function(Asset) {
 	  		}
 
 			console.log(result)
-	  		callback(null, result);
+	  		callback(null, assets);
 	  	}).catch( e => callback(null, e));
 	};
 };
