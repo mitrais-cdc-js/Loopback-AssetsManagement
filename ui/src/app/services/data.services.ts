@@ -141,34 +141,6 @@ export class DataService {
         return result;
     }
 
-    updateAsset(asset, id){
-         if (asset.productionDate){
-            asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
-        }
-
-        if (asset.installedDate){
-            asset.installedDate = new Date(this.convertStringToDate(asset.installedDate));
-        }
-
-        if (asset.scheduledReplacementDate){
-            asset.scheduledReplacementDate = new Date(this.convertStringToDate(asset.scheduledReplacementDate));
-        }
-
-        if (asset.lastRecertificationDate){
-            asset.lastRecertificationDate = new Date(this.convertStringToDate(asset.lastRecertificationDate));
-        }
-
-        if (asset.nextRecertificationDate){
-            asset.nextRecertificationDate = new Date(this.convertStringToDate(asset.nextRecertificationDate));
-        }
-
-        asset.createDate = new Date();
-        
-        console.log(asset);
-        return this.http.put('http://localhost:3000/api/assets/'+id, asset)
-        .map((res: Response) => res.json()).toPromise();
-    }
-
     getAssets() {
         return this.http.get(`${environment.apiUrl}/assets`)
             .map((res: Response) => res.json());
