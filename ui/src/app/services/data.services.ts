@@ -19,13 +19,13 @@ export class DataService {
         return string.split('/')[1] + "/" + string.split('/')[0] + "/" + string.split('/')[2];
     }
 
-    updateAsset(asset) {
+    patchAsset(asset) {
         return this.http.patch('http://localhost:3000/api/assets/', asset)
             .map((res: Response) => res.json()).toPromise();
     }
 
     deleteAsset(asset) {
-        return this.http.delete('http://localhost:3000/api/assets/' + asset.id)
+        return this.http.delete(`http://localhost:3000/api/assets/${asset.id}`)
             .map((res: Response) => res.json()).toPromise();
     }
 
@@ -80,7 +80,7 @@ export class DataService {
             .map((res: Response) => res.json()).toPromise();
     }
 
-    updateAsset(asset, assetId) {
+    updateAsset(asset, assetId?:string) {
         if (asset.productionDate) {
             if( this.parseDateFormat(asset.productionDate, "DD/MM/YYYY") ) {
                 asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
@@ -121,8 +121,14 @@ export class DataService {
             }
         }
 
-        return this.http.put(`http://localhost:3000/api/assets/${assetId}`, asset)
+        if(assetId) {
+            return this.http.put(`http://localhost:3000/api/assets/${assetId}`, asset)
             .map((res: Response) => res.json()).toPromise();
+        } else {
+            return this.http.put(`http://localhost:3000/api/assets/${asset.id}`, asset)
+            .map((res: Response) => res.json()).toPromise();
+        }
+
     }
 
     parseDateFormat(value:string, format:string) : boolean {
