@@ -78,17 +78,12 @@ module.exports = function(Asset) {
 	 */
 
 	Asset.sortByCreateDate = function(sort, callback) {
-		
 		console.log(sort);
 	  	
 	  	Asset.find({
 	  		order: 'createDate ' + sort
 	  	})
 	  	.then( assets => {
-	  		var result = {
-	  			assets: assets
-	  		}
-
 			console.log(result)
 	  		callback(null, assets);
 	  	}).catch( e => callback(null, e));
