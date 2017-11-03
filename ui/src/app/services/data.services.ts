@@ -19,6 +19,16 @@ export class DataService {
         return string.split('/')[1] + "/" + string.split('/')[0] + "/" + string.split('/')[2];
     }
 
+    updateAsset(asset) {
+        return this.http.patch('http://localhost:3000/api/assets/', asset)
+            .map((res: Response) => res.json()).toPromise();
+    }
+
+    deleteAsset(asset) {
+        return this.http.delete('http://localhost:3000/api/assets/' + asset.id)
+            .map((res: Response) => res.json()).toPromise();
+    }
+
     createAsset(asset) {
         //let headers = new Headers({ 'Content-Type': 'application/json' });
         //let options = new RequestOptions({ headers: headers });
