@@ -48,15 +48,27 @@ export class AssetEditComponent implements OnInit {
 	  	}
 	}
 
- 	editAsset(form: NgForm){
+ 	updateAsset(id){
 
  		var assetId = this.route.snapshot.params['id'];
- 		var assetAttr = form.value;
+ 		
+ 		//this.asset.installedDate = this.dateFormat(new Date(this.asset.installedDate));
+		//this.asset.scheduledReplacementDate = this.dateFormat(new Date(this.asset.scheduledReplacementDate));
+		//this.asset.lastRecertificationDate = this.dateFormat(new Date(this.asset.lastRecertificationDate));
+		//this.asset.nextRecertificationDate = this.dateFormat(new Date(this.asset.nextRecertificationDate));
+		//this.asset.productionDate = this.dateFormat(new Date(this.asset.productionDate));
+		//this.asset.geolocation = this.asset.geolocation.lat + ',' + this.asset.geolocation.lng;
 
- 		this.dataService.updateAsset(assetAttr, assetId)
+ 		console.log(this.asset);
+
+ 		this.dataService.updateAsset(this.asset, assetId)
  		.then( asset => {
  			console.log(asset);
- 		}).catch(e => console.log(e));
+ 			this.router.navigate(['/assets']);
+ 		}).catch(e => { 
+ 			this.router.navigate(['/assets']);
+ 			console.log(e)
+ 		});
  	}
 
 }
