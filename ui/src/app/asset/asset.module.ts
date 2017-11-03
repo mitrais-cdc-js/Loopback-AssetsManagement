@@ -7,6 +7,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { AssetCreateComponent } from './asset-create/asset-create.component';
 import { AssetComponent } from './asset.component';
+import { AssetEditComponent } from './asset-edit/asset-edit.component';
 
 import { CustomDateRenderComponent } from './customDateRender.component';
 
@@ -19,6 +20,10 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 		path: 'assets/create',
 		component: AssetCreateComponent,
 	},
+	{
+		path: 'assets/edit/:id',
+		component: AssetEditComponent
+	}
 ]);
 
 @NgModule({
@@ -34,8 +39,9 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
   ],
 	declarations: [
 		AssetComponent,
-    AssetCreateComponent,
-    CustomDateRenderComponent,
+		AssetCreateComponent,
+		AssetEditComponent,
+    	CustomDateRenderComponent
 	]
 })
 
