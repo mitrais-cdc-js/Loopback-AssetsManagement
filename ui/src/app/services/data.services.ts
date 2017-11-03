@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import 'rxjs/add/operator/map';
 
+import { environment } from '../../environments/environment';
 import * as moment from 'moment';
 
 //module
-import { Asset } from '../asset/asset'; 
+import { Asset } from '../asset/asset';
 
 @Injectable()
 export class DataService {
@@ -23,14 +24,14 @@ export class DataService {
         //let headers = new Headers({ 'Content-Type': 'application/json' });
         //let options = new RequestOptions({ headers: headers });
         //let body = JSON.stringify(asset);
-        
+
         asset.createDate = new Date();
-        
+
         if (asset.productionDate) {
             if( this.parseDateFormat(asset.productionDate, "DD/MM/YYYY") ) {
                 asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
             } else {
-                throw new TypeError("Production Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Production Date is not valid formated in DD/MM/YYYY");
             }
         }
 
@@ -38,7 +39,7 @@ export class DataService {
             if( this.parseDateFormat(asset.installedDate, "DD/MM/YYYY") ) {
                 asset.installedDate = new Date(this.convertStringToDate(asset.installedDate));
             } else {
-                throw new TypeError("Installation Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Installation Date is not valid formated in DD/MM/YYYY");
             }
         }
 
@@ -46,7 +47,7 @@ export class DataService {
             if( this.parseDateFormat(asset.scheduledReplacementDate, "DD/MM/YYYY") ) {
                 asset.scheduledReplacementDate = new Date(this.convertStringToDate(asset.scheduledReplacementDate));
             } else {
-                throw new TypeError("Schedule Replacement Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Schedule Replacement Date is not valid formated in DD/MM/YYYY");
             }
         }
 
@@ -54,7 +55,7 @@ export class DataService {
             if( this.parseDateFormat(asset.lastRecertificationDate, "DD/MM/YYYY") ) {
                 asset.lastRecertificationDate = new Date(this.convertStringToDate(asset.lastRecertificationDate));
             } else {
-                throw new TypeError("Last Recertification Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Last Recertification Date is not valid formated in DD/MM/YYYY");
             }
         }
 
@@ -62,11 +63,11 @@ export class DataService {
             if( this.parseDateFormat(asset.nextRecertificationDate, "DD/MM/YYYY") ) {
                 asset.nextRecertificationDate = new Date(this.convertStringToDate(asset.nextRecertificationDate));
             } else {
-                throw new TypeError("Next Recertification Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Next Recertification Date is not valid formated in DD/MM/YYYY");
             }
         }
 
-        return this.http.post('http://localhost:3000/api/assets/', asset)
+        return this.http.post(`${environment.apiUrl}/assets`, asset)
             .map((res: Response) => res.json()).toPromise();
     }
 
@@ -75,7 +76,7 @@ export class DataService {
             if( this.parseDateFormat(asset.productionDate, "DD/MM/YYYY") ) {
                 asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
             } else {
-                throw new TypeError("Production Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Production Date is not valid formated in DD/MM/YYYY");
             }
         }
 
@@ -83,7 +84,7 @@ export class DataService {
             if( this.parseDateFormat(asset.installedDate, "DD/MM/YYYY") ) {
                 asset.installedDate = new Date(this.convertStringToDate(asset.installedDate));
             } else {
-                throw new TypeError("Installation Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Installation Date is not valid formated in DD/MM/YYYY");
             }
         }
 
@@ -91,7 +92,7 @@ export class DataService {
             if( this.parseDateFormat(asset.scheduledReplacementDate, "DD/MM/YYYY") ) {
                 asset.scheduledReplacementDate = new Date(this.convertStringToDate(asset.scheduledReplacementDate));
             } else {
-                throw new TypeError("Schedule Replacement Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Schedule Replacement Date is not valid formated in DD/MM/YYYY");
             }
         }
 
@@ -99,7 +100,7 @@ export class DataService {
             if( this.parseDateFormat(asset.lastRecertificationDate, "DD/MM/YYYY") ) {
                 asset.lastRecertificationDate = new Date(this.convertStringToDate(asset.lastRecertificationDate));
             } else {
-                throw new TypeError("Last Recertification Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Last Recertification Date is not valid formated in DD/MM/YYYY");
             }
         }
 
@@ -107,11 +108,11 @@ export class DataService {
             if( this.parseDateFormat(asset.nextRecertificationDate, "DD/MM/YYYY") ) {
                 asset.nextRecertificationDate = new Date(this.convertStringToDate(asset.nextRecertificationDate));
             } else {
-                throw new TypeError("Next Recertification Date is not valid formated in DD/MM/YYYY"); 
+                throw new TypeError("Next Recertification Date is not valid formated in DD/MM/YYYY");
             }
         }
 
-        return this.http.put(`http://localhost:3000/api/assets/${assetId}`, asset)
+        return this.http.put(`${environment.apiUrl}/assets/${assetId}`, asset)
             .map((res: Response) => res.json()).toPromise();
     }
 
@@ -125,12 +126,12 @@ export class DataService {
     }
 
     getAssets() {
-        return this.http.get('http://localhost:3000/api/assets')
+        return this.http.get(`${environment.apiUrl}/assets`)
             .map((res: Response) => res.json());
     }
 
     getSortedAssets(order) {
-        return this.http.get(`http://localhost:3000/api/assets/sort_create_date?sort=${order}`)
+        return this.http.get(`${environment.apiUrl}/assets/sort_create_date?sort=${order}`)
             .map((res: Response) => res.json());
     }
 }
