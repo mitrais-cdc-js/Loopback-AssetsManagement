@@ -11,9 +11,9 @@ import { Asset } from './asset';
 import { CustomDateRenderComponent } from "./customDateRender.component";
 
 @Component({
-  	selector: 'app-asset',
-  	templateUrl: './asset.component.html',
-    styleUrls: ['./asset.component.css'],
+		selector: 'app-asset',
+		templateUrl: './asset.component.html',
+		styleUrls: ['./asset.component.css'],
 })
 
 export class AssetComponent implements OnInit {
@@ -75,44 +75,13 @@ export class AssetComponent implements OnInit {
     },
   };
 
-  settings1 = {
-    columns: {
-      id: {
-        title: 'ID',
-      },
-      description: {
-        title: 'Description',
-      },
-    },
-  };
-
-  settings4 = {
-    columns: {
-      id: {
-        title: 'ID',
-      },
-      albumId: {
-        title: 'Album',
-      },
-      title: {
-        title: 'Title',
-      },
-      url: {
-        title: 'Url',
-      },
-    },
-  };
-
-  source: ServerDataSource;
-
 	title = 'Asset Management Application';
-	
+  source: ServerDataSource;
 	assets:Asset[];
 	errorMessage:any;
 
 	constructor( http: Http, protected dataService:DataService ) { 
     console.log('AssetComponent const called...');
-    //this.source = new ServerDataSource(http, { endPoint: 'https://jsonplaceholder.typicode.com/photos' });
     this.source = new ServerDataSource(http, { endPoint: 'http://localhost:3000/assets-p'});
     this.source.setPaging(1, 5, true);
   }
@@ -137,7 +106,18 @@ export class AssetComponent implements OnInit {
       console.log((<Error>e).message);
       event.confirm.reject();
     }
-  }
+	}
+	
+	onPostCall(event) {
+    try {
+		event.confirm.resolve(event.newData);
+		console.log(event.newData); //this contains the new edited data
+    this.dataService.createAsset(event.newData);
+    } catch(e) {
+      console.log((<Error>e).message);
+      event.confirm.reject();
+    } 
+	}
 
   onDeleteCall(event) {
     try {
@@ -156,7 +136,7 @@ export class AssetComponent implements OnInit {
 	}
 
 	loadAssets() {
-        this.dataService.getAssets().subscribe(
+				this.dataService.getAssets().subscribe(
 		data => {
 			console.log(data);
 			this.assets = data;
@@ -164,10 +144,10 @@ export class AssetComponent implements OnInit {
 		err => {
 			console.log("Error occured.")
 		});
-   	}
+	}
 
 	loadSortedAssets() {
-        this.dataService.getSortedAssets('desc').subscribe(
+				this.dataService.getSortedAssets('desc').subscribe(
 		data => {
 			console.log(data);
 			this.assets = data;
@@ -175,10 +155,15 @@ export class AssetComponent implements OnInit {
 		err => {
 			console.log("Error occured.")
 		});
-   	}
+	}
+
+	dateFormat(dateString){
+		var date = new Date(dateString);
+		return date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
+	}
 
 	ngOnInit() {
 		console.log('ngOnInit called...');
-      	this.loadAssets();
+				this.loadAssets();
 	}
 }

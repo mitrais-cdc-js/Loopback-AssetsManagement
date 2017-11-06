@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 //services
@@ -18,7 +19,7 @@ export class AssetCreateComponent implements OnInit {
 	
 	//newAsset = new Asset();
 	
-	constructor( private dataService:DataService ) { 
+	constructor( private dataService:DataService, private router: Router ) { 
 		console.log('AssetCreateComponent const called...');
 	
 	}
@@ -30,15 +31,14 @@ export class AssetCreateComponent implements OnInit {
 	}
 
 	createAsset(form: NgForm){
-
-		this.dataService.createAsset(form.value)
 		
-		/*this.dataService.createAsset(form.value)
+		this.dataService.createAsset(form.value)
 		.then( asset => {
 			console.log(asset);
+			this.router.navigate(['/assets']);
 		}).catch( e => {
 			console.log(e);
-		})*/
+		})
 	}
 }
 
