@@ -2,7 +2,8 @@
 	<div class="col-md-6">
 		<div class="asset-form">
 			<h3>Edit Asset</h3>
-			<form (ngSubmit)="updateAsset(asset.id)" #bookForm="ngForm">
+			<form (ngSubmit)="updateAsset(asset.id,assetForm)" #assetForm="ngForm">
+				<input type="hidden" class="form-control" placeholder="Installed Date" name="createDate" [(ngModel)]="asset.createDate">
 				<div class="form-group">
 					<label for="">Risk Level</label>
 					<input type="number" class="form-control" placeholder="Risk Level" name="riskLevel" [(ngModel)]="asset.riskLevel">
