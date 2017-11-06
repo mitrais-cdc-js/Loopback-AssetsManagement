@@ -3,6 +3,10 @@ import { Http } from '@angular/http';
 
 import { ServerDataSource } from 'ng2-smart-table';
 
+//environment
+import { environment } from '../../environments/environment';
+
+
 //services
 import { DataService } from '../services/data.services';
 
@@ -82,7 +86,7 @@ export class AssetComponent implements OnInit {
 
 	constructor( http: Http, protected dataService:DataService ) { 
     console.log('AssetComponent const called...');
-    this.source = new ServerDataSource(http, { endPoint: 'http://localhost:3000/assets-p'});
+    this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets-p`});
     this.source.setPaging(1, 5, true);
   }
  
