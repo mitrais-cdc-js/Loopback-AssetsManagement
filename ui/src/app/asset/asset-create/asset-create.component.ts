@@ -31,8 +31,17 @@ export class AssetCreateComponent implements OnInit {
 	}
 
 	createAsset(form: NgForm){
-		
-		this.dataService.createAsset(form.value)
+	
+		var newAsset = form.value;
+		newAsset.geolocation = (newAsset.geolocation == "") ? null : newAsset.geolocation;
+		newAsset.installedDate = (newAsset.installedDate == "")? null : newAsset.installedDate;
+		newAsset.scheduledReplacementDate = (newAsset.scheduledReplacementDate == "")? null : newAsset.scheduledReplacementDate;
+		newAsset.lastRecertificationDate = (newAsset.lastRecertificationDate == "")? null : newAsset.lastRecertificationDate;
+		newAsset.nextRecertificationDate = (newAsset.nextRecertificationDate == "")? null : newAsset.nextRecertificationDate;
+
+		console.log(newAsset);
+
+		this.dataService.createAsset(newAsset)
 		.then( asset => {
 			console.log(asset);
 			this.router.navigate(['/assets']);
