@@ -1,7 +1,7 @@
 module.exports = function(app) {
     // Install a "/ping" route that returns "pong"
 
-    app.get('/assets-p', function(req, res){
+    app.get('/api/assets-p', function(req, res){
         console.log(req.query._sort);
         console.log(req.query._order);
         console.log(req.query._page);
