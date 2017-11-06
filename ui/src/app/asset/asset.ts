@@ -1,4 +1,9 @@
+import * as moment from 'moment';
+
 export class Asset {
+
+  public static readonly DATE_FORMAT = "DD/MM/YYYY";
+
 	constructor(
         public model: string = "",
         public serial: string = "",
@@ -20,6 +25,22 @@ export class Asset {
         public history: string = "",
    		public geolocation: string = ""
     ){}
+
+  public static compareDate(direction: any, a: any, b: any) {
+
+    console.log("yes im called");
+
+    var dateA  = moment(a, Asset.DATE_FORMAT);
+    var dateB  = moment(b, Asset.DATE_FORMAT);
+
+    if ( moment(dateA).isBefore(dateB) )  {
+      return -1 * direction;
+    } 
+    if(moment(dateA).isAfter(dateB) ) {
+      return direction;
+    }
+    return 0;
+  }
 }
 
 export interface IAsset {

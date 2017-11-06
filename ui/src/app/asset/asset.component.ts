@@ -22,12 +22,22 @@ export class AssetComponent implements OnInit {
 
     add: {
       confirmCreate: true,
+      addButtonContent: 'Add',
     },
     edit: {
       confirmSave: true,
     },
+    delete: {
+      confirmDelete: true,
+    },
 
     columns: {
+        id: {
+          title: 'ID',
+          editable: false,
+          addable: false,
+          filter: false,
+        },
         model: {
           title: 'Model',
           editable: true,
@@ -44,9 +54,13 @@ export class AssetComponent implements OnInit {
         },
         createDate: {
           title: 'Date of Creation',
+          editable: false,
+          addable: false,
           type: 'custom',
           renderComponent: CustomDateRenderComponent,
           filter: false,
+          sort: true,
+          sortDirection: 'DESC'
         },
         productionDate: {
           title: 'Date of Production',
@@ -55,9 +69,37 @@ export class AssetComponent implements OnInit {
           filter: false,
         },
         description: {
-          title: 'Description',
+          title: 'Description',          
           filter: false,
         },
+    },
+  };
+
+  settings1 = {
+    columns: {
+      id: {
+        title: 'ID',
+      },
+      description: {
+        title: 'Description',
+      },
+    },
+  };
+
+  settings4 = {
+    columns: {
+      id: {
+        title: 'ID',
+      },
+      albumId: {
+        title: 'Album',
+      },
+      title: {
+        title: 'Title',
+      },
+      url: {
+        title: 'Url',
+      },
     },
   };
 
@@ -70,15 +112,44 @@ export class AssetComponent implements OnInit {
 
 	constructor( http: Http, protected dataService:DataService ) { 
     console.log('AssetComponent const called...');
-    this.source = new ServerDataSource(http, { endPoint: 'http://localhost:3000/api/assets' });
+    //this.source = new ServerDataSource(http, { endPoint: 'https://jsonplaceholder.typicode.com/photos' });
+    this.source = new ServerDataSource(http, { endPoint: 'http://localhost:3000/assets-p'});
+    this.source.setPaging(1, 5, true);
   }
-  
+ 
+  onCreateCall(event) {
+    try {
+      console.log("Event create triggered...");
+      this.dataService.createAsset(event.newData); 
+      event.confirm.resolve(event.newData);
+    } catch(e) {
+      console.log((<Error>e).message);
+      event.confirm.reject();
+    }
+  }
 
-  onPostCall(event) {
-    event.confirm.resolve(event.newData);
-    console.log(event.newData); //this contains the new edited data
-    this.dataService.createAsset(event.newData); 
+  onEditCall(event) {
+    try {
+      console.log(`Event edit triggered on id: ${event.newData.id}`); 
+      this.dataService.updateAsset(event.newData, event.newData.id); 
+      event.confirm.resolve(event.newData);
+    } catch(e) {
+      console.log((<Error>e).message);
+      event.confirm.reject();
+    }
   }
+
+  onDeleteCall(event) {
+    try {
+      console.log("Event delete triggered..."); 
+      this.dataService.deleteAsset(event.newData); 
+      event.confirm.resolve(event.newData);
+    } catch(e) {
+      console.log((<Error>e).message);
+      event.confirm.reject();
+    }
+  }
+
 
 	onSort(): void {
 		this.loadSortedAssets();

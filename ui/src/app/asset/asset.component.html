@@ -3,8 +3,10 @@
   <ng2-smart-table 
 	  [settings]="settings" 
 	  [source]="source"  
-	  (createConfirm)="onPostCall($event)"
-	  (editConfirm)="onPostCall($event)"></ng2-smart-table>
+	  (createConfirm)="onCreateCall($event)"
+	  (editConfirm)="onEditCall($event)"
+	  (deleteConfirm)="onDeleteCall($event)"
+	  ></ng2-smart-table>
 </p> 
 <br/><br/>
 <p>
