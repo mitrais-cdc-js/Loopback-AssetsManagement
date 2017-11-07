@@ -127,24 +127,8 @@ export class AssetComponent implements OnInit {
     }
   }
 
-
-	onSort(): void {
-		this.loadSortedAssets();
-	}
-
 	loadAssets() {
-				this.dataService.getAssets().subscribe(
-		data => {
-			console.log(data);
-			this.assets = data;
-		},
-		err => {
-			console.log("Error occured.")
-		});
-	}
-
-	loadSortedAssets() {
-				this.dataService.getSortedAssets('desc').subscribe(
+				this.dataService.getAssets('desc').subscribe(
 		data => {
 			console.log(data);
 			this.assets = data;

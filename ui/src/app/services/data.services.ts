@@ -141,18 +141,13 @@ export class DataService {
         return result;
     }
 
-    getAssets() {
-        return this.http.get(`${environment.apiUrl}/assets`)
+    getAssets(order) {
+        return this.http.get(`${environment.apiUrl}/assets?filter=%7B%22order%22%3A%20%22createDate%20${order}%22%20%7D`)
             .map((res: Response) => res.json());
     }
 
     getAsset(id){
         return this.http.get('http://localhost:3000/api/assets/' + id)
         .map((res: Response) => res.json()).toPromise();
-    }
-    
-    getSortedAssets(order) {
-        return this.http.get(`${environment.apiUrl}/assets/sort_create_date?sort=${order}`)
-            .map((res: Response) => res.json());
     }
 }
