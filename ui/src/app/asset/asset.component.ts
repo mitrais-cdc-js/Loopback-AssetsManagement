@@ -36,12 +36,6 @@ export class AssetComponent implements OnInit {
     },
 
     columns: {
-        id: {
-          title: 'ID',
-          editable: false,
-          addable: false,
-          filter: false,
-        },
         model: {
           title: 'Model',
           editable: true,
@@ -63,8 +57,6 @@ export class AssetComponent implements OnInit {
           type: 'custom',
           renderComponent: CustomDateRenderComponent,
           filter: false,
-          sort: true,
-          sortDirection: 'DESC'
         },
         productionDate: {
           title: 'Date of Production',
@@ -86,8 +78,8 @@ export class AssetComponent implements OnInit {
 
 	constructor( http: Http, protected dataService:DataService ) { 
     console.log('AssetComponent const called...');
-    this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets-p`});
-    this.source.setPaging(1, 5, true);
+    this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
+    this.source.setPaging(1, 10, true);
   }
  
   onCreateCall(event) {
@@ -126,32 +118,17 @@ export class AssetComponent implements OnInit {
   onDeleteCall(event) {
     try {
       console.log("Event delete triggered..."); 
-      this.dataService.deleteAsset(event.newData); 
-      event.confirm.resolve(event.newData);
+      console.log(` test: ${event.data}` );
+      this.dataService.deleteAsset(event.data); 
+      event.confirm.resolve(event.data);
     } catch(e) {
       console.log((<Error>e).message);
       event.confirm.reject();
     }
   }
 
-
-	onSort(): void {
-		this.loadSortedAssets();
-	}
-
 	loadAssets() {
-				this.dataService.getAssets().subscribe(
-		data => {
-			console.log(data);
-			this.assets = data;
-		},
-		err => {
-			console.log("Error occured.")
-		});
-	}
-
-	loadSortedAssets() {
-				this.dataService.getSortedAssets('desc').subscribe(
+				this.dataService.getAssets('desc').subscribe(
 		data => {
 			console.log(data);
 			this.assets = data;

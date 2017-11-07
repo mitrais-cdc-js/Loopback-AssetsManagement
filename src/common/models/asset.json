@@ -77,13 +77,21 @@
   "relations": {},
   "acls": [],
   "methods": {
+    "assetsPaging": {
+      "accepts": [
+        { "arg": "_sort", "type": "string" },
+        { "arg": "_order", "type": "string" },
+        { "arg": "_limit", "type": "number" },
+        { "arg": "_page", "type": "number" } ],
+      "returns": [ { "arg": "result", "type": "object", "root": true} ],
+      "description": "Get list of assets and sort by creation date",
+      "http": [ { "path": "/asset_paging", "verb": "get" } ]
+    },
     "sortByCreateDate": {
       "accepts": [
         {
           "arg": "sort",
           "type": "string",
-          "required": true,
-          "description": "descending or ascending",
           "http": {
             "source": "query"
           }
