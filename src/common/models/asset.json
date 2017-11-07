@@ -20,7 +20,8 @@
       "required": true
     },
     "createDate": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "productionDate": {
       "type": "date",

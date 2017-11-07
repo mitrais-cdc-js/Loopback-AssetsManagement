@@ -46,7 +46,7 @@ module.exports = function(Asset) {
 			.catch( e => callback(null, e));
 	};
 
-	Asset.validatesPresenceOf(  'model', 'serial', 'batchNo', 
+	Asset.validatesPresenceOf(  'model', 'serial', 'batchNo', 'createDate', 
 								'description', 'productionDate' );
 
 	Asset.validatesLengthOf('model', {
