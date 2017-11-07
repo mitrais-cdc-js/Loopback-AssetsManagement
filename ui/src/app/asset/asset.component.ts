@@ -161,10 +161,14 @@ export class AssetComponent implements OnInit {
 		});
 	}
 
-	dateFormat(dateString){
+	dateFormat(dateString, type = "date"){
 		var date = new Date(dateString);
-		return date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
-	}
+    if (type == "datetime"){
+      return date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+    }else{
+		  return date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
+	  }
+  }
 
 	ngOnInit() {
 		console.log('ngOnInit called...');
