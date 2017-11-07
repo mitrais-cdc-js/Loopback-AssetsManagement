@@ -3,7 +3,7 @@
 module.exports = function(Asset) {
 
 	Asset.validatesPresenceOf(  'model', 'serial', 'batchNo', 
-								'description', 'createDate', 'productionDate' );
+								'description', 'productionDate' );
 
 	Asset.validatesLengthOf('model', {
 		min: 3,
