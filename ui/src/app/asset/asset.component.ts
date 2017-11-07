@@ -86,7 +86,7 @@ export class AssetComponent implements OnInit {
 
 	constructor( http: Http, protected dataService:DataService ) { 
     console.log('AssetComponent const called...');
-    this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets-p`});
+    this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
     this.source.setPaging(1, 5, true);
   }
  
