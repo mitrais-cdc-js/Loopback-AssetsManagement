@@ -2,6 +2,37 @@
 
 module.exports = function(Asset) {
 
+	Asset.beforeRemote( 'assetsPaging', function( ctx, unused, next ) {
+		Asset.count('', function (err, count) {
+			console.log(`Asset X-Total-Count: ${count}`);
+			ctx.res.set('Access-Control-Expose-Headers', 'x-total-count');
+			ctx.res.set('x-total-count', count);
+			next();
+		})
+	});
+
+	Asset.assetsPaging = function(_sort, _order, _limit, _page, callback) {
+		console.log(`IN custom: /api/assets_paging?_sort=${_sort}&_order=${_order}&_limit=${_limit}&_page=${_page}`);
+		if(typeof(_sort) == 'undefined') { 
+			_sort = "creationDate";
+		}
+		if(typeof(_order) == 'undefined') {
+			_order = "DESC";
+		}
+		if(typeof(_limit) == 'undefined') {
+			_limit = 0;
+		}
+		if(typeof(_page) == 'undefined') {
+			_page = _page >= 1 ? _page - 1 : 0;
+		}
+
+		var skip_calc = _page * _limit;
+
+		Asset.find({ order: _sort + " " + _order, limit: _limit, skip: skip_calc })
+			.then( assets => {console.log(assets); callback(null, assets); })
+			.catch( e => callback(null, e));
+	};
+
 	Asset.validatesPresenceOf(  'model', 'serial', 'batchNo', 
 								'description', 'createDate', 'productionDate' );
 
