@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 
 //services
 import { DataService } from '../../services/data.services';
@@ -31,15 +32,15 @@ export class AssetEditComponent implements OnInit {
  			asset.nextRecertificationDate = (asset.nextRecertificationDate == null) ? "" : this.dateFormat(new Date(asset.nextRecertificationDate));
  			asset.productionDate = (asset.productionDate == null) ? "" : this.dateFormat(new Date(asset.productionDate));
  			asset.geolocation = (asset.geolocation == null) ? "" : asset.geolocation.lat + ',' + asset.geolocation.lng;
- 			asset.createDate = (asset.createDate == null) ? "" : this.dateFormat(new Date(asset.createDate));
- 			
+
  			this.asset = asset;
 
  		}).catch(e => console.log(e));
  	}
 
  	dateFormat(date){
- 		return date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
+ 		var momentDate = moment(date,"DD/MM/YYYY");
+ 		return momentDate.format("DD/MM/YYYY");
  	}
 
  	removeEmptyAttr(obj) {
