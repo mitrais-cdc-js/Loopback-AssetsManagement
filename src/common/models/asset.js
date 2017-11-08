@@ -46,8 +46,8 @@ module.exports = function(Asset) {
 			.catch( e => callback(null, e));
 	};
 
-	Asset.validatesPresenceOf(  'model', 'serial', 'batchNo', 
-								'description', 'createDate', 'productionDate' );
+	Asset.validatesPresenceOf(  'model', 'serial', 'batchNo', 'createDate', 
+								'description', 'productionDate' );
 
 	Asset.validatesLengthOf('model', {
 		min: 3,

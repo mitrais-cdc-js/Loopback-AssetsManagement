@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 
 //services
 import { DataService } from '../../services/data.services';
@@ -25,19 +26,21 @@ export class AssetEditComponent implements OnInit {
  		this.dataService.getAsset(id)
  		.then( asset => {
 
- 			asset.installedDate = this.dateFormat(new Date(asset.installedDate));
- 			asset.scheduledReplacementDate = this.dateFormat(new Date(asset.scheduledReplacementDate));
- 			asset.lastRecertificationDate = this.dateFormat(new Date(asset.lastRecertificationDate));
- 			asset.nextRecertificationDate = this.dateFormat(new Date(asset.nextRecertificationDate));
- 			asset.productionDate = this.dateFormat(new Date(asset.productionDate));
- 			asset.geolocation = asset.geolocation.lat + ',' + asset.geolocation.lng;
+ 			asset.installedDate = (asset.installedDate == null) ? "" : this.dateFormat(new Date(asset.installedDate));
+ 			asset.scheduledReplacementDate = (asset.scheduledReplacementDate == null) ? "" : this.dateFormat(new Date(asset.scheduledReplacementDate));
+ 			asset.lastRecertificationDate = (asset.lastRecertificationDate == null) ? "" : this.dateFormat(new Date(asset.lastRecertificationDate));
+ 			asset.nextRecertificationDate = (asset.nextRecertificationDate == null) ? "" : this.dateFormat(new Date(asset.nextRecertificationDate));
+ 			asset.productionDate = (asset.productionDate == null) ? "" : this.dateFormat(new Date(asset.productionDate));
+ 			asset.geolocation = (asset.geolocation == null) ? "" : asset.geolocation.lat + ',' + asset.geolocation.lng;
  			
  			this.asset = asset;
+
  		}).catch(e => console.log(e));
  	}
 
  	dateFormat(date){
- 		return date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
+ 		var momentDate = moment(date,"DD/MM/YYYY");
+ 		return momentDate.format("DD/MM/YYYY");
  	}
 
  	removeEmptyAttr(obj) {
@@ -48,25 +51,22 @@ export class AssetEditComponent implements OnInit {
 	  	}
 	}
 
- 	updateAsset(id){
+ 	updateAsset(id, form: NgForm){
 
  		var assetId = this.route.snapshot.params['id'];
  		
- 		//this.asset.installedDate = this.dateFormat(new Date(this.asset.installedDate));
-		//this.asset.scheduledReplacementDate = this.dateFormat(new Date(this.asset.scheduledReplacementDate));
-		//this.asset.lastRecertificationDate = this.dateFormat(new Date(this.asset.lastRecertificationDate));
-		//this.asset.nextRecertificationDate = this.dateFormat(new Date(this.asset.nextRecertificationDate));
-		//this.asset.productionDate = this.dateFormat(new Date(this.asset.productionDate));
-		//this.asset.geolocation = this.asset.geolocation.lat + ',' + this.asset.geolocation.lng;
+ 		var editAsset = form.value;
+		editAsset.geolocation = (editAsset.geolocation == "") ? null : editAsset.geolocation;
+		editAsset.installedDate = (editAsset.installedDate == "")? null : editAsset.installedDate;
+		editAsset.scheduledReplacementDate = (editAsset.scheduledReplacementDate == "")? null : editAsset.scheduledReplacementDate;
+		editAsset.lastRecertificationDate = (editAsset.lastRecertificationDate == "")? null : editAsset.lastRecertificationDate;
+		editAsset.nextRecertificationDate = (editAsset.nextRecertificationDate == "")? null : editAsset.nextRecertificationDate;
 
- 		console.log(this.asset);
-
- 		this.dataService.updateAsset(this.asset, assetId)
+ 		this.dataService.updateAsset(editAsset, assetId)
  		.then( asset => {
  			console.log(asset);
  			this.router.navigate(['/assets']);
  		}).catch(e => { 
- 			this.router.navigate(['/assets']);
  			console.log(e)
  		});
  	}

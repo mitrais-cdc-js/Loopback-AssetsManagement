@@ -30,7 +30,7 @@
 			<td>{{ asset.model }}</td>
 			<td>{{ asset.serial }}</td>
 			<td>{{ dateFormat(asset.productionDate) }}</td>
-			<td>{{ dateFormat(asset.createDate) }}</td>
+			<td>{{ dateFormat(asset.createDate, "datetime") }}</td>
 			<td>{{ asset.status }}</td>
 			<td>
 				<a routerLink="/assets/{{ asset.id }}" class="label label-info">view</a>
