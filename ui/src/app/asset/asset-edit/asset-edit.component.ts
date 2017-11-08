@@ -32,7 +32,7 @@ export class AssetEditComponent implements OnInit {
  			asset.nextRecertificationDate = (asset.nextRecertificationDate == null) ? "" : this.dateFormat(new Date(asset.nextRecertificationDate));
  			asset.productionDate = (asset.productionDate == null) ? "" : this.dateFormat(new Date(asset.productionDate));
  			asset.geolocation = (asset.geolocation == null) ? "" : asset.geolocation.lat + ',' + asset.geolocation.lng;
-
+ 			
  			this.asset = asset;
 
  		}).catch(e => console.log(e));
