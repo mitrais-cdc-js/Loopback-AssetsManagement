@@ -150,8 +150,16 @@ export class AssetComponent implements OnInit {
  		}
  	}
 
+ 	deleteAsset(asset){
+ 		this.dataService.deleteAsset(asset)
+ 			.then( res => {
+ 				console.log("deleted");
+ 				this.loadAssets();
+ 			}).catch( err => console.log(err));
+ 	}
+
 	ngOnInit() {
 		console.log('ngOnInit called...');
-				this.loadAssets();
+		this.loadAssets();
 	}
 }

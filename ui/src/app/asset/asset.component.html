@@ -35,7 +35,7 @@
 			<td>
 				<a routerLink="/assets/{{ asset.id }}" class="label label-info">view</a>
 				<a routerLink="/assets/edit/{{ asset.id }}" class="label label-warning">edit</a>
-				<a routerLink="/assets/delete{{ asset.id }}" class="label label-danger">delete</a>
+				<a (click)="deleteAsset(asset)" class="label label-danger">delete</a>
 			</td>
 		</tr>
 	</tbody>
