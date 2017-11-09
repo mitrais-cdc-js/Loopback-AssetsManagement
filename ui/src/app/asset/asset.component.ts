@@ -151,11 +151,13 @@ export class AssetComponent implements OnInit {
  	}
 
  	deleteAsset(asset){
- 		this.dataService.deleteAsset(asset)
+ 		if(confirm("Are you sure to delete " + asset.model)) {
+		    this.dataService.deleteAsset(asset)
  			.then( res => {
  				console.log("deleted");
  				this.loadAssets();
  			}).catch( err => console.log(err));
+		}
  	}
 
 	ngOnInit() {
