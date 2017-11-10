@@ -1,14 +1,19 @@
 import { AppPage } from './app.po';
 
 describe('ui App', () => {
-  let page: AppPage;
+  	let page: AppPage;
 
-  beforeEach(() => {
-    page = new AppPage();
-  });
+  	beforeEach(() => {
+		page = new AppPage();
+  	});
 
-  it('should display title : Asset Management Application', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Asset Management Application');
-  });
+  	it('should display title : Asset Management Application', () => {
+		page.navigateTo();
+		expect(page.getParagraphText()).toEqual('Asset Management Application');
+  	});
+
+  	it('should display title : List of Assets', () => {
+  		page.navigateTo('/assets');
+  		expect(page.getAssetPageTitle()).toEqual('List of Assets');
+  	})
 });
