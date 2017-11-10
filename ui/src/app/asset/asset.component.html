@@ -18,6 +18,7 @@
 			<th>Description</th>
 			<th>Model</th>
 			<th>Serial</th>
+			<th>Installed Date</th>
 			<th>Production Date</th>
 			<th>Create Date</th>
 			<th>Status</th>
@@ -29,6 +30,7 @@
 			<td>{{ asset.description }}</td>
 			<td>{{ asset.model }}</td>
 			<td>{{ asset.serial }}</td>
+			<td>{{ dateFormat(asset.installedDate) }}</td>
 			<td>{{ dateFormat(asset.productionDate) }}</td>
 			<td>{{ dateFormat(asset.createDate, "datetime") }}</td>
 			<td>{{ asset.status }}</td>

@@ -134,10 +134,6 @@ export class AssetComponent implements OnInit {
   }
 
 
-	onSort(): void {
-		this.loadSortedAssets();
-	}
-
 	loadAssets() {
 				this.dataService.getAssets('desc').subscribe(
 		data => {
