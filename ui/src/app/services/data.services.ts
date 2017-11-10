@@ -152,7 +152,7 @@ export class DataService {
 
     getAssets(order) {
         return this.http.get(`${environment.apiUrl}/assets?filter=%7B%22order%22%3A%20%22createDate%20${order}%22%20%7D`)
-        .map((res: Response) => res.json());
+        .map((res: Response) => res.json());
     }
 
     getAsset(id) {
