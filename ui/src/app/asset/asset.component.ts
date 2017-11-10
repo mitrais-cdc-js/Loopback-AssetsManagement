@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 import { DataService } from '../services/data.services';
 
 //module
-import { Asset } from './asset'; 
+import { Asset } from './asset';
 import { CustomDateRenderComponent } from "./customDateRender.component";
 import { CustomDateEditorComponent } from "./customDateEditor.component";
 
@@ -23,8 +23,7 @@ import { CustomDateEditorComponent } from "./customDateEditor.component";
 })
 
 export class AssetComponent implements OnInit {
-	
-<<<<<<< HEAD
+
   settings = {
 
     add: {
@@ -72,78 +71,28 @@ export class AssetComponent implements OnInit {
           filter: false,
         },
         description: {
-          title: 'Description',          
+          title: 'Description',
           filter: false,
         },
     },
   };
-=======
-	settings = {
 
-		add: {
-			confirmCreate: true,
-			addButtonContent: 'Add',
-		},
-		edit: {
-			confirmSave: true,
-		},
-		delete: {
-			confirmDelete: true,
-		},
-
-		columns: {
-				model: {
-					title: 'Model',
-					editable: true,
-					addable: true,
-					filter: false,
-				},
-				serial: {
-					title: 'Serial Nr.',
-					filter: false,
-				},
-				batchNo: {
-					title: 'Batch Nr.',
-					filter: false,
-				},
-				createDate: {
-					title: 'Date of Creation',
-					editable: false,
-					addable: false,
-					type: 'custom',
-					renderComponent: CustomDateRenderComponent,
-					filter: false,
-				},
-				productionDate: {
-					title: 'Date of Production',
-					type: 'custom',
-					renderComponent: CustomDateRenderComponent,
-					filter: false,
-				},
-				description: {
-					title: 'Description',          
-					filter: false,
-				},
-		},
-	};
->>>>>>> 4842d11dd54925f81d9c6fe00dbc80b352b248f9
 
 	title = 'Asset Management Application';
 	source: ServerDataSource;
 	assets:Asset[];
 	errorMessage:any;
 
-	constructor( http: Http, protected dataService:DataService ) { 
+	constructor( http: Http, protected dataService:DataService ) {
 		console.log('AssetComponent const called...');
 		this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
 		this.source.setPaging(1, 10, true);
 	}
- 
-<<<<<<< HEAD
+
   onCreateCall(event) {
     try {
       console.log("Create triggered.");
-      this.dataService.createAsset(event.newData); 
+      this.dataService.createAsset(event.newData);
       event.confirm.resolve(event.newData);
     } catch(e) {
       console.log((<Error>e).message);
@@ -153,15 +102,15 @@ export class AssetComponent implements OnInit {
 
   onEditCall(event) {
     try {
-      console.log(`Edit triggered on: ${event.data.id}`); 
-      this.dataService.updateAsset(event.newData); 
+      console.log(`Edit triggered on: ${event.data.id}`);
+      this.dataService.updateAsset(event.newData);
       event.confirm.resolve(event.newData);
     } catch(e) {
       console.log((<Error>e).message);
       event.confirm.reject();
     }
 	}
-	
+
 	onPostCall(event) {
     try {
     console.log(`Post triggered on: ${event.data.id}`);
@@ -170,13 +119,13 @@ export class AssetComponent implements OnInit {
     } catch(e) {
       console.log((<Error>e).message);
       event.confirm.reject();
-    } 
+    }
 	}
 
   onDeleteCall(event) {
     try {
-      console.log(`Delete triggered on: ${event.data.id}...`); 
-      this.dataService.deleteAsset(event.data); 
+      console.log(`Delete triggered on: ${event.data.id}...`);
+      this.dataService.deleteAsset(event.data);
       event.confirm.resolve(event.data);
     } catch(e) {
       console.log((<Error>e).message);
@@ -187,51 +136,6 @@ export class AssetComponent implements OnInit {
 
 	onSort(): void {
 		this.loadSortedAssets();
-=======
-	onCreateCall(event) {
-		try {
-			console.log("Event create triggered...");
-			this.dataService.createAsset(event.newData); 
-			event.confirm.resolve(event.newData);
-		} catch(e) {
-			console.log((<Error>e).message);
-			event.confirm.reject();
-		}
-	}
-
-	onEditCall(event) {
-		try {
-			console.log(`Event edit triggered on id: ${event.newData.id}`); 
-			this.dataService.updateAsset(event.newData, event.newData.id); 
-			event.confirm.resolve(event.newData);
-		} catch(e) {
-			console.log((<Error>e).message);
-			event.confirm.reject();
-		}
-	}
-	
-	onPostCall(event) {
-		try {
-		event.confirm.resolve(event.newData);
-		console.log(event.newData); //this contains the new edited data
-		this.dataService.createAsset(event.newData);
-		} catch(e) {
-			console.log((<Error>e).message);
-			event.confirm.reject();
-		} 
-	}
-
-	onDeleteCall(event) {
-		try {
-			console.log("Event delete triggered..."); 
-			console.log(` test: ${event.data}` );
-			this.dataService.deleteAsset(event.data); 
-			event.confirm.resolve(event.data);
-		} catch(e) {
-			console.log((<Error>e).message);
-			event.confirm.reject();
-		}
->>>>>>> 4842d11dd54925f81d9c6fe00dbc80b352b248f9
 	}
 
 	loadAssets() {
