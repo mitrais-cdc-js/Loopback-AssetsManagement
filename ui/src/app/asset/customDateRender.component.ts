@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { ViewCell } from 'ng2-smart-table';
 
+import * as moment from 'moment';
+
 @Component({
   template: `
     {{renderValue}}
@@ -21,9 +23,9 @@ export class CustomDateRenderComponent implements ViewCell, OnInit {
   }
 
   ngOnInit() {
-    var date = new Date(this.value);
-    
-    var temp = this.paddyHelper( date.getDate(), 2, '0' ) + '/' +  this.paddyHelper( (date.getMonth() + 1), 2, '0') + '/' +  date.getFullYear();
+    console.log(this.value);
+    var date = moment(this.value);
+    var temp = this.paddyHelper( date.get('date'), 2, '0' ) + '/' +  this.paddyHelper( (date.get('month') + 1), 2, '0') + '/' +  date.get('year');
     this.renderValue = temp;
   }
 

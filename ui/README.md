@@ -2,6 +2,11 @@
 
 This project was built with [Angular](https://angular.io/) version 4.2.4 and generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.9.
 
+### Development 
+
+This project uses EditorConfig to standartize text editor configuration.
+Visit http://editorconfig.org for details.
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

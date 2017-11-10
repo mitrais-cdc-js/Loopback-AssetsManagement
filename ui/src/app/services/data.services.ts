@@ -82,9 +82,14 @@ export class DataService {
     }
 
     updateAsset(asset, assetId?:string) {
+
+        //var eq = Object.toJSON(user1) == Object.toJSON(user2);
+
         if (asset.productionDate) {
             if( this.parseDateFormat(asset.productionDate, "DD/MM/YYYY") ) {
                 asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
+                asset.productionDate = asset.productionDate.toISOString();
+                console.log(asset.productionDate);
             } else {
                 throw new TypeError("Production Date is not valid formated in DD/MM/YYYY");
             }
@@ -93,6 +98,7 @@ export class DataService {
         if (asset.installedDate) {
             if( this.parseDateFormat(asset.installedDate, "DD/MM/YYYY") ) {
                 asset.installedDate = new Date(this.convertStringToDate(asset.installedDate));
+                asset.installedDate = asset.installedDate.toISOString();
             } else {
                 throw new TypeError("Installation Date is not valid formated in DD/MM/YYYY");
             }
@@ -101,6 +107,7 @@ export class DataService {
         if (asset.scheduledReplacementDate) {
             if( this.parseDateFormat(asset.scheduledReplacementDate, "DD/MM/YYYY") ) {
                 asset.scheduledReplacementDate = new Date(this.convertStringToDate(asset.scheduledReplacementDate));
+                asset.scheduledReplacementDate = asset.scheduledReplacementDate.toISOString();
             } else {
                 throw new TypeError("Schedule Replacement Date is not valid formated in DD/MM/YYYY");
             }
@@ -109,6 +116,7 @@ export class DataService {
         if (asset.lastRecertificationDate) {
             if( this.parseDateFormat(asset.lastRecertificationDate, "DD/MM/YYYY") ) {
                 asset.lastRecertificationDate = new Date(this.convertStringToDate(asset.lastRecertificationDate));
+                asset.lastRecertificationDate = asset.lastRecertificationDate.toISOString();
             } else {
                 throw new TypeError("Last Recertification Date is not valid formated in DD/MM/YYYY");
             }
@@ -117,6 +125,7 @@ export class DataService {
         if (asset.nextRecertificationDate) {
             if( this.parseDateFormat(asset.nextRecertificationDate, "DD/MM/YYYY") ) {
                 asset.nextRecertificationDate = new Date(this.convertStringToDate(asset.nextRecertificationDate));
+                asset.nextRecertificationDate = asset.nextRecertificationDate.toISOString();
             } else {
                 throw new TypeError("Next Recertification Date is not valid formated in DD/MM/YYYY");
             }
@@ -141,13 +150,18 @@ export class DataService {
         return result;
     }
 
-    getAssets(order) {
-        return this.http.get(`${environment.apiUrl}/assets?filter=%7B%22order%22%3A%20%22createDate%20${order}%22%20%7D`)
+    getAssets() {
+        return this.http.get(`${environment.apiUrl}/assets`)
             .map((res: Response) => res.json());
     }
 
     getAsset(id){
         return this.http.get('http://localhost:3000/api/assets/' + id)
         .map((res: Response) => res.json()).toPromise();
+    }
+
+    getSortedAssets(order) {
+        return this.http.get(`${environment.apiUrl}/assets/sort_create_date?sort=${order}`)
+            .map((res: Response) => res.json());
     }
 }
