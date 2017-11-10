@@ -10,6 +10,7 @@ import { AssetComponent } from './asset.component';
 import { AssetEditComponent } from './asset-edit/asset-edit.component';
 
 import { CustomDateRenderComponent } from './customDateRender.component';
+import { CustomDateEditorComponent } from './customDateEditor.component';
 
 const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	{
@@ -35,13 +36,15 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
     Ng2SmartTableModule,
   ],
   entryComponents: [
-    CustomDateRenderComponent, 
+		CustomDateRenderComponent, 
+		CustomDateEditorComponent
   ],
 	declarations: [
 		AssetComponent,
 		AssetCreateComponent,
 		AssetEditComponent,
-    	CustomDateRenderComponent
+		CustomDateRenderComponent,
+		CustomDateEditorComponent
 	]
 })
 

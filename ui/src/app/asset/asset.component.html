@@ -30,16 +30,15 @@
 			<td>{{ asset.model }}</td>
 			<td>{{ asset.serial }}</td>
 			<td>{{ dateFormat(asset.productionDate) }}</td>
-			<td>{{ dateFormat(asset.createDate) }}</td>
+			<td>{{ dateFormat(asset.createDate, "datetime") }}</td>
 			<td>{{ asset.status }}</td>
 			<td>
 				<a routerLink="/assets/{{ asset.id }}" class="label label-info">view</a>
 				<a routerLink="/assets/edit/{{ asset.id }}" class="label label-warning">edit</a>
-				<a routerLink="/assets/delete{{ asset.id }}" class="label label-danger">delete</a>
+				<a (click)="deleteAsset(asset)" class="label label-danger">delete</a>
 			</td>
 		</tr>
 	</tbody>
 </table>
-<button type="submit" class="btn btn-default" (click)='onSort()'>Sort</button>
 <!-- <ng2-smart-table [settings]="settings" [source]="assets" class="test-tlass"></ng2-smart-table> -->
 

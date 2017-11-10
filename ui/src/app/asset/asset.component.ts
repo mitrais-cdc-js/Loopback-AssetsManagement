@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { ServerDataSource } from 'ng2-smart-table';
+import * as moment from 'moment';
 
 //environment
 import { environment } from '../../environments/environment';
@@ -23,6 +24,7 @@ import { CustomDateEditorComponent } from "./customDateEditor.component";
 
 export class AssetComponent implements OnInit {
 	
+<<<<<<< HEAD
   settings = {
 
     add: {
@@ -75,18 +77,69 @@ export class AssetComponent implements OnInit {
         },
     },
   };
+=======
+	settings = {
+
+		add: {
+			confirmCreate: true,
+			addButtonContent: 'Add',
+		},
+		edit: {
+			confirmSave: true,
+		},
+		delete: {
+			confirmDelete: true,
+		},
+
+		columns: {
+				model: {
+					title: 'Model',
+					editable: true,
+					addable: true,
+					filter: false,
+				},
+				serial: {
+					title: 'Serial Nr.',
+					filter: false,
+				},
+				batchNo: {
+					title: 'Batch Nr.',
+					filter: false,
+				},
+				createDate: {
+					title: 'Date of Creation',
+					editable: false,
+					addable: false,
+					type: 'custom',
+					renderComponent: CustomDateRenderComponent,
+					filter: false,
+				},
+				productionDate: {
+					title: 'Date of Production',
+					type: 'custom',
+					renderComponent: CustomDateRenderComponent,
+					filter: false,
+				},
+				description: {
+					title: 'Description',          
+					filter: false,
+				},
+		},
+	};
+>>>>>>> 4842d11dd54925f81d9c6fe00dbc80b352b248f9
 
 	title = 'Asset Management Application';
-  source: ServerDataSource;
+	source: ServerDataSource;
 	assets:Asset[];
 	errorMessage:any;
 
 	constructor( http: Http, protected dataService:DataService ) { 
-    console.log('AssetComponent const called...');
-    this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
-    this.source.setPaging(1, 10, true);
-  }
+		console.log('AssetComponent const called...');
+		this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
+		this.source.setPaging(1, 10, true);
+	}
  
+<<<<<<< HEAD
   onCreateCall(event) {
     try {
       console.log("Create triggered.");
@@ -134,10 +187,55 @@ export class AssetComponent implements OnInit {
 
 	onSort(): void {
 		this.loadSortedAssets();
+=======
+	onCreateCall(event) {
+		try {
+			console.log("Event create triggered...");
+			this.dataService.createAsset(event.newData); 
+			event.confirm.resolve(event.newData);
+		} catch(e) {
+			console.log((<Error>e).message);
+			event.confirm.reject();
+		}
+	}
+
+	onEditCall(event) {
+		try {
+			console.log(`Event edit triggered on id: ${event.newData.id}`); 
+			this.dataService.updateAsset(event.newData, event.newData.id); 
+			event.confirm.resolve(event.newData);
+		} catch(e) {
+			console.log((<Error>e).message);
+			event.confirm.reject();
+		}
+	}
+	
+	onPostCall(event) {
+		try {
+		event.confirm.resolve(event.newData);
+		console.log(event.newData); //this contains the new edited data
+		this.dataService.createAsset(event.newData);
+		} catch(e) {
+			console.log((<Error>e).message);
+			event.confirm.reject();
+		} 
+	}
+
+	onDeleteCall(event) {
+		try {
+			console.log("Event delete triggered..."); 
+			console.log(` test: ${event.data}` );
+			this.dataService.deleteAsset(event.data); 
+			event.confirm.resolve(event.data);
+		} catch(e) {
+			console.log((<Error>e).message);
+			event.confirm.reject();
+		}
+>>>>>>> 4842d11dd54925f81d9c6fe00dbc80b352b248f9
 	}
 
 	loadAssets() {
-				this.dataService.getAssets().subscribe(
+				this.dataService.getAssets('desc').subscribe(
 		data => {
 			console.log(data);
 			this.assets = data;
@@ -147,24 +245,29 @@ export class AssetComponent implements OnInit {
 		});
 	}
 
-	loadSortedAssets() {
-				this.dataService.getSortedAssets('desc').subscribe(
-		data => {
-			console.log(data);
-			this.assets = data;
-		},
-		err => {
-			console.log("Error occured.")
-		});
-	}
-
-	dateFormat(dateString){
+	dateFormat(dateString, type = "date"){
 		var date = new Date(dateString);
-		return date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
-	}
+ 		var momentDate = moment(date,"DD/MM/YYYY");
+
+ 		if (type == "datetime"){
+ 			return momentDate.format("DD/MM/YYYY HH:mm:ss");
+ 		}else{
+ 			return momentDate.format("DD/MM/YYYY");
+ 		}
+ 	}
+
+ 	deleteAsset(asset){
+ 		if(confirm("Are you sure to delete " + asset.model)) {
+		    this.dataService.deleteAsset(asset)
+ 			.then( res => {
+ 				console.log("deleted");
+ 				this.loadAssets();
+ 			}).catch( err => console.log(err));
+		}
+ 	}
 
 	ngOnInit() {
 		console.log('ngOnInit called...');
-				this.loadAssets();
+		this.loadAssets();
 	}
 }

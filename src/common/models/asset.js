@@ -46,8 +46,8 @@ module.exports = function(Asset) {
 			.catch( e => callback(null, e));
 	};
 
-	Asset.validatesPresenceOf(  'model', 'serial', 'batchNo', 
-								'description', 'createDate', 'productionDate' );
+	Asset.validatesPresenceOf(  'model', 'serial', 'batchNo', 'createDate', 
+								'description', 'productionDate' );
 
 	Asset.validatesLengthOf('model', {
 		min: 3,
@@ -114,22 +114,4 @@ module.exports = function(Asset) {
 		allowBlank: true,
 		message: 'is not allowed' 
 	});
-
-	/**
-	 * Get list of assets and sort by creation date
-	 * @param {string} sort descending or ascending
-	 * @param {Function(Error, object)} callback
-	 */
-
-	Asset.sortByCreateDate = function(sort, callback) {
-		console.log(sort);
-	  	
-	  	Asset.find({
-	  		order: 'createDate ' + sort
-	  	})
-	  	.then( assets => {
-			console.log(assets)
-	  		callback(null, assets);
-	  	}).catch( e => callback(null, e));
-	};
 };
