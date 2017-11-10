@@ -12,8 +12,14 @@ describe('ui App', () => {
 		expect(page.getParagraphText()).toEqual('Asset Management Application');
   	});
 
-  	it('should display title : List of Assets', () => {
+
+  	// Asset Pages
+  	it('Asset page should display title : List of Assets', () => {
   		page.navigateTo('/assets');
   		expect(page.getAssetPageTitle()).toEqual('List of Assets');
+  	})
+
+  	it('Asset table should have the fourth column as : Installed Date', () => {
+  		expect(page.getColumnName(4)).toEqual('Installed Date');
   	})
 });

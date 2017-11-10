@@ -16,4 +16,8 @@ export class AppPage {
   	getAssetPageTitle() {
   		return element(by.css('app-asset h4')).getText();
   	}
+
+  	getColumnName(column){
+  		return element(by.css('.table th:nth-child(' + column +')')).getText();
+  	}
 }
