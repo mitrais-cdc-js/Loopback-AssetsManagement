@@ -4,28 +4,27 @@ import { Http } from '@angular/http';
 import { ServerDataSource } from 'ng2-smart-table';
 import * as moment from 'moment';
 
-//environment
+// environment
 import { environment } from '../../environments/environment';
 
 
-//services
+// services
 import { DataService } from '../services/data.services';
 
-//module
+// module
 import { Asset } from './asset';
-import { CustomDateRenderComponent } from "./customDateRender.component";
-import { CustomDateEditorComponent } from "./customDateEditor.component";
+import { CustomDateRenderComponent } from './customDateRender.component';
+import { CustomDateEditorComponent } from './customDateEditor.component';
 
 @Component({
-		selector: 'app-asset',
-		templateUrl: './asset.component.html',
-		styleUrls: ['./asset.component.css'],
+  selector: 'app-asset',
+  templateUrl: './asset.component.html',
+  styleUrls: ['./asset.component.css'],
 })
 
 export class AssetComponent implements OnInit {
 
   settings = {
-
     add: {
       confirmCreate: true,
       addButtonContent: 'Add',
@@ -36,7 +35,6 @@ export class AssetComponent implements OnInit {
     delete: {
       confirmDelete: true,
     },
-
     columns: {
         model: {
           title: 'Model',
@@ -78,23 +76,23 @@ export class AssetComponent implements OnInit {
   };
 
 
-	title = 'Asset Management Application';
-	source: ServerDataSource;
-	assets:Asset[];
-	errorMessage:any;
+  title = 'Asset Management Application';
+  source: ServerDataSource;
+  assets: Asset[];
+  errorMessage: any;
 
-	constructor( http: Http, protected dataService:DataService ) {
-		console.log('AssetComponent const called...');
-		this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
-		this.source.setPaging(1, 10, true);
-	}
+  constructor( http: Http, protected dataService: DataService ) {
+    console.log('AssetComponent const called...');
+    this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
+    this.source.setPaging(1, 10, true);
+  }
 
   onCreateCall(event) {
     try {
-      console.log("Create triggered.");
+      console.log('Create triggered.');
       this.dataService.createAsset(event.newData);
       event.confirm.resolve(event.newData);
-    } catch(e) {
+    } catch (e) {
       console.log((<Error>e).message);
       event.confirm.reject();
     }
@@ -105,69 +103,70 @@ export class AssetComponent implements OnInit {
       console.log(`Edit triggered on: ${event.data.id}`);
       this.dataService.updateAsset(event.newData);
       event.confirm.resolve(event.newData);
-    } catch(e) {
+    } catch (e) {
       console.log((<Error>e).message);
       event.confirm.reject();
     }
-	}
+  }
 
-	onPostCall(event) {
+  onPostCall(event) {
     try {
     console.log(`Post triggered on: ${event.data.id}`);
-		event.confirm.resolve(event.newData);
+    event.confirm.resolve(event.newData);
     this.dataService.createAsset(event.newData);
-    } catch(e) {
+    } catch (e) {
       console.log((<Error>e).message);
       event.confirm.reject();
     }
-	}
+  }
 
   onDeleteCall(event) {
     try {
       console.log(`Delete triggered on: ${event.data.id}...`);
       this.dataService.deleteAsset(event.data);
       event.confirm.resolve(event.data);
-    } catch(e) {
+    } catch (e) {
       console.log((<Error>e).message);
       event.confirm.reject();
     }
   }
 
 
-	loadAssets() {
-				this.dataService.getAssets('desc').subscribe(
-		data => {
-			console.log(data);
-			this.assets = data;
-		},
-		err => {
-			console.log("Error occured.")
-		});
-	}
+  loadAssets() {
+    this.dataService.getAssets('desc').subscribe(
+      data => {
+        console.log(data);
+        this.assets = data;
+      },
+      err => {
+        console.log('Error occured.');
+      }
+    );
+  }
 
-	dateFormat(dateString, type = "date"){
-		var date = new Date(dateString);
- 		var momentDate = moment(date,"DD/MM/YYYY");
+  dateFormat(dateString, type = 'date') {
+    const date = new Date(dateString);
+    const momentDate = moment(date, 'DD/MM/YYYY');
+    if (type === 'datetime') {
+      return momentDate.format('DD/MM/YYYY HH:mm:ss');
+    } else {
+      return momentDate.format('DD/MM/YYYY');
+    }
+  }
 
- 		if (type == "datetime"){
- 			return momentDate.format("DD/MM/YYYY HH:mm:ss");
- 		}else{
- 			return momentDate.format("DD/MM/YYYY");
- 		}
- 	}
+  deleteAsset(asset) {
+    if (confirm('Are you sure to delete ' + asset.model)) {
+      this.dataService.deleteAsset(asset)
+      .then( res => {
+        console.log('deleted');
+        this.loadAssets();
+      })
+      .catch( err => console.log(err));
+    }
+  }
 
- 	deleteAsset(asset){
- 		if(confirm("Are you sure to delete " + asset.model)) {
-		    this.dataService.deleteAsset(asset)
- 			.then( res => {
- 				console.log("deleted");
- 				this.loadAssets();
- 			}).catch( err => console.log(err));
-		}
- 	}
-
-	ngOnInit() {
-		console.log('ngOnInit called...');
-		this.loadAssets();
-	}
+  ngOnInit() {
+    console.log('ngOnInit called...');
+    this.loadAssets();
+  }
 }

@@ -35,21 +35,20 @@ export class CustomDateEditorComponent extends DefaultEditor implements AfterVie
         }
     }
 
-    getDateString() : string {
-        var date = moment(this.htmlValue.nativeElement.innerText);
-        var temp = this.paddyHelper( date.get('date'), 2, '0' ) + '/' +  this.paddyHelper( (date.get('month') + 1), 2, '0') + '/' +  date.get('year');
+    getDateString(): string {
+        const date = moment(this.htmlValue.nativeElement.innerText);
+        const temp = this.paddyHelper( date.get('date'), 2, '0' ) + '/' +  this.paddyHelper( (date.get('month') + 1), 2, '0') + '/' +  date.get('year');
         return `${temp}`;
     }
 
     updateValue() {
-        let temp = this.name.nativeElement.value;
+        const temp = this.name.nativeElement.value;
         this.cell.newValue = temp;
     }
 
     paddyHelper(n, p, c) {
-        var pad_char = typeof c !== 'undefined' ? c : '0';
-        var pad = new Array(1 + p).join(pad_char);
+        const pad_char = typeof c !== 'undefined' ? c : '0';
+        const pad = new Array(1 + p).join(pad_char);
         return (pad + n).slice(-pad.length);
     }
-
 }
