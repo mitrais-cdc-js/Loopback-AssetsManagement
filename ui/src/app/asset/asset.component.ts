@@ -13,6 +13,7 @@ import { DataService } from '../services/data.services';
 //module
 import { Asset } from './asset'; 
 import { CustomDateRenderComponent } from "./customDateRender.component";
+import { CustomDateEditorComponent } from "./customDateEditor.component";
 
 @Component({
 		selector: 'app-asset',
@@ -62,6 +63,10 @@ export class AssetComponent implements OnInit {
           title: 'Date of Production',
           type: 'custom',
           renderComponent: CustomDateRenderComponent,
+          editor: {
+            type: 'custom',
+            component: CustomDateEditorComponent,
+          },
           filter: false,
         },
         description: {
@@ -84,7 +89,7 @@ export class AssetComponent implements OnInit {
  
   onCreateCall(event) {
     try {
-      console.log("Event create triggered...");
+      console.log("Create triggered.");
       this.dataService.createAsset(event.newData); 
       event.confirm.resolve(event.newData);
     } catch(e) {
@@ -95,8 +100,8 @@ export class AssetComponent implements OnInit {
 
   onEditCall(event) {
     try {
-      console.log(`Event edit triggered on id: ${event.newData.id}`); 
-      this.dataService.updateAsset(event.newData, event.newData.id); 
+      console.log(`Edit triggered on: ${event.data.id}`); 
+      this.dataService.updateAsset(event.newData); 
       event.confirm.resolve(event.newData);
     } catch(e) {
       console.log((<Error>e).message);
@@ -106,8 +111,8 @@ export class AssetComponent implements OnInit {
 	
 	onPostCall(event) {
     try {
+    console.log(`Post triggered on: ${event.data.id}`);
 		event.confirm.resolve(event.newData);
-		console.log(event.newData); //this contains the new edited data
     this.dataService.createAsset(event.newData);
     } catch(e) {
       console.log((<Error>e).message);
@@ -117,8 +122,7 @@ export class AssetComponent implements OnInit {
 
   onDeleteCall(event) {
     try {
-      console.log("Event delete triggered..."); 
-      console.log(` test: ${event.data}` );
+      console.log(`Delete triggered on: ${event.data.id}...`); 
       this.dataService.deleteAsset(event.data); 
       event.confirm.resolve(event.data);
     } catch(e) {
