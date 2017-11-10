@@ -134,4 +134,18 @@ describe('It should resolve the routes', function() {
 
 	})
 
+	it('to delete single asset', function(){
+
+		return Asset.findOne()
+			.then(res => {
+				console.log("==> assetId to delete: " + res.id)
+
+				return request.delete('/api/assets/' + res.id)
+					.then( resDelete => {
+						console.log('deleted rows: ' + JSON.parse(resDelete.text).count);
+						expect(JSON.parse(resDelete.text).count).to.be.equal(1);
+					})
+			})
+	})
+
 })
