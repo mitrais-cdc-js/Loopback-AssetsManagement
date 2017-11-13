@@ -83,7 +83,6 @@ export class AssetComponent implements OnInit {
 
 	selected = [];
 	selectAll = false;
-	multipleDeleteBtn = false;
 
 	constructor( http: Http, protected dataService: DataService ) {
 		console.log('AssetComponent const called...');
@@ -187,7 +186,6 @@ export class AssetComponent implements OnInit {
 
 	checkAll(){
 		console.log('select all assets...');
-		console.log('select all' + this.assets);
 		if (this.selectAll){
 			this.assets.forEach(function(asset){
 				console.log(asset);
@@ -208,6 +206,5 @@ export class AssetComponent implements OnInit {
 	ngOnInit() {
 		console.log('ngOnInit called...');
 		this.loadAssets();
-
 	}
 }
