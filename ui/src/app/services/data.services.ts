@@ -21,12 +21,12 @@ export class DataService {
     }
 
     patchAsset(asset) {
-        return this.http.patch('http://localhost:3000/api/assets/', asset)
+        return this.http.patch(`${environment.apiUrl}/assets/`, asset)
             .map((res: Response) => res.json()).toPromise();
     }
 
     deleteAsset(asset) {
-        return this.http.delete(`http://localhost:3000/api/assets/${asset.id}`)
+        return this.http.delete(`${environment.apiUrl}/assets/${asset.id}`)
             .map((res: Response) => res.json()).toPromise();
     }
 
@@ -156,7 +156,7 @@ export class DataService {
     }
 
     getAsset(id) {
-        return this.http.get('http://localhost:3000/api/assets/' + id)
+        return this.http.get(`${environment.apiUrl}/assets/` + id)
         .map((res: Response) => res.json()).toPromise();
     }
 
