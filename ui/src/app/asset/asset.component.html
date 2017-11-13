@@ -15,6 +15,7 @@
 <table class="table table-bordered">
 	<thead>
 		<tr>
+			<th><input type="checkbox" [(ngModel)]="selectAll" (click)="checkAll()"/></th>
 			<th>Description</th>
 			<th>Model</th>
 			<th>Serial</th>
@@ -27,6 +28,7 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let asset of assets">
+			<td><input type="checkbox" ng-model="selected" ng-checked="exist(asset)" (click)="toggleSelection(asset)"></td>
 			<td>{{ asset.description }}</td>
 			<td>{{ asset.model }}</td>
 			<td>{{ asset.serial }}</td>
@@ -42,5 +44,8 @@
 		</tr>
 	</tbody>
 </table>
+<h3>Selected</h3>
+{{ selected }}
+<p ng-repeat="selectedName in selected"> {{ selectedName }}</p>
 <!-- <ng2-smart-table [settings]="settings" [source]="assets" class="test-tlass"></ng2-smart-table> -->
 
