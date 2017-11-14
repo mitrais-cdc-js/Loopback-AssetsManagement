@@ -12,9 +12,11 @@
 <p>
 	<a routerLink="/assets/create" class="pull-right">New Asset</a>
 </p>
+
 <table class="table table-bordered">
 	<thead>
 		<tr>
+			<th><input type="checkbox" [(ngModel)]="selectAll" (change)="checkAll()"/></th>
 			<th>Description</th>
 			<th>Model</th>
 			<th>Serial</th>
@@ -27,6 +29,9 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let asset of assets">
+			<td>
+				<input type="checkbox" [checked]="exist(asset)" (click)="toggleSelection(asset)">
+			</td>
 			<td>{{ asset.description }}</td>
 			<td>{{ asset.model }}</td>
 			<td>{{ asset.serial }}</td>
@@ -40,7 +45,13 @@
 				<a (click)="deleteAsset(asset)" class="label label-danger">delete</a>
 			</td>
 		</tr>
+		<tr>
+			<td colspan="9"><button class="btn btn-default" (click)="deleteMultiple()">Delete</button></td>
+		</tr>
 	</tbody>
 </table>
+<h3>Selected</h3>
+{{ selected }}
+<p ng-repeat="selectedName in selected"> {{ selectedName }}</p>
 <!-- <ng2-smart-table [settings]="settings" [source]="assets" class="test-tlass"></ng2-smart-table> -->
 
