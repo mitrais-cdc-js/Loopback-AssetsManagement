@@ -158,7 +158,7 @@ export class AssetComponent implements OnInit {
 	}
 
 	deleteAsset(asset) {
-		if (confirm('Are you sure to delete ' + asset.model)) {
+		if (confirm('Are you sure want to delete ' + asset.model)) {
 			this.dataService.deleteAsset(asset)
 			.then( res => {
 				console.log('deleted');
@@ -173,7 +173,7 @@ export class AssetComponent implements OnInit {
 	}
 
 	toggleSelection(asset){
-
+		
 		var idx = this.selected.indexOf(asset);
 		console.log(idx);
 		if (idx > -1){
@@ -182,24 +182,46 @@ export class AssetComponent implements OnInit {
 			this.selected.push(asset);
 		}
 		console.log(this.selected);
+		console.log("total asset: " + this.assets.length);
+		console.log("total selected: " + this.selected.length);
+
+		if (this.selected.length >= this.assets.length){
+			this.selectAll = true;
+		}else{
+			this.selectAll = false;
+		}
 	}
 
 	checkAll(){
-		console.log('select all assets...');
+		console.log('select all assets...' + this.selectAll);
 		if (this.selectAll){
-			this.assets.forEach(function(asset){
-				console.log(asset);
-				//var idx = this.selected.indexOf(asset);
-				//console.log(idx);
-				//if (idx  >= 0){
-				//	return true;
-				//}else{
-				//	this.selected.push(asset);
-				//}
+			console.log("checkall checked");
+			var tempSelected = [];
+			
+			for(var i = 0; i < this.assets.length; i++) {
+				tempSelected.push(this.assets[i]);
+			}
 
-			})
+			this.selected = tempSelected;
 		}else{
 			this.selected = [];
+		}
+
+		console.log(this.selected);
+	}
+
+	deleteMultiple(){
+		console.log("delete multiple");
+		console.log("selected asset: " + this.selected.length);
+
+		if (this.selected.length < 1){
+			alert("Please select asset that you wan to delete");
+		}else{
+			if (confirm('Are you sure want to delete all selected assets? ')) {
+
+				//======= Call the service method ==========
+				this.dataService.deleteMultipleAssets(this.selected);	
+			}
 		}
 	}
 

@@ -30,6 +30,10 @@ export class DataService {
             .map((res: Response) => res.json()).toPromise();
     }
 
+    deleteMultipleAssets(assets){
+        console.log("delete multiple asset services");
+    }
+
     createAsset(asset) {
         // let headers = new Headers({ 'Content-Type': 'application/json' });
         // let options = new RequestOptions({ headers: headers });

@@ -12,10 +12,11 @@
 <p>
 	<a routerLink="/assets/create" class="pull-right">New Asset</a>
 </p>
+
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<th><input type="checkbox" [(ngModel)]="selectAll" (click)="checkAll()"/></th>
+			<th><input type="checkbox" [(ngModel)]="selectAll" (change)="checkAll()"/></th>
 			<th>Description</th>
 			<th>Model</th>
 			<th>Serial</th>
@@ -28,7 +29,9 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let asset of assets">
-			<td><input type="checkbox" ng-model="selected" ng-checked="exist(asset)" (click)="toggleSelection(asset)"></td>
+			<td>
+				<input type="checkbox" [checked]="exist(asset)" (click)="toggleSelection(asset)">
+			</td>
 			<td>{{ asset.description }}</td>
 			<td>{{ asset.model }}</td>
 			<td>{{ asset.serial }}</td>
@@ -41,6 +44,9 @@
 				<a routerLink="/assets/edit/{{ asset.id }}" class="label label-warning">edit</a>
 				<a (click)="deleteAsset(asset)" class="label label-danger">delete</a>
 			</td>
+		</tr>
+		<tr>
+			<td colspan="9"><button class="btn btn-default" (click)="deleteMultiple()">Delete</button></td>
 		</tr>
 	</tbody>
 </table>
