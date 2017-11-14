@@ -220,7 +220,11 @@ export class AssetComponent implements OnInit {
 			if (confirm('Are you sure want to delete all selected assets? ')) {
 
 				//======= Call the service method ==========
-				this.dataService.deleteMultipleAssets(this.selected);	
+				this.dataService.deleteMultipleAssets(this.selected)
+					.then( res => {
+						console.log("total rows deleted: " + res.count);
+						this.loadAssets();
+					})	
 			}
 		}
 	}

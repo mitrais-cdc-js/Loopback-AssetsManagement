@@ -32,6 +32,16 @@ export class DataService {
 
     deleteMultipleAssets(assets){
         console.log("delete multiple asset services");
+        var ids = [];
+        for(var i = 0; i < assets.length; i++) {
+            ids.push(assets[i].id);
+        }
+
+        var queryStringIds = ids.join("&id=");
+        console.log(queryStringIds);
+
+        return this.http.delete(`${environment.apiUrl}/assets/delete?id=${queryStringIds}`)
+            .map((res: Response) => res.json()).toPromise();
     }
 
     createAsset(asset) {
