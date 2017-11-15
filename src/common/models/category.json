@@ -22,7 +22,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "assets": {
+      "type": "hasMany",
+      "model": "Asset",
+      "foreignKey": "categoryId"
+    }
+  },
   "acls": [],
   "methods": {}
 }
