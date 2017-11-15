@@ -1,4 +1,14 @@
 {
+  "initial": {
+    "compression": {},
+    "cors": {
+      "params": {
+        "origin": true,
+        "credentials": true,
+        "maxAge": 86400
+      }
+    }
+  },
   "final:after": {
     "strong-error-handler": {
       "params": {
