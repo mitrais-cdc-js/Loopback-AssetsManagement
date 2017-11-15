@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AssetsModule } from './asset/asset.module';
+import { CategoriesModule } from './category/category.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -40,6 +41,7 @@ const RootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     Ng2SmartTableModule,
     HttpModule,
     AssetsModule,
+    CategoriesModule,
     RootRouting,
   ],
   providers: [DataService],
