@@ -11,6 +11,7 @@
 				<div class="form-group">
 					<label for="">Complience Status</label>
 					<input type="text" class="form-control" placeholder="Complience Status" name="complienceStatus" [(ngModel)]="asset.complienceStatus">
+					<p class="help-block">options: COMPLIANT</p>
 				</div>
 				<div class="form-group">
 					<label for="">Installed Date</label>
@@ -49,16 +50,19 @@
 					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
-					<label for="">Model</label>
+					<label for="">Model *</label>
 					<input type="text" class="form-control" placeholder="Model" name="model" [(ngModel)]="asset.model" required="required">
+					<p class="help-block">Min. 3 characters</p>
 				</div>
 				<div class="form-group">
-					<label for="">Serial</label>
+					<label for="">Serial *</label>
 					<input type="text" class="form-control" placeholder="Serial" name="serial" [(ngModel)]="asset.serial" required="required">
+					<p class="help-block">Min. 3 characters</p>
 				</div>
 				<div class="form-group">
-					<label for="">Batch No</label>
+					<label for="">Batch No *</label>
 					<input type="text" class="form-control" placeholder="Batch No" name="batchNo" [(ngModel)]="asset.batchNo" required="required">
+					<p class="help-block">Min. 3 characters</p>
 				</div>
 				<div class="form-group">
 					<label for="">Related Delivery Order</label>
@@ -70,13 +74,14 @@
 					<p class="help-block">Example: -7.800386,110.3937263 </p>
 				</div>
 				<div class="form-group">
-					<label for="">Production Date</label>
+					<label for="">Production Date *</label>
 					<input type="text" class="form-control" placeholder="Production Date" name="productionDate" [(ngModel)]="asset.productionDate">
 					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
 					<label for="">Status</label>
 					<input type="text" class="form-control" placeholder="Status " name="status" [(ngModel)]="asset.status">
+					<p class="help-block">Options: OK, OVERDUE INSPECTITON, DO NOT USE</p>
 				</div>
 				<div class="form-group">
 					<label for="">History </label>
