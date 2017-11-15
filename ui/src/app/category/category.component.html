@@ -1,3 +1,28 @@
+<h4>List of Categories</h4>
 <p>
-  category works!
+	<a routerLink="/categories/create" class="pull-right">New Category</a>
 </p>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Checklist</th>
+			<th>Parent</th>
+			<th width="15%">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let category of categories">
+			<td>{{ category.name }}</td>
+			<td>{{ category.description }}</td>
+			<td>{{ category.parent }}</td>
+			<td>{{ category.checklist }}</td>
+			<td>
+				<a routerLink="/categories/edit/{{ category.id }}" class="label label-warning">edit</a>
+				<a (click)="deleteCategory(category)" class="label label-danger">delete</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
