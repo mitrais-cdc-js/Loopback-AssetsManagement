@@ -1,121 +1,145 @@
 {
-	"name": "Asset",
-	"plural": "assets",
-	"base": "PersistedModel",
-	"idInjection": true,
-	"options": {
-		"validateUpsert": true
-	},
-	"properties": {
-		"model": {
-			"type": "string",
-			"required": true
-		},
-		"serial": {
-			"type": "string",
-			"required": true
-		},
-		"batchNo": {
-			"type": "string",
-			"required": true
-		},
-		"createDate": {
-			"type": "date",
-			"required": true
-		},
-		"productionDate": {
-			"type": "date",
-			"required": true
-		},
-		"description": {
-			"type": "string",
-			"required": true
-		},
-		"riskLevel": {
-			"type": "number",
-			"default": 1
-		},
-		"complienceStatus": {
-			"type": "string"
-		},
-		"installedDate": {
-			"type": "date"
-		},
-		"scheduledReplacementDate": {
-			"type": "date"
-		},
-		"recertificationInterval": {
-			"type": "number"
-		},
-		"lifeSpan": {
-			"type": "number"
-		},
-		"lastRecertificationDate": {
-			"type": "date"
-		},
-		"lastRecertificationResult": {
-			"type": "string"
-		},
-		"nextRecertificationDate": {
-			"type": "date"
-		},
-		"relatedDeliveryOrder": {
-			"type": "number",
-			"default": 0
-		},
-		"status": {
-			"type": "string",
-			"default": "OK"
-		},
-		"history": {
-			"type": "string"
-		},
-		"geolocation": {
-			"type": "geopoint"
-		}
-	},
-	"validations": [],
-	"relations": {},
-	"acls": [],
-	"methods": {
-		"assetsPaging": {
-			"accepts": [
-				{ "arg": "_sort", "type": "string" },
-				{ "arg": "_order", "type": "string" },
-				{ "arg": "_limit", "type": "number" },
-				{ "arg": "_page", "type": "number" } ],
-			"returns": [ { "arg": "result", "type": "object", "root": true} ],
-			"description": "Get list of assets and sort by creation date",
-			"http": [ { "path": "/asset_paging", "verb": "get" } ]
-		},
-		"sortByCreateDate": {
-			"accepts": [
-				{
-					"arg": "sort",
-					"type": "string",
-					"http": {
-						"source": "query"
-					}
-				}
-			],
-			"returns": [
-				{
-					"arg": "result",
-					"type": "object",
-					"root": true,
-					"description": "list of assets"
-				}
-			],
-			"description": "Get list of assets and sort by creation date",
-			"http": [
-				{
-					"path": "/sort_create_date",
-					"verb": "get"
-				}
-			]
-		}
-	},
-	"mixins": {
-	    "MultipleDelete": true
-	}
+  "name": "Asset",
+  "plural": "assets",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "MultipleDelete": true
+  },
+  "properties": {
+    "model": {
+      "type": "string",
+      "required": true
+    },
+    "serial": {
+      "type": "string",
+      "required": true
+    },
+    "batchNo": {
+      "type": "string",
+      "required": true
+    },
+    "createDate": {
+      "type": "date",
+      "required": true
+    },
+    "productionDate": {
+      "type": "date",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "riskLevel": {
+      "type": "number",
+      "default": 1
+    },
+    "complienceStatus": {
+      "type": "string"
+    },
+    "installedDate": {
+      "type": "date"
+    },
+    "scheduledReplacementDate": {
+      "type": "date"
+    },
+    "recertificationInterval": {
+      "type": "number"
+    },
+    "lifeSpan": {
+      "type": "number"
+    },
+    "lastRecertificationDate": {
+      "type": "date"
+    },
+    "lastRecertificationResult": {
+      "type": "string"
+    },
+    "nextRecertificationDate": {
+      "type": "date"
+    },
+    "relatedDeliveryOrder": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "default": "OK"
+    },
+    "history": {
+      "type": "string"
+    },
+    "geolocation": {
+      "type": "geopoint"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "assetsPaging": {
+      "accepts": [
+        {
+          "arg": "_sort",
+          "type": "string"
+        },
+        {
+          "arg": "_order",
+          "type": "string"
+        },
+        {
+          "arg": "_limit",
+          "type": "number"
+        },
+        {
+          "arg": "_page",
+          "type": "number"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Get list of assets and sort by creation date",
+      "http": [
+        {
+          "path": "/asset_paging",
+          "verb": "get"
+        }
+      ]
+    },
+    "sortByCreateDate": {
+      "accepts": [
+        {
+          "arg": "sort",
+          "type": "string",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true,
+          "description": "list of assets"
+        }
+      ],
+      "description": "Get list of assets and sort by creation date",
+      "http": [
+        {
+          "path": "/sort_create_date",
+          "verb": "get"
+        }
+      ]
+    }
+  }
 }
