@@ -5,8 +5,9 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 import * as moment from 'moment';
 
-// module
+// class/model
 import { Asset } from '../asset/asset';
+import { ServiceError, ServiceResultCode } from './serviceResult';
 
 @Injectable()
 export class DataService {
@@ -30,14 +31,14 @@ export class DataService {
             .map((res: Response) => res.json()).toPromise();
     }
 
-    deleteMultipleAssets(assets){
-        console.log("delete multiple asset services");
-        var ids = [];
-        for(var i = 0; i < assets.length; i++) {
+    deleteMultipleAssets(assets) {
+        console.log('delete multiple asset services');
+        let ids = [];
+        for (let i = 0; i < assets.length; i++) {
             ids.push(assets[i].id);
         }
 
-        var queryStringIds = ids.join("&id=");
+        const queryStringIds = ids.join('&id=');
         console.log(queryStringIds);
 
         return this.http.delete(`${environment.apiUrl}/assets/delete?id=${queryStringIds}`)
@@ -97,17 +98,21 @@ export class DataService {
 
     updateAsset(asset, assetId?: string) {
 
-        // var eq = Object.toJSON(user1) == Object.toJSON(user2);
+      if (asset === null) {
+        throw new ServiceError('asset can be null', ServiceResultCode.VALUE_IS_NULL_OR_UNDEFINED);
+      }
 
-        if (asset.productionDate) {
-            if ( this.parseDateFormat(asset.productionDate, 'DD/MM/YYYY') ) {
-                asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
-                asset.productionDate = asset.productionDate.toISOString();
-                console.log(asset.productionDate);
-            } else {
-                throw new TypeError('Production Date is not valid formated in DD/MM/YYYY');
-            }
-        }
+      // var eq = Object.toJSON(user1) == Object.toJSON(user2);
+
+      if (asset.productionDate) {
+          if ( this.parseDateFormat(asset.productionDate, 'DD/MM/YYYY') ) {
+              asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
+              asset.productionDate = asset.productionDate.toISOString();
+              console.log(asset.productionDate);
+          } else {
+            throw new TypeError('Production Date is not valid formated in DD/MM/YYYY');
+          }
+      }
 
         if (asset.installedDate) {
             if ( this.parseDateFormat(asset.installedDate, 'DD/MM/YYYY') ) {
