@@ -98,8 +98,9 @@ export class DataService {
 
     updateAsset(asset, assetId?: string) {
 
-      if (asset === null) {
-        throw new ServiceError('asset can be null', ServiceResultCode.VALUE_IS_NULL_OR_UNDEFINED);
+      if (asset === null || asset === undefined) {
+        throw new ServiceError('asset cant be null', ServiceResultCode.VALUE_IS_NULL_OR_UNDEFINED);
+       // throw new Error ('asset cant be null');
       }
 
       // var eq = Object.toJSON(user1) == Object.toJSON(user2);
