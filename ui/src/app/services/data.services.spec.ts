@@ -14,4 +14,16 @@ describe('Data Service', () => {
   it('should be created', inject([DataService], (service: DataService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('should has CRUD methods - we just say its CGUD',  inject([DataService], (service: DataService) => {
+    expect(service.createAsset).toBeDefined();
+    expect(service.getAsset).toBeDefined();
+    expect(service.updateAsset).toBeDefined();
+    expect(service.deleteAsset).toBeDefined();
+  }));
+
+  it('should return one asset object if it exist', inject([DataService], (service: DataService) => {
+      expect(service.updateAsset(null)).toThrowError(TypeError);
+  }));
+
 });
