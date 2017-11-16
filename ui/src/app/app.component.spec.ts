@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './header/header.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { AssetCreateComponent } from './asset/asset-create/asset-create.component';
 
 describe('AppComponent', () => {
@@ -12,6 +13,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         HeaderComponent,
+        NavigationComponent,
         AssetCreateComponent
       ],
       imports: [
