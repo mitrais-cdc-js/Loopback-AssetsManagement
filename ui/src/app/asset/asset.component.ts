@@ -75,7 +75,6 @@ export class AssetComponent implements OnInit {
 		},
 	};
 
-
 	title = 'Asset Management Application';
 	source: ServerDataSource;
 	assets: Asset[];
@@ -158,28 +157,24 @@ export class AssetComponent implements OnInit {
 		this.loadPage(1)
 		this.currentPage = 1
 		this.inputPage = this.currentPage
-		this.refreshPageNavigation()
 	}
 
 	goToPrevPage() {
 		this.loadPage(this.currentPage - 1)
 		this.currentPage -= 1
 		this.inputPage = this.currentPage
-		this.refreshPageNavigation()
 	}
 
 	goToNextPage() {
 		this.loadPage(this.currentPage + 1)
 		this.currentPage += 1
 		this.inputPage = this.currentPage
-		this.refreshPageNavigation()
 	}
 
 	goToLastPage() {
 		this.loadPage(this.pageCount)
 		this.currentPage = this.pageCount
 		this.inputPage = this.currentPage
-		this.refreshPageNavigation()
 	}
 
 	goToSelectedPage() {
@@ -187,11 +182,10 @@ export class AssetComponent implements OnInit {
 		{
 			this.loadPage(this.inputPage)
 			this.currentPage = this.inputPage
-			this.refreshPageNavigation()
 		}
 	}
 
-	refreshPageNavigation() {		
+	refreshPageNavigation() {
 		this.isFirstPage = this.currentPage <= 1
 		this.isLastPage = this.currentPage >= this.pageCount
 	}
@@ -200,7 +194,7 @@ export class AssetComponent implements OnInit {
 		this.dataService.getAssetCount().then(
 			data => {
 				this.pageCount = Math.ceil(data.count / config.pageLimit)
-
+				this.refreshPageNavigation()
 			}
 		)
 	}
@@ -291,6 +285,6 @@ export class AssetComponent implements OnInit {
 
 	ngOnInit() {
 		console.log('ngOnInit called...');
-		this.goToFirstPage();
+		this.goToFirstPage()
 	}
 }
