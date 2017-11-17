@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { environment } from '../../environments/environment';
+import { environment, config } from '../../environments/environment';
 import * as moment from 'moment';
 
 // class/model
@@ -170,8 +170,9 @@ export class DataService {
         return result;
     }
 
-    getAssets(order) {
-        return this.http.get(`${environment.apiUrl}/assets?filter=%7B%22order%22%3A%20%22createDate%20${order}%22%20%7D`)
+    getAssets(order, page) {
+        var skip = (page-1) * config.pageLimit
+        return this.http.get(`${environment.apiUrl}/assets?filter=%7B%22order%22%3A%20%22createDate%20${order}%22%2C%20%22skip%22%3A%20${skip}%2C%20%22limit%22%3A%20${config.pageLimit}%7D`)
         .map((res: Response) => res.json());
     }
 
@@ -180,8 +181,8 @@ export class DataService {
         .map((res: Response) => res.json()).toPromise();
     }
 
-    getSortedAssets(order) {
-        return this.http.get(`${environment.apiUrl}/assets/sort_create_date?sort=${order}`)
-            .map((res: Response) => res.json());
+    getAssetCount() {
+        return this.http.get(`${environment.apiUrl}/assets/count`)
+        .map((res: Response) => res.json()).toPromise();
     }
 }

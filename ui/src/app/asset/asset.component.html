@@ -46,10 +46,26 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="9"><button class="btn btn-default" (click)="deleteMultiple()">Delete</button></td>
+			<td colspan="6">
+				<button class="btn btn-default" (click)="deleteMultiple()">Delete</button>
+			</td>
+			<td colspan="3">
+				<table>
+					<tr>
+						<td><button class="btn btn-default" [disabled]="isFirstPage" (click)="goToFirstPage()">|&lt;</button></td>
+						<td><button class="btn btn-default" [disabled]="isFirstPage" (click)="goToPrevPage()">&lt;&lt;</button></td>
+						<td>
+							<input type="text" class="form-control" [(ngModel)]="inputPage" (keyup.enter)="goToSelectedPage()">
+						</td>
+						<td><button class="btn btn-default" [disabled]="isLastPage" (click)="goToNextPage()">&gt;&gt;</button></td>
+						<td><button class="btn btn-default" [disabled]="isLastPage" (click)="goToLastPage()">&gt;|</button></td>
+					</tr>
+				</table>
+			</td>
 		</tr>
 	</tbody>
 </table>
+
 
 <p ng-repeat="selectedName in selected"> {{ selectedName }}</p>
 <!-- <ng2-smart-table [settings]="settings" [source]="assets" class="test-tlass"></ng2-smart-table> -->
