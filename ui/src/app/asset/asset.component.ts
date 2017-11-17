@@ -144,7 +144,6 @@ export class AssetComponent implements OnInit {
 	loadPage(page) {
 		this.dataService.getAssets('desc', page).subscribe(
 			data => {
-				console.log(data)
 				this.assets = data
 			},
 			err => {
@@ -186,7 +185,6 @@ export class AssetComponent implements OnInit {
 	goToSelectedPage() {
 		if(this.inputPage > 0 && this.inputPage <= this.pageCount)
 		{
-			console.log(`goToSelectedPage, inputPage =========> ${this.inputPage}`)
 			this.loadPage(this.inputPage)
 			this.currentPage = this.inputPage
 			this.refreshPageNavigation()
@@ -194,13 +192,8 @@ export class AssetComponent implements OnInit {
 	}
 
 	refreshPageNavigation() {		
-		console.log(`refreshPageNavigation, currentPage =========> ${this.currentPage}`)
-		console.log(`refreshPageNavigation, pageCount =========> ${this.pageCount}`)
 		this.isFirstPage = this.currentPage <= 1
 		this.isLastPage = this.currentPage >= this.pageCount
-		
-		console.log(`refreshPageNavigation, isFirstPage =========> ${this.isFirstPage}`)
-		console.log(`refreshPageNavigation, isLastPage =========> ${this.isLastPage}`)
 	}
 
 	refreshPageCount() {
