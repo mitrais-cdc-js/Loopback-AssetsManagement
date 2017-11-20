@@ -16,6 +16,7 @@ import { Asset } from './../asset';
 })
 export class AssetCreateComponent implements OnInit {
   title = 'Asset Management Application';
+  autoCalculate: boolean = true
 
   // newAsset = new Asset();
 
@@ -46,6 +47,10 @@ export class AssetCreateComponent implements OnInit {
     }).catch( e => {
       console.log(e);
     });
+  }
+
+  toggleAutoCalculate() {
+    this.autoCalculate = !this.autoCalculate
   }
 }
 

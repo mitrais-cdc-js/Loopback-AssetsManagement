@@ -26,8 +26,12 @@
 					<input type="number" class="form-control" placeholder="Life Span / Warranty" name="lifeSpan" ngModel>
 				</div>
 				<div class="form-group">
+					<input type="checkbox" name="autoCalculation" (change)="toggleAutoCalculate()" [checked]="autoCalculate">
+				</div>
+				<div class="form-group">
 					<label for="">Scheduled Replacement Date</label>
-					<input type="text" class="form-control" placeholder="Scheduled Replacement Date" name="scheduledReplacementDate" ngModel>
+					<input type="text" class="form-control" placeholder="Scheduled Replacement Date" name="scheduledReplacementDate" 
+						[disabled]="autoCalculate" ngModel>
 					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">

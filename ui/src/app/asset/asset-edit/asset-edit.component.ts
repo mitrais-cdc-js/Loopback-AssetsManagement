@@ -12,8 +12,8 @@ import { DataService } from '../../services/data.services';
   styleUrls: ['./asset-edit.component.css']
 })
 export class AssetEditComponent implements OnInit {
-
   asset = {};
+  autoCalculate: boolean = true
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService) { }
 
@@ -67,4 +67,7 @@ export class AssetEditComponent implements OnInit {
     });
   }
 
+  toggleAutoCalculate() {
+    this.autoCalculate = !this.autoCalculate
+  }
 }
