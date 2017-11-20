@@ -5,7 +5,7 @@ import { ServerDataSource } from 'ng2-smart-table';
 import * as moment from 'moment';
 
 // environment
-import { environment } from '../../environments/environment';
+import { environment, config } from '../../environments/environment';
 
 
 // services
@@ -75,11 +75,15 @@ export class AssetComponent implements OnInit {
 		},
 	};
 
-
 	title = 'Asset Management Application';
 	source: ServerDataSource;
 	assets: Asset[];
 	errorMessage: any;
+	currentPage: number;
+	inputPage: number;
+	pageCount: number;
+	isFirstPage: boolean;
+	isLastPage: boolean;
 
 	selected = [];
 	selectAll = false;
@@ -133,19 +137,69 @@ export class AssetComponent implements OnInit {
 			event.confirm.reject();
 		}
 	}
+	
+	//#region Paging
 
-
-	loadAssets() {
-		this.dataService.getAssets('desc').subscribe(
+	loadPage(page) {
+		this.dataService.getAssets('desc', page).subscribe(
 			data => {
-				console.log(data);
-				this.assets = data;
+				this.assets = data
 			},
 			err => {
-				console.log('Error occured.');
+				console.log('Error occured.')
 			}
 		);
+		
+		this.refreshPageCount()
 	}
+
+	goToFirstPage() {
+		this.loadPage(1)
+		this.currentPage = 1
+		this.inputPage = this.currentPage
+	}
+
+	goToPrevPage() {
+		this.loadPage(this.currentPage - 1)
+		this.currentPage -= 1
+		this.inputPage = this.currentPage
+	}
+
+	goToNextPage() {
+		this.loadPage(this.currentPage + 1)
+		this.currentPage += 1
+		this.inputPage = this.currentPage
+	}
+
+	goToLastPage() {
+		this.loadPage(this.pageCount)
+		this.currentPage = this.pageCount
+		this.inputPage = this.currentPage
+	}
+
+	goToSelectedPage() {
+		if(this.inputPage > 0 && this.inputPage <= this.pageCount)
+		{
+			this.loadPage(this.inputPage)
+			this.currentPage = this.inputPage
+		}
+	}
+
+	refreshPageNavigation() {
+		this.isFirstPage = this.currentPage <= 1
+		this.isLastPage = this.currentPage >= this.pageCount
+	}
+
+	refreshPageCount() {
+		this.dataService.getAssetCount().then(
+			data => {
+				this.pageCount = Math.ceil(data.count / config.pageLimit)
+				this.refreshPageNavigation()
+			}
+		)
+	}
+
+	//#endregion
 
 	dateFormat(dateString, type = 'date') {
 		const date = new Date(dateString);
@@ -162,7 +216,7 @@ export class AssetComponent implements OnInit {
 			this.dataService.deleteAsset(asset)
 			.then( res => {
 				console.log('deleted');
-				this.loadAssets();
+				this.loadPage(this.currentPage);
 			})
 			.catch( err => console.log(err));
 		}
@@ -215,7 +269,7 @@ export class AssetComponent implements OnInit {
 		console.log("selected asset: " + this.selected.length);
 
 		if (this.selected.length < 1){
-			alert("Please select asset that you wan to delete");
+			alert("Please select asset that you want to delete");
 		}else{
 			if (confirm('Are you sure want to delete all selected assets? ')) {
 
@@ -223,7 +277,7 @@ export class AssetComponent implements OnInit {
 				this.dataService.deleteMultipleAssets(this.selected)
 					.then( res => {
 						console.log("total rows deleted: " + res.count);
-						this.loadAssets();
+						this.goToFirstPage();
 					})	
 			}
 		}
@@ -231,6 +285,6 @@ export class AssetComponent implements OnInit {
 
 	ngOnInit() {
 		console.log('ngOnInit called...');
-		this.loadAssets();
+		this.goToFirstPage()
 	}
 }

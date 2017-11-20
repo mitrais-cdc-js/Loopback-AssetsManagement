@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { environment } from '../../environments/environment';
+import { environment, config } from '../../environments/environment';
 import * as moment from 'moment';
 
-// module
+// class/model
 import { Asset } from '../asset/asset';
+import { ServiceError, ServiceResultCode } from './serviceResult';
 
 @Injectable()
 export class DataService {
@@ -30,14 +31,14 @@ export class DataService {
             .map((res: Response) => res.json()).toPromise();
     }
 
-    deleteMultipleAssets(assets){
-        console.log("delete multiple asset services");
-        var ids = [];
-        for(var i = 0; i < assets.length; i++) {
+    deleteMultipleAssets(assets) {
+        console.log('delete multiple asset services');
+        let ids = [];
+        for (let i = 0; i < assets.length; i++) {
             ids.push(assets[i].id);
         }
 
-        var queryStringIds = ids.join("&id=");
+        const queryStringIds = ids.join('&id=');
         console.log(queryStringIds);
 
         return this.http.delete(`${environment.apiUrl}/assets/delete?id=${queryStringIds}`)
@@ -97,17 +98,22 @@ export class DataService {
 
     updateAsset(asset, assetId?: string) {
 
-        // var eq = Object.toJSON(user1) == Object.toJSON(user2);
+      if (asset === null || asset === undefined) {
+        throw new ServiceError('asset cant be null', ServiceResultCode.VALUE_IS_NULL_OR_UNDEFINED);
+       // throw new Error ('asset cant be null');
+      }
 
-        if (asset.productionDate) {
-            if ( this.parseDateFormat(asset.productionDate, 'DD/MM/YYYY') ) {
-                asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
-                asset.productionDate = asset.productionDate.toISOString();
-                console.log(asset.productionDate);
-            } else {
-                throw new TypeError('Production Date is not valid formated in DD/MM/YYYY');
-            }
-        }
+      // var eq = Object.toJSON(user1) == Object.toJSON(user2);
+
+      if (asset.productionDate) {
+          if ( this.parseDateFormat(asset.productionDate, 'DD/MM/YYYY') ) {
+              asset.productionDate = new Date(this.convertStringToDate(asset.productionDate));
+              asset.productionDate = asset.productionDate.toISOString();
+              console.log(asset.productionDate);
+          } else {
+            throw new TypeError('Production Date is not valid formated in DD/MM/YYYY');
+          }
+      }
 
         if (asset.installedDate) {
             if ( this.parseDateFormat(asset.installedDate, 'DD/MM/YYYY') ) {
@@ -164,8 +170,9 @@ export class DataService {
         return result;
     }
 
-    getAssets(order) {
-        return this.http.get(`${environment.apiUrl}/assets?filter=%7B%22order%22%3A%20%22createDate%20${order}%22%20%7D`)
+    getAssets(order, page) {
+        var skip = (page-1) * config.pageLimit
+        return this.http.get(`${environment.apiUrl}/assets?filter=%7B%22order%22%3A%20%22createDate%20${order}%22%2C%20%22skip%22%3A%20${skip}%2C%20%22limit%22%3A%20${config.pageLimit}%7D`)
         .map((res: Response) => res.json());
     }
 
@@ -174,8 +181,8 @@ export class DataService {
         .map((res: Response) => res.json()).toPromise();
     }
 
-    getSortedAssets(order) {
-        return this.http.get(`${environment.apiUrl}/assets/sort_create_date?sort=${order}`)
-            .map((res: Response) => res.json());
+    getAssetCount() {
+        return this.http.get(`${environment.apiUrl}/assets/count`)
+        .map((res: Response) => res.json()).toPromise();
     }
 }

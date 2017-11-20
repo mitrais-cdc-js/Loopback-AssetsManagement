@@ -9,15 +9,15 @@ import { CategoriesModule } from './category/category.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-
 import { HomeComponent } from './home/home.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 // services
 import { DataService } from './services/data.services';
 
 // 3rd part
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { NavigationComponent } from './navigation/navigation.component';
+
 
 // define routes
 const appRoutes: Routes = [
@@ -29,12 +29,6 @@ const appRoutes: Routes = [
 const RootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: false });
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    NavigationComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -43,6 +37,12 @@ const RootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     AssetsModule,
     CategoriesModule,
     RootRouting,
+  ],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    NavigationComponent,
+    HomeComponent
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

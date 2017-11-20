@@ -7,3 +7,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000/api',
 };
+
+export const config = {
+  pageLimit: 10
+};
