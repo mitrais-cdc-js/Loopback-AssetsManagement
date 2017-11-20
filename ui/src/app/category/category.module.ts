@@ -6,12 +6,22 @@ import { FormsModule } from '@angular/forms';
 
 import { CategoryComponent } from './category.component';
 import { CategoryService } from '../services/category.service';
+import { CategoryCreateComponent } from './category-create/category-create.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
 
 const assetRouting: ModuleWithProviders = RouterModule.forChild([
 		{
 			path: 'categories',
 			component: CategoryComponent,
-		}
+		},
+		{
+			path: 'categories/create',
+			component: CategoryCreateComponent
+		},
+		{
+    		path: 'categories/edit/:id',
+    		component: CategoryEditComponent
+  		}
 ]);
 
 
@@ -22,7 +32,9 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 		assetRouting,
 	],
 	declarations: [
-		CategoryComponent
+		CategoryComponent,
+		CategoryCreateComponent,
+		CategoryEditComponent
 	],
 	providers: [
 		CategoryService
