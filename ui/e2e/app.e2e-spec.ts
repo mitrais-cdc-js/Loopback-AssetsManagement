@@ -19,7 +19,7 @@ describe('ui App', () => {
   });
 
   it('Asset table should have the fourth column as : Installed Date', () => {
-    expect(page.getColumnName(4)).toEqual('Installed Date');
+    expect(page.getColumnName(5)).toEqual('Installed Date');
   });
 
 });
