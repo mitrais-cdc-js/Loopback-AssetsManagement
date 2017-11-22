@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Http } from '@angular/http';
 
 import { ServerDataSource } from 'ng2-smart-table';
@@ -34,6 +35,14 @@ export class AssetComponent implements OnInit {
 		},
 		delete: {
 			confirmDelete: true,
+		},
+		actions: {
+			custom: [
+				{
+					name: 'view',
+					title: 'View'
+				}
+			]
 		},
 		columns: {
 				model: {
@@ -88,7 +97,7 @@ export class AssetComponent implements OnInit {
 	selected = [];
 	selectAll = false;
 
-	constructor( http: Http, protected dataService: DataService ) {
+	constructor( http: Http, protected dataService: DataService, private router: Router ) {
 		console.log('AssetComponent const called...');
 		this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
 		this.source.setPaging(1, 10, true);
@@ -135,6 +144,13 @@ export class AssetComponent implements OnInit {
 		} catch (e) {
 			console.log((<Error>e).message);
 			event.confirm.reject();
+		}
+	}
+
+	onCustom(event){
+		let assetId = event.data.id;
+		if (event.action == 'view'){
+			this.router.navigate(['/assets/'+ assetId ]);
 		}
 	}
 	
