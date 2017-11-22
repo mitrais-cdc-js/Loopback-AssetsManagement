@@ -3,6 +3,18 @@
 	<a routerLink="/categories/create" class="pull-right">New Category</a>
 </p>
 
+<p>
+  <ng2-smart-table
+    [settings]="settings"
+    [source]="source"
+    (createConfirm)="onCreateCall($event)"
+	  (editConfirm)="onEditCall($event)"
+	  (deleteConfirm)="onDeleteCall($event)">
+  </ng2-smart-table>
+</p>
+<br/>
+<br/>
+
 <table class="table table-bordered">
 	<thead>
 		<tr>
