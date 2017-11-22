@@ -75,6 +75,10 @@
     },
     "geolocation": {
       "type": "geopoint"
+    },
+    "categoryId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
