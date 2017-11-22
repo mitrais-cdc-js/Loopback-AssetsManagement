@@ -15,7 +15,8 @@
 				</div>
 				<div class="form-group">
 					<label for="">Installed Date</label>
-					<input type="text" class="form-control" placeholder="Installed Date" name="installedDate" [(ngModel)]="asset.installedDate">
+					<input type="text" class="form-control" placeholder="Installed Date" name="installedDate" [(ngModel)]="asset.installedDate"
+						(input)="recalculateReplacementDate()">
 					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
@@ -24,11 +25,16 @@
 				</div>
 				<div class="form-group">
 					<label for="">Life Span / Warranty (in weeks)</label>
-					<input type="number" class="form-control" placeholder="Life Span / Warranty" name="lifeSpan" [(ngModel)]="asset.lifeSpan">
+					<input type="number" class="form-control" placeholder="Life Span / Warranty" name="lifeSpan" [(ngModel)]="asset.lifeSpan"
+						(input)="recalculateReplacementDate()">
+				</div>
+				<div class="form-group">
+					<input type="checkbox" name="autoCalculation" (change)="toggleAutoCalculate()" [checked]="autoCalculate">
 				</div>
 				<div class="form-group">
 					<label for="">Scheduled Replacement Date</label>
-					<input type="text" class="form-control" placeholder="Scheduled Replacement Date" name="scheduledReplacementDate" [(ngModel)]="asset.scheduledReplacementDate">
+					<input type="text" class="form-control" placeholder="Scheduled Replacement Date" name="scheduledReplacementDate" 
+						[(ngModel)]="asset.scheduledReplacementDate" [disabled]="autoCalculate">
 					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">

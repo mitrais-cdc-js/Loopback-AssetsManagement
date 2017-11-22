@@ -16,7 +16,6 @@ export class DataService {
         console.log('DataService const called...');
     }
 
-
     convertStringToDate(string) {
         return string.split('/')[1] + '/' + string.split('/')[0] + '/' + string.split('/')[2];
     }
@@ -97,13 +96,9 @@ export class DataService {
     }
 
     updateAsset(asset, assetId?: string) {
-
       if (asset === null || asset === undefined) {
         throw new ServiceError('asset cant be null', ServiceResultCode.VALUE_IS_NULL_OR_UNDEFINED);
-       // throw new Error ('asset cant be null');
       }
-
-      // var eq = Object.toJSON(user1) == Object.toJSON(user2);
 
       if (asset.productionDate) {
           if ( this.parseDateFormat(asset.productionDate, 'DD/MM/YYYY') ) {
@@ -158,11 +153,9 @@ export class DataService {
             return this.http.put(`${environment.apiUrl}/assets/${asset.id}`, asset)
             .map((res: Response) => res.json()).toPromise();
         }
-
     }
 
     parseDateFormat(value: string, format: string): boolean {
-
         console.log(value);
         let result: boolean = false;
         result = moment(value, format, true).isValid();

@@ -47,6 +47,7 @@ export class CategoryCreateComponent implements OnInit {
 		console.log(form.value); 
 		let inputFields = form.value;
 		let newCategory = {
+			id: null,
 			name: inputFields.name,
 			description: inputFields.description,
 			parent_id: inputFields.parent_id,

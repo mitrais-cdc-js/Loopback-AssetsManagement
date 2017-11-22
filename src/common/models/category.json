@@ -30,5 +30,40 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+    "catPaging": {
+      "accepts": [
+        {
+          "arg": "_sort",
+          "type": "string"
+        },
+        {
+          "arg": "_order",
+          "type": "string"
+        },
+        {
+          "arg": "_limit",
+          "type": "number"
+        },
+        {
+          "arg": "_page",
+          "type": "number"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true
+        }
+      ],
+      "description": "Get list of categories and sort by name",
+      "http": [
+        {
+          "path": "/category_paging",
+          "verb": "get"
+        }
+      ]
+    }
+  }
 }
