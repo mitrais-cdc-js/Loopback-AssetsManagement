@@ -1,13 +1,13 @@
 <h4>List of Assets</h4>
 <p>
-  <ng2-smart-table 
-	  [settings]="settings" 
-	  [source]="source"  
+  <ng2-smart-table
+	  [settings]="settings"
+	  [source]="source"
 	  (createConfirm)="onCreateCall($event)"
 	  (editConfirm)="onEditCall($event)"
 	  (deleteConfirm)="onDeleteCall($event)"
 	  ></ng2-smart-table>
-</p> 
+</p>
 <br/><br/>
 <p>
 	<a routerLink="/assets/create" class="pull-right">New Asset</a>
