@@ -6,7 +6,7 @@ import * as moment from 'moment';
 // services
 import { DataService } from '../../services/data.services';
 import { UtilityService } from '../../services/utility.services';
-
+import { CategoryService } from '../../services/category.service';
 // model
 import { Asset } from './../asset';
 
@@ -19,11 +19,23 @@ export class AssetEditComponent implements OnInit {
   asset = new Asset()
   autoCalculate: boolean = true
 
-  constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService, 
-    private utilityService: UtilityService) { }
+  categories = [];
+
+  constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService, private categoryService: CategoryService, private utilityService: UtilityService) { }
 
   ngOnInit() {
     this.getAssetDetail(this.route.snapshot.params['id']);
+
+    this.categoryService.getCategories().
+    subscribe(
+      categories => {
+        console.log(categories);
+        this.categories = categories;
+      },
+      err => {
+        console.log(err)
+      }
+    )
   }
 
   getAssetDetail(id) {

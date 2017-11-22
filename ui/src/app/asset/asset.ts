@@ -23,7 +23,8 @@ export class Asset {
           public relatedDeliveryOrder: number = 0,
           public status: string = '',
           public history: string = '',
-          public geolocation: string = ''
+          public geolocation: string = '',
+          public categoryId: string = ''
       ) {}
 
   public static compareDate(direction: any, a: any, b: any) {
