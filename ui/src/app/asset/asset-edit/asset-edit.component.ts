@@ -5,6 +5,10 @@ import * as moment from 'moment';
 
 // services
 import { DataService } from '../../services/data.services';
+import { UtilityService } from '../../services/utility.services';
+
+// model
+import { Asset } from './../asset';
 
 @Component({
   selector: 'app-asset-edit',
@@ -12,10 +16,11 @@ import { DataService } from '../../services/data.services';
   styleUrls: ['./asset-edit.component.css']
 })
 export class AssetEditComponent implements OnInit {
-  asset = {};
+  asset = new Asset()
   autoCalculate: boolean = true
 
-  constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService, 
+    private utilityService: UtilityService) { }
 
   ngOnInit() {
     this.getAssetDetail(this.route.snapshot.params['id']);
@@ -24,21 +29,16 @@ export class AssetEditComponent implements OnInit {
   getAssetDetail(id) {
     this.dataService.getAsset(id)
     .then( asset => {
-      asset.installedDate = (asset.installedDate === null) ? '' : this.dateFormat(new Date(asset.installedDate));
-      asset.scheduledReplacementDate = (asset.scheduledReplacementDate === null) ? '' : this.dateFormat(new Date(asset.scheduledReplacementDate));
-      asset.lastRecertificationDate = (asset.lastRecertificationDate === null) ? '' : this.dateFormat(new Date(asset.lastRecertificationDate));
-      asset.nextRecertificationDate = (asset.nextRecertificationDate === null) ? '' : this.dateFormat(new Date(asset.nextRecertificationDate));
-      asset.productionDate = (asset.productionDate === null) ? '' : this.dateFormat(new Date(asset.productionDate));
+      asset.installedDate = (asset.installedDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.installedDate));
+      asset.scheduledReplacementDate = (asset.scheduledReplacementDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.scheduledReplacementDate));
+      asset.lastRecertificationDate = (asset.lastRecertificationDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.lastRecertificationDate));
+      asset.nextRecertificationDate = (asset.nextRecertificationDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.nextRecertificationDate));
+      asset.productionDate = (asset.productionDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.productionDate));
       asset.geolocation = (asset.geolocation === null) ? '' : asset.geolocation.lat + ',' + asset.geolocation.lng;
 
       this.asset = asset;
     })
     .catch(e => console.log(e));
-  }
-
-  dateFormat(date) {
-    const momentDate = moment(date, 'DD/MM/YYYY');
-    return momentDate.format('DD/MM/YYYY');
   }
 
   removeEmptyAttr(obj) {
@@ -69,5 +69,16 @@ export class AssetEditComponent implements OnInit {
 
   toggleAutoCalculate() {
     this.autoCalculate = !this.autoCalculate
+    this.recalculateReplacementDate()
+  }
+
+  recalculateReplacementDate() {
+    if(this.autoCalculate && this.asset.installedDate !== null && this.asset.lifeSpan !== null) {
+      const days = this.asset.lifeSpan * 7
+      var tempDate = new Date(this.dataService.convertStringToDate(this.asset.installedDate))
+
+      tempDate = new Date(tempDate.getTime() + (days * 86400000))
+      this.asset.scheduledReplacementDate = this.utilityService.dateFormat(tempDate)
+    }
   }
 }

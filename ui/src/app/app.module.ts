@@ -14,6 +14,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 // services
 import { DataService } from './services/data.services';
+import { UtilityService } from './services/utility.services';
 
 // 3rd part
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -44,7 +45,7 @@ const RootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     NavigationComponent,
     HomeComponent
   ],
-  providers: [DataService],
+  providers: [DataService, UtilityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
