@@ -11,40 +11,46 @@ import { AssetEditComponent } from './asset-edit/asset-edit.component';
 
 import { CustomDateRenderComponent } from './customDateRender.component';
 import { CustomDateEditorComponent } from './customDateEditor.component';
+import { AssetViewComponent } from './asset-view/asset-view.component';
 
 const assetRouting: ModuleWithProviders = RouterModule.forChild([
-  {
-    path: 'assets',
-    component: AssetComponent,
-  },
-  {
-    path: 'assets/create',
-    component: AssetCreateComponent,
-  },
-  {
-    path: 'assets/edit/:id',
-    component: AssetEditComponent
-  }
+	{
+		path: 'assets',
+		component: AssetComponent,
+	},
+	{
+		path: 'assets/create',
+		component: AssetCreateComponent,
+	},
+	{
+		path: 'assets/:id',
+		component: AssetViewComponent
+	},
+	{
+		path: 'assets/edit/:id',
+		component: AssetEditComponent
+	}
 ]);
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    assetRouting,
-    Ng2SmartTableModule,
-  ],
-  entryComponents: [
-    CustomDateRenderComponent,
-    CustomDateEditorComponent
-  ],
-  declarations: [
-    AssetComponent,
-    AssetCreateComponent,
-    AssetEditComponent,
-    CustomDateRenderComponent,
-    CustomDateEditorComponent
-  ]
+	imports: [
+		CommonModule,
+		FormsModule,
+		assetRouting,
+		Ng2SmartTableModule,
+	],
+	entryComponents: [
+		CustomDateRenderComponent,
+		CustomDateEditorComponent
+	],
+	declarations: [
+		AssetComponent,
+		AssetCreateComponent,
+		AssetEditComponent,
+		CustomDateRenderComponent,
+		CustomDateEditorComponent,
+		AssetViewComponent
+	]
 })
 
 export class AssetsModule { }

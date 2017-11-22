@@ -1,0 +1,73 @@
+<h3 class="page-header">
+	Detail Asset
+</h3>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Attribute</th>
+			<th>Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Category</td><td>{{ asset.categoryId }}</td>
+		</tr>
+		<tr>
+			<td>Risk Level</td><td>{{ asset.riskLevel }}</td>
+		</tr>
+		<tr>
+			<td>Complience Status</td><td>{{ asset.complienceStatus }}</td>
+		</tr>
+		<tr>
+			<td>Installed Date</td><td>{{ dateFormat(asset.installedDate,'datetime') }}</td>
+		</tr>
+		<tr>
+			<td>Description</td><td>{{ asset.description }}</td>
+		</tr>
+		<tr>
+			<td>Life Span</td><td>{{ asset.lifeSpan }}</td>
+		</tr>
+		<tr>
+			<td>Schedule Replacement Date</td><td>{{ dateFormat(asset.scheduledReplacementDate) }}</td>
+		</tr>
+		<tr>
+			<td>Re-Certification Interval</td><td>{{ asset.recertificationInterval }}</td>
+		</tr>
+		<tr>
+			<td>Last Re-Certification Date</td><td>{{ dateFormat(asset.lastRecertificationDate) }}</td>
+		</tr>
+		<tr>
+			<td>Last Re-Certification Result</td><td>{{ asset.lastRecertificationResult }}</td>
+		</tr>
+		<tr>
+			<td>Next Re-Certification Date</td><td>{{ dateFormat(asset.nextRecertificationDate) }}</td>
+		</tr>
+		<tr>
+			<td>Model</td><td>{{ asset.model }}</td>
+		</tr>
+		<tr>
+			<td>Serial</td><td>{{ asset.serial }}</td>
+		</tr>
+		<tr>
+			<td>Batch No</td><td>{{ asset.batchNo }}</td>
+		</tr>
+		<tr>
+			<td>Related Delivery Order</td><td>{{ asset.relatedDeliveryOrder }}</td>
+		</tr>
+		<tr>
+			<td>Geolocation</td><td>{{ asset.geolocation }}</td>
+		</tr>
+		<tr>
+			<td>Production Date</td><td>{{ dateFormat(asset.productionDate) }}</td>
+		</tr>
+		<tr>
+			<td>Status</td><td>{{ asset.status }}</td>
+		</tr>
+		<tr>
+			<td>History</td><td>{{ asset.history }}</td>
+		</tr>
+	</tbody>
+</table>
+<p>
+	<a class="btn btn-default" routerLink="/assets">Back</a>
+</p>
