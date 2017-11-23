@@ -39,7 +39,7 @@ export class AssetComponent implements OnInit {
 		actions: {
 			add: false,
 			edit: false,
-			delete: false,
+			delete: true,
 			custom: [
 				{
 					name: 'view',
@@ -48,10 +48,6 @@ export class AssetComponent implements OnInit {
 				{
 					name: 'edit',
 					title: 'Edit '
-				},
-				{
-					name: 'delete',
-					title: 'Delete'
 				}
 			]
 		},
@@ -149,9 +145,12 @@ export class AssetComponent implements OnInit {
 
 	onDeleteCall(event) {
 		try {
-			console.log(`Delete triggered on: ${event.data.id}...`);
-			this.dataService.deleteAsset(event.data);
-			event.confirm.resolve(event.data);
+
+			if (confirm('Are you sure want to delete ' + event.data.id)) {
+				console.log(`Delete triggered on: ${event.data.id}...`);
+				this.dataService.deleteAsset(event.data);
+				event.confirm.resolve(event.data);
+			}
 		} catch (e) {
 			console.log((<Error>e).message);
 			event.confirm.reject();
