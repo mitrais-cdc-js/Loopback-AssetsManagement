@@ -4,7 +4,7 @@
 			<h3>Create New Asset</h3>
 			<form #assetForm="ngForm" (submit)="createAsset(assetForm)">
 				<div class="form-group">
-					<label for="">Category *</label>
+					<label for="">Category</label>
 					 <select class="form-control" ngModel name="categoryId">
                         <option *ngFor="let cat of categories" [ngValue]="cat.id">{{cat.name}}</option>
                     </select>
