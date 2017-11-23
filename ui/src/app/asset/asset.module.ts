@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
@@ -36,6 +36,7 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	imports: [
 		CommonModule,
 		FormsModule,
+    	ReactiveFormsModule,
 		assetRouting,
 		Ng2SmartTableModule,
 	],
