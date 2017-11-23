@@ -146,7 +146,7 @@ export class AssetComponent implements OnInit {
 	onDeleteCall(event) {
 		try {
 
-			if (confirm('Are you sure want to delete ' + event.data.id)) {
+			if (confirm('Are you sure want to delete ' + event.data.model)) {
 				console.log(`Delete triggered on: ${event.data.id}...`);
 				this.dataService.deleteAsset(event.data);
 				event.confirm.resolve(event.data);

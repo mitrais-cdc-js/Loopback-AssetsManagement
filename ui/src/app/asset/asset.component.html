@@ -1,5 +1,9 @@
 <h4>List of Assets</h4>
 <p>
+	<a routerLink="/assets/create" class="btn btn-default btn-xs pull-right">New Asset</a>
+</p>
+<p>&nbsp;</p>
+<p>
   <ng2-smart-table
 	  [settings]="settings"
 	  [source]="source"
@@ -9,12 +13,8 @@
 	  (custom)="onCustom($event)"
 	  ></ng2-smart-table>
 </p>
-<br/><br/>
-<p>
-	<a routerLink="/assets/create" class="pull-right">New Asset</a>
-</p>
 
-<table class="table table-bordered">
+<!-- <table class="table table-bordered">
 	<thead>
 		<tr>
 			<th><input type="checkbox" [(ngModel)]="selectAll" (change)="checkAll()"/></th>
@@ -65,9 +65,4 @@
 			</td>
 		</tr>
 	</tbody>
-</table>
-
-
-<p ng-repeat="selectedName in selected"> {{ selectedName }}</p>
-<!-- <ng2-smart-table [settings]="settings" [source]="assets" class="test-tlass"></ng2-smart-table> -->
-
+</table> -->
