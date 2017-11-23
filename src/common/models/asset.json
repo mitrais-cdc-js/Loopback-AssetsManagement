@@ -77,8 +77,7 @@
       "type": "geopoint"
     },
     "categoryId": {
-      "type": "string",
-      "required": true
+      "type": "string"
     }
   },
   "validations": [],
