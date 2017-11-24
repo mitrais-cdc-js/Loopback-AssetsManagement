@@ -20,7 +20,7 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	},
 	{
 		path: 'assets/create',
-		component: AssetCreateComponent,
+		component: AssetCreateComponent
 	},
 	{
 		path: 'assets/:id',

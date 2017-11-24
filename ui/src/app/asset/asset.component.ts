@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, CanDeactivate } from '@angular/router';
 import { Http } from '@angular/http';
 
 import { ServerDataSource } from 'ng2-smart-table';
