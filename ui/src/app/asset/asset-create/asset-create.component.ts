@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 // services
 import { DataService } from '../../services/data.services';
 import { UtilityService } from '../../services/utility.services';
 import { CategoryService } from '../../services/category.service';
+import { DialogService }  from '../../dialog.service';
 
 // model
 import { Asset } from './../asset';
@@ -45,8 +47,14 @@ export class AssetCreateComponent implements OnInit {
     categoryId: [""]
   });
   
-  constructor( private dataService: DataService, private utilityService: UtilityService, private categoryService: CategoryService,  private router: Router,
-    public fb: FormBuilder ) {
+  constructor( 
+    private dataService: DataService, 
+    private utilityService: UtilityService, 
+    private categoryService: CategoryService,  
+    private router: Router,
+    public fb: FormBuilder,
+    public dialogService: DialogService 
+  ) {
 		console.log('AssetCreateComponent const called...');
 	}
 
@@ -68,6 +76,29 @@ export class AssetCreateComponent implements OnInit {
 		)
 	}
 
+  canDeactivate(): Observable<boolean> | boolean {
+
+    var hasChangeForm = false;
+    for (var property in this.asset){
+      if (this.asset[property] != "" && this.asset[property] != undefined){
+        hasChangeForm = true;
+      }
+    }
+
+    console.log("change form " + hasChangeForm);
+		// Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+		// if (!this.crisis || this.crisis.name === this.editName) {
+		//   return true;
+		// }
+		// Otherwise ask the user with the dialog service and return its
+    // observable which resolves to true or false when the user decides
+    if (hasChangeForm == true){
+      return this.dialogService.confirm('Discard changes?');
+    }else{
+      return true;
+    }
+  }
+    
   createAsset() {
     this.asset.geolocation = (this.asset.geolocation === '') ? null : this.asset.geolocation;
     this.asset.installedDate = (this.asset.installedDate === '') ? null : this.asset.installedDate;

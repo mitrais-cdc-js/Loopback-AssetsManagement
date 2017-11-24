@@ -104,12 +104,13 @@ export class AssetComponent implements OnInit {
 	selected = [];
 	selectAll = false;
 
-	constructor( http: Http, protected dataService: DataService, private router: Router ) {
+	constructor( http: Http, protected dataService: DataService, private router: Router) {
 		console.log('AssetComponent const called...');
 		this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/assets/asset_paging`});
 		this.source.setPaging(1, 10, true);
 	}
 
+	
 	onCreateCall(event) {
 		try {
 			console.log('Create triggered.');

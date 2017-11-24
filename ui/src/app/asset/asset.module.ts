@@ -13,14 +13,18 @@ import { CustomDateRenderComponent } from './customDateRender.component';
 import { CustomDateEditorComponent } from './customDateEditor.component';
 import { AssetViewComponent } from './asset-view/asset-view.component';
 
+import { CanDeactivateGuard }     from '../can-deactivate-guard.service';
+
 const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	{
 		path: 'assets',
 		component: AssetComponent,
+		canDeactivate: [CanDeactivateGuard]
 	},
 	{
 		path: 'assets/create',
-		component: AssetCreateComponent
+		component: AssetCreateComponent,
+		canDeactivate: [CanDeactivateGuard]
 	},
 	{
 		path: 'assets/:id',
@@ -28,7 +32,8 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	},
 	{
 		path: 'assets/edit/:id',
-		component: AssetEditComponent
+		component: AssetEditComponent,
+		canDeactivate: [CanDeactivateGuard]
 	}
 ]);
 
