@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 // services
 import { DataService } from '../../services/data.services';
@@ -17,18 +17,44 @@ import { Asset } from './../asset';
 })
 
 export class AssetCreateComponent implements OnInit {
+  asset: Asset
 	title = 'Asset Management Application';
 	autoCalculate: boolean = true
-	dateOfInstallation: string
-	dateOfReplacement: string
-	warranty: number
-	categories = [];
-	constructor( private dataService: DataService, private utilityService: UtilityService, private categoryService: CategoryService,  private router: Router ) {
+  validReplacementDate: boolean = true
+  categories = [];
+  
+  public frmAsset = this.fb.group({
+    riskLevel: [""],
+    complienceStatus: [""],
+    installedDate: [""],
+    description: ["", Validators.required],
+    lifeSpan: [""],
+    scheduledReplacementDate: [""],
+    recertificationInterval: [""],
+    lastRecertificationDate: [""],
+    lastRecertificationResult: [""],
+    nextRecertificationDate: [""],
+    model: ["", Validators.required],
+    serial: ["", Validators.required],
+    batchNo: ["", Validators.required],
+    relatedDeliveryOrder: [""],
+    geolocation: [""],
+    productionDate: ["", Validators.required],
+    status: [""],
+    history: [""],
+    categoryId: [""]
+  });
+  
+  constructor( private dataService: DataService, private utilityService: UtilityService, private categoryService: CategoryService,  private router: Router,
+    public fb: FormBuilder ) {
 		console.log('AssetCreateComponent const called...');
 	}
 
 	ngOnInit() {
 		console.log('ngOnInit called...');
+    
+    // init
+    this.asset = new Asset()
 
 		this.categoryService.getCategories().
 		subscribe(
@@ -42,39 +68,60 @@ export class AssetCreateComponent implements OnInit {
 		)
 	}
 
-	createAsset(form: NgForm) {
-		const newAsset = form.value;
-		newAsset.geolocation = (newAsset.geolocation === '') ? null : newAsset.geolocation;
-		newAsset.installedDate = (newAsset.installedDate === '') ? null : newAsset.installedDate;
-		newAsset.scheduledReplacementDate = (newAsset.scheduledReplacementDate === '') ? null : newAsset.scheduledReplacementDate;
-		newAsset.lastRecertificationDate = (newAsset.lastRecertificationDate === '') ? null : newAsset.lastRecertificationDate;
-		newAsset.nextRecertificationDate = (newAsset.nextRecertificationDate === '') ? null : newAsset.nextRecertificationDate;
+  createAsset() {
+    this.asset.geolocation = (this.asset.geolocation === '') ? null : this.asset.geolocation;
+    this.asset.installedDate = (this.asset.installedDate === '') ? null : this.asset.installedDate;
+    this.asset.scheduledReplacementDate = (this.asset.scheduledReplacementDate === '') ? null : this.asset.scheduledReplacementDate;
+    this.asset.lastRecertificationDate = (this.asset.lastRecertificationDate === '') ? null : this.asset.lastRecertificationDate;
+    this.asset.nextRecertificationDate = (this.asset.nextRecertificationDate === '') ? null : this.asset.nextRecertificationDate;
 
-		console.log(newAsset);
+    console.log("createAsset :::::::::::: " + this.asset);
 
-		this.dataService.createAsset(newAsset)
-		.then( asset => {
-			console.log(asset);
-			this.router.navigate(['/assets']);
-		}).catch( e => {
-			console.log(e);
-		});
-	}
+    this.dataService.createAsset(this.asset)
+    .then( asset => {
+      console.log(asset);
+      this.router.navigate(['/assets']);
+    }).catch( e => {
+      console.log(e);
+    });
+  }
 
-	toggleAutoCalculate() {
-		this.autoCalculate = !this.autoCalculate
-		this.recalculateReplacementDate()
-	}
+  toggleAutoCalculate() {
+    this.autoCalculate = !this.autoCalculate
 
-	recalculateReplacementDate() {
-		if(this.autoCalculate && this.dateOfInstallation !== null && this.warranty !== null) {
-			const days = this.warranty * 7
-			var tempDate = new Date(this.dataService.convertStringToDate(this.dateOfInstallation))
+    if(this.autoCalculate) {
+      this.frmAsset.get('scheduledReplacementDate').disable()
+    } else {
+      this.frmAsset.get('scheduledReplacementDate').enable()
+    }
+    
+    this.recalculateReplacementDate()
+    this.validateReplacementDate()
+  }
+  
+  validateReplacementDate() {
+    if(this.asset.installedDate !== '' && this.asset.scheduledReplacementDate !== '') {
+      var installedDate = new Date(this.dataService.convertStringToDate(this.asset.installedDate))
+      var scheduledReplacementDate = new Date(this.dataService.convertStringToDate(this.asset.scheduledReplacementDate))
+      this.validReplacementDate = scheduledReplacementDate >= installedDate
 
-			tempDate = new Date(tempDate.getTime() + (days * 86400000))
-			this.dateOfReplacement = this.utilityService.dateFormat(tempDate)
-		}
-	}
+      if(!this.validReplacementDate) {
+        this.frmAsset.get('scheduledReplacementDate').setErrors({"invalidDate":true})
+      }
+    } else {      
+      this.validReplacementDate = true
+      this.frmAsset.get('scheduledReplacementDate').setErrors(null)
+    }
+  }
+
+  recalculateReplacementDate() {
+    if(this.autoCalculate && this.asset.installedDate !== '' && this.asset.lifeSpan !== undefined) {
+      const days = this.asset.lifeSpan * 7
+      var tempDate = new Date(this.dataService.convertStringToDate(this.asset.installedDate))
+
+      tempDate = new Date(tempDate.getTime() + (days * 86400000))
+      this.asset.scheduledReplacementDate = this.utilityService.dateFormat(tempDate)
+      this.validReplacementDate = true
+    }
+  }
 }
-
-
