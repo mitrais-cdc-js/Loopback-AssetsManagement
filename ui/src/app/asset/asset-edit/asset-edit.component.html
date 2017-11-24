@@ -2,103 +2,114 @@
 	<div class="col-md-6">
 		<div class="asset-form">
 			<h3>Edit Asset</h3>
-			<form (ngSubmit)="updateAsset(asset.id,assetForm)" #assetForm="ngForm">
-				<input type="hidden" name="createDate" [(ngModel)]="asset.createDate">
+			<form [formGroup]="frmAsset" (submit)="updateAsset(asset.id)">
 				<div class="form-group">
 					<label for="">Category</label>
-					 <select class="form-control" [(ngModel)]="asset.categoryId" name="categoryId">
+					 <select class="form-control" formControlName="categoryId" [(ngModel)]="asset.categoryId">
                         <option *ngFor="let cat of categories" [ngValue]="cat.id">{{cat.name}}</option>
                     </select>
 				</div>
 				<div class="form-group">
 					<label for="">Risk Level</label>
-					<input type="number" class="form-control" placeholder="Risk Level" name="riskLevel" [(ngModel)]="asset.riskLevel">
+					<input type="number" class="form-control" placeholder="Risk Level" formControlName="riskLevel" [(ngModel)]="asset.riskLevel">
 				</div>
 				<div class="form-group">
 					<label for="">Complience Status</label>
-					<input type="text" class="form-control" placeholder="Complience Status" name="complienceStatus" [(ngModel)]="asset.complienceStatus">
+					<input type="text" class="form-control" placeholder="Complience Status" formControlName="complienceStatus" [(ngModel)]="asset.complienceStatus">
 					<p class="help-block">options: COMPLIANT</p>
 				</div>
 				<div class="form-group">
 					<label for="">Installed Date</label>
-					<input type="text" class="form-control" placeholder="Installed Date" name="installedDate" [(ngModel)]="asset.installedDate"
-						(input)="recalculateReplacementDate()">
+					<input type="text" class="form-control" placeholder="Installed Date" formControlName="installedDate" 
+						[(ngModel)]="asset.installedDate" (input)="recalculateReplacementDate()">
 					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
 					<label for="">Description *</label>
-					<textarea class="form-control" placeholder="Description " name="description" [(ngModel)]="asset.description"></textarea>
+					<textarea class="form-control" placeholder="Description " formControlName="description" [(ngModel)]="asset.description"></textarea>
+					<p class="help-block">Min. 5 characters</p>
+					<div class="alert alert-danger" *ngIf="!asset.description">This is a mandatory field.</div>
 				</div>
 				<div class="form-group">
 					<label for="">Life Span / Warranty (in weeks)</label>
-					<input type="number" class="form-control" placeholder="Life Span / Warranty" name="lifeSpan" [(ngModel)]="asset.lifeSpan"
-						(input)="recalculateReplacementDate()">
+					<input type="number" class="form-control" placeholder="Life Span / Warranty" formControlName="lifeSpan" 
+					[(ngModel)]="asset.lifeSpan" (input)="recalculateReplacementDate()">
 				</div>
 				<div class="form-group">
 					<input type="checkbox" name="autoCalculation" (change)="toggleAutoCalculate()" [checked]="autoCalculate">
 				</div>
 				<div class="form-group">
 					<label for="">Scheduled Replacement Date</label>
-					<input type="text" class="form-control" placeholder="Scheduled Replacement Date" name="scheduledReplacementDate" 
-						[(ngModel)]="asset.scheduledReplacementDate" [disabled]="autoCalculate">
+					<input type="text" class="form-control" placeholder="Scheduled Replacement Date" formControlName="scheduledReplacementDate" 
+						[(ngModel)]="asset.scheduledReplacementDate" (input)="validateReplacementDate()">
 					<p class="help-block">Format : DD/MM/YYYY</p>
+					<div class="alert alert-danger" *ngIf="!this.validReplacementDate">This should be later than Installed Date.</div>
 				</div>
 				<div class="form-group">
 					<label for="">Re-Certification Interval</label>
-					<input type="number" class="form-control" placeholder="Re-Certification Interval" name="recertificationInterval" [(ngModel)]="asset.recertificationInterval">
+					<input type="number" class="form-control" placeholder="Re-Certification Interval" formControlName="recertificationInterval" 
+						[(ngModel)]="asset.recertificationInterval">
 				</div>
 				<div class="form-group">
 					<label for="">Last Re-Certification Date</label>
-					<input type="text" class="form-control" placeholder="Last Re-Certification Date" name="lastRecertificationDate" [(ngModel)]="asset.lastRecertificationDate">
+					<input type="text" class="form-control" placeholder="Last Re-Certification Date" formControlName="lastRecertificationDate" 
+						[(ngModel)]="asset.lastRecertificationDate">
 					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
 					<label for="">Last Re-Certification Result</label>
-					<input type="text" class="form-control" placeholder="Last Re-Certification Result" name="lastRecertificationResult" [(ngModel)]="asset.lastRecertificationResult">
+					<input type="text" class="form-control" placeholder="Last Re-Certification Result" formControlName="lastRecertificationResult" 
+						[(ngModel)]="asset.lastRecertificationResult">
 				</div>
 				<div class="form-group">
 					<label for="">Next Re-Certification Date</label>
-					<input type="text" class="form-control" placeholder="Next Re-Certification Date" name="nextRecertificationDate" [(ngModel)]="asset.nextRecertificationDate">
+					<input type="text" class="form-control" placeholder="Next Re-Certification Date" formControlName="nextRecertificationDate" 
+						[(ngModel)]="asset.nextRecertificationDate">
 					<p class="help-block">Format : DD/MM/YYYY</p>
 				</div>
 				<div class="form-group">
 					<label for="">Model *</label>
-					<input type="text" class="form-control" placeholder="Model" name="model" [(ngModel)]="asset.model" required="required">
+					<input type="text" class="form-control" placeholder="Model" formControlName="model" [(ngModel)]="asset.model" required>
 					<p class="help-block">Min. 3 characters</p>
+					<div class="alert alert-danger" *ngIf="!asset.model">This is a mandatory field.</div>
 				</div>
 				<div class="form-group">
 					<label for="">Serial *</label>
-					<input type="text" class="form-control" placeholder="Serial" name="serial" [(ngModel)]="asset.serial" required="required">
+					<input type="text" class="form-control" placeholder="Serial" formControlName="serial" [(ngModel)]="asset.serial" required>
 					<p class="help-block">Min. 3 characters</p>
+					<div class="alert alert-danger" *ngIf="!asset.serial">This is a mandatory field.</div>
 				</div>
 				<div class="form-group">
 					<label for="">Batch No *</label>
-					<input type="text" class="form-control" placeholder="Batch No" name="batchNo" [(ngModel)]="asset.batchNo" required="required">
+					<input type="text" class="form-control" placeholder="Batch No" formControlName="batchNo" [(ngModel)]="asset.batchNo" required>
 					<p class="help-block">Min. 3 characters</p>
+					<div class="alert alert-danger" *ngIf="!asset.batchNo">This is a mandatory field.</div>
 				</div>
 				<div class="form-group">
 					<label for="">Related Delivery Order</label>
-					<input type="number" class="form-control" placeholder="Related Delivery Order" name="relatedDeliveryOrder" [(ngModel)]="asset.relatedDeliveryOrder">
+					<input type="number" class="form-control" placeholder="Related Delivery Order" formControlName="relatedDeliveryOrder" 
+						[(ngModel)]="asset.relatedDeliveryOrder">
 				</div>
 				<div class="form-group">
 					<label for="">Geolocation</label>
-					<input type="text" class="form-control" placeholder="Geolocation" name="geolocation" [(ngModel)]="asset.geolocation">
+					<input type="text" class="form-control" placeholder="Geolocation" formControlName="geolocation" [(ngModel)]="asset.geolocation">
 					<p class="help-block">Example: -7.800386,110.3937263 </p>
 				</div>
 				<div class="form-group">
 					<label for="">Production Date *</label>
-					<input type="text" class="form-control" placeholder="Production Date" name="productionDate" [(ngModel)]="asset.productionDate">
+					<input type="text" class="form-control" placeholder="Production Date" formControlName="productionDate" [(ngModel)]="asset.productionDate" required>
 					<p class="help-block">Format : DD/MM/YYYY</p>
+					<div class="alert alert-danger" *ngIf="!asset.productionDate">This is a mandatory field.</div>
 				</div>
 				<div class="form-group">
 					<label for="">Status</label>
-					<input type="text" class="form-control" placeholder="Status " name="status" [(ngModel)]="asset.status">
+					<input type="text" class="form-control" placeholder="Status " formControlName="status" [(ngModel)]="asset.status">
 					<p class="help-block">Options: OK, OVERDUE INSPECTITON, DO NOT USE</p>
 				</div>
 				<div class="form-group">
 					<label for="">History </label>
-					<textarea class="form-control" placeholder="History " name="history" [(ngModel)]="asset.history"></textarea>
-				</div>
+					<textarea class="form-control" placeholder="History " formControlName="history" [(ngModel)]="asset.history"></textarea>
+				</div>				
 				<div class="form-group">
 					<div class="col-md-6">
 						<button type="submit" class="btn btn-primary btn-block" id="asset-update-btn">Update</button>
