@@ -2,13 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import * as moment from 'moment';
+import { Observable } from 'rxjs/Observable';
 
 // services
 import { DataService } from '../../services/data.services';
 import { UtilityService } from '../../services/utility.services';
 import { CategoryService } from '../../services/category.service';
+import { DialogService }  from '../../dialog.service';
+
 // model
 import { Asset } from './../asset';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-asset-edit',
@@ -16,12 +20,19 @@ import { Asset } from './../asset';
   styleUrls: ['./asset-edit.component.css']
 })
 export class AssetEditComponent implements OnInit {
-  asset = new Asset()
-  autoCalculate: boolean = true
-
+  asset = new Asset();
+  autoCalculate: boolean = true;
+  oldAssetData = {};
   categories = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService, private categoryService: CategoryService, private utilityService: UtilityService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private dataService: DataService, 
+    private categoryService: CategoryService, 
+    private utilityService: UtilityService,
+    public dialogService: DialogService
+  ) { }
 
   ngOnInit() {
     this.getAssetDetail(this.route.snapshot.params['id']);
@@ -47,8 +58,10 @@ export class AssetEditComponent implements OnInit {
       asset.nextRecertificationDate = (asset.nextRecertificationDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.nextRecertificationDate));
       asset.productionDate = (asset.productionDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.productionDate));
       asset.geolocation = (asset.geolocation === null) ? '' : asset.geolocation.lat + ',' + asset.geolocation.lng;
-
+    
       this.asset = asset;
+      console.log(this.asset["id"]);
+      this.oldAssetData = asset;
     })
     .catch(e => console.log(e));
   }
@@ -59,6 +72,56 @@ export class AssetEditComponent implements OnInit {
         delete obj[propName];
       }
     }
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    
+    var hasChangeForm = this.compareAssetValue();
+    
+    var changeStatus = false;
+    hasChangeForm.then( result => {
+      changeStatus = result; // true
+    });
+
+    return hasChangeForm.map((result:boolean) => {
+      changeStatus = result;
+    })
+
+    // console.log(changeStatus); // false ??
+
+    // if (changeStatus){
+    //   return this.dialogService.confirm('Discard changes?');
+    // }else{
+    //   return true;
+    // }
+    // this.dialogService.confirm('Discard changes?');
+    // return false;
+  }
+
+  compareAssetValue(){
+    var hasChangeForm = false;
+    return this.dataService.getAsset(this.asset["id"])
+      .then( asset => {
+        
+        asset.installedDate = (asset.installedDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.installedDate));
+        asset.scheduledReplacementDate = (asset.scheduledReplacementDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.scheduledReplacementDate));
+        asset.lastRecertificationDate = (asset.lastRecertificationDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.lastRecertificationDate));
+        asset.nextRecertificationDate = (asset.nextRecertificationDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.nextRecertificationDate));
+        asset.productionDate = (asset.productionDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.productionDate));
+        asset.geolocation = (asset.geolocation === null) ? '' : asset.geolocation.lat + ',' + asset.geolocation.lng;
+
+          for (var property in this.asset){
+        
+            if (this.asset[property] != asset[property]){
+              hasChangeForm = true;
+              console.log(property+ " -- change: " + this.asset[property] + " | " + asset[property]);
+            }
+            
+          }
+
+          return hasChangeForm;
+
+      });
   }
 
   updateAsset(id, form: NgForm) {

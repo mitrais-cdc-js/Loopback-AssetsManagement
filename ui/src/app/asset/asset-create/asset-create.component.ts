@@ -86,12 +86,6 @@ export class AssetCreateComponent implements OnInit {
     }
 
     console.log("change form " + hasChangeForm);
-		// Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
-		// if (!this.crisis || this.crisis.name === this.editName) {
-		//   return true;
-		// }
-		// Otherwise ask the user with the dialog service and return its
-    // observable which resolves to true or false when the user decides
     if (hasChangeForm == true){
       return this.dialogService.confirm('Discard changes?');
     }else{

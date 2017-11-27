@@ -18,8 +18,7 @@ import { CanDeactivateGuard }     from '../can-deactivate-guard.service';
 const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	{
 		path: 'assets',
-		component: AssetComponent,
-		canDeactivate: [CanDeactivateGuard]
+		component: AssetComponent
 	},
 	{
 		path: 'assets/create',
