@@ -24,6 +24,7 @@ export class AssetEditComponent implements OnInit {
   autoCalculate: boolean = true;
   oldAssetData = {};
   categories = [];
+  changeStatus: boolean = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -78,14 +79,18 @@ export class AssetEditComponent implements OnInit {
     
     var hasChangeForm = this.compareAssetValue();
     
-    var changeStatus = false;
     hasChangeForm.then( result => {
-      changeStatus = result; // true
+      this.changeStatus = result; // true
+      
     });
+    console.log(this.changeStatus);
+    
+    console.log(this.asset);
+    console.log(this.oldAssetData);
 
-    return hasChangeForm.map((result:boolean) => {
-      changeStatus = result;
-    })
+    // return hasChangeForm.map((result:boolean) => {
+    //   changeStatus = result;
+    // })
 
     // console.log(changeStatus); // false ??
 
@@ -94,8 +99,8 @@ export class AssetEditComponent implements OnInit {
     // }else{
     //   return true;
     // }
-    // this.dialogService.confirm('Discard changes?');
-    // return false;
+    this.dialogService.confirm('Discard changes?');
+    return false;
   }
 
   compareAssetValue(){
