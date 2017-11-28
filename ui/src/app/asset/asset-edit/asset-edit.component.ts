@@ -121,6 +121,19 @@ export class AssetEditComponent implements OnInit {
     return this.dialogService.confirm('Discard changes?');
   }
 
+  onCancel(event){
+    var hasChangeForm = this.compareAssetValue();
+    
+    hasChangeForm.then( changeStatus => {
+      console.log("change form " + changeStatus);
+      if (changeStatus == true){
+        return this.dialogService.confirm('Discard changes?');
+      }else{
+        this.router.navigate(['/assets']);
+      }
+    });
+  }
+
   compareAssetValue(){
     var hasChangeForm = false;
     return this.dataService.getAsset(this.asset["id"])

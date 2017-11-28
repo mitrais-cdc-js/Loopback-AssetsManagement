@@ -32,7 +32,7 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	{
 		path: 'assets/edit/:id',
 		component: AssetEditComponent,
-		canDeactivate: [CanDeactivateGuard]
+		// canDeactivate: [CanDeactivateGuard]
 	}
 ]);
 
