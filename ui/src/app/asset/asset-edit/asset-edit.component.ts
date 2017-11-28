@@ -72,11 +72,12 @@ export class AssetEditComponent implements OnInit {
   getAssetDetail(id) {
     this.dataService.getAsset(id)
     .then( asset => {
-      asset.installedDate = (asset.installedDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.installedDate));
-      asset.scheduledReplacementDate = (asset.scheduledReplacementDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.scheduledReplacementDate));
-      asset.lastRecertificationDate = (asset.lastRecertificationDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.lastRecertificationDate));
-      asset.nextRecertificationDate = (asset.nextRecertificationDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.nextRecertificationDate));
-      asset.productionDate = (asset.productionDate === null) ? '' : this.utilityService.dateFormat(new Date(asset.productionDate));
+      console.log(asset.scheduledReplacementDate);
+      asset.installedDate = (asset.installedDate === null || asset.installedDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.installedDate));
+      asset.scheduledReplacementDate = (asset.scheduledReplacementDate === null || asset.scheduledReplacementDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.scheduledReplacementDate));
+      asset.lastRecertificationDate = (asset.lastRecertificationDate === null || asset.lastRecertificationDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.lastRecertificationDate));
+      asset.nextRecertificationDate = (asset.nextRecertificationDate === null || asset.nextRecertificationDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.nextRecertificationDate));
+      asset.productionDate = (asset.productionDate === null || asset.productionDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.productionDate));
       asset.geolocation = (asset.geolocation === null) ? '' : asset.geolocation.lat + ',' + asset.geolocation.lng;
     
       this.asset = asset;
