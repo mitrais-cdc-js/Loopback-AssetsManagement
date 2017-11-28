@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+files:
+  - source: backend
+    destination: /home/ubuntu/server/backend/
+  - source: frontend
+    destination: /home/ubuntu/server/frontend/
+
+hooks:
+  BeforeInstall:
+    - location: script/beforeinstall.sh
+      timeout: 1000
+      runas: ubuntu
+  AfterInstall:
+    - location: script/afterinstall.sh
+      timeout: 1000
+      runas: ubuntu
