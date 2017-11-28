@@ -113,10 +113,10 @@
 				
 				<div class="form-group">
 					<div class="col-md-6">
-						<button type="submit" [disabled]="!frmAsset.valid" class="btn btn-primary btn-block" id="asset-create-btn">Create</button>
+						<button type="submit" [disabled]="!frmAsset.valid" (click)="onClick($event)" class="btn btn-primary btn-block" id="asset-create-btn">Create</button>
 					</div>
 					<div class="col-md-6">
-						<a routerLink="/assets" class="btn btn-default btn-block" id="asset-cancel-btn">Cancel</a>
+						<a class="btn btn-default btn-block" id="asset-cancel-btn" (click)="onCancel($event)">Cancel</a>
 					</div>
 				</div>
 				<br>

@@ -76,7 +76,33 @@ export class AssetCreateComponent implements OnInit {
 		)
 	}
 
-  canDeactivate(): Observable<boolean> | boolean {
+
+  onClick(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.attributes.id;
+    var value = idAttr.nodeValue;
+    console.log(value);
+  }
+
+  onCancel(event){
+    var hasChangeForm = false;
+    for (var property in this.asset){
+      if (this.asset[property] != "" && this.asset[property] != undefined){
+        hasChangeForm = true;
+      }
+    }
+
+    console.log("change form " + hasChangeForm);
+    if (hasChangeForm == true){
+      return this.dialogService.confirm('Discard changes?');
+    }else{
+      this.router.navigate(['/assets']);
+    }
+  }
+
+  canDeactivate(event): Observable<boolean> | boolean {
+    console.log(event);
+    console.log(this.router.url);
 
     var hasChangeForm = false;
     for (var property in this.asset){

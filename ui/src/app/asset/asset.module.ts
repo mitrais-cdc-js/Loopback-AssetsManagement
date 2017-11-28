@@ -23,7 +23,7 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	{
 		path: 'assets/create',
 		component: AssetCreateComponent,
-		canDeactivate: [CanDeactivateGuard]
+		// canDeactivate: [CanDeactivateGuard]
 	},
 	{
 		path: 'assets/:id',
