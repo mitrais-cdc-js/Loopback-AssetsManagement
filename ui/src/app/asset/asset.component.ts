@@ -62,6 +62,14 @@ export class AssetComponent implements OnInit {
 					title: 'Serial Nr.',
 					filter: false,
 				},
+				installedDate: {
+					title: 'Installed Date',
+					editable: false,
+					addable: false,
+					type: 'custom',
+					renderComponent: CustomDateRenderComponent,
+					filter: false
+				},
 				batchNo: {
 					title: 'Batch Nr.',
 					filter: false,
