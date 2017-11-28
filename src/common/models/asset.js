@@ -25,7 +25,7 @@ module.exports = function(Asset) {
 		console.log(`IN custom: /api/assets_paging?_sort=${_sort}&_order=${_order}&_limit=${_limit}&_page=${_page}`);
 
 		if(typeof(_sort) == 'undefined') { 
-			_sort = "creationDate";
+			_sort = "createDate";
 		}
 		if(typeof(_order) == 'undefined') {
 			_order = "DESC";
@@ -38,9 +38,10 @@ module.exports = function(Asset) {
 		} else {
 			_page = _page >= 1 ? _page - 1 : 0;
 		}
-
+		console.log("sort: " + _sort);
+		console.log("order: " + _order);
 		var skip_calc = _page * _limit;
-
+		
 		Asset.find({ order: _sort + " " + _order, limit: _limit, skip: skip_calc })
 			.then( assets => { callback(null, assets); })
 			.catch( e => callback(null, e));
