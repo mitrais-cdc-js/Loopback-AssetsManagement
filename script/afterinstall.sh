@@ -1,4 +1,5 @@
 #!/bin/bash
+
 cd /home/ubuntu/server/
 sudo chmod 777 -R /home/ubuntu/server/backend
 sudo chmod 777 -R /home/ubuntu/server/frontend
