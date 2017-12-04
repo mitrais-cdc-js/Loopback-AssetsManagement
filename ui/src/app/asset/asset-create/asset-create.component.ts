@@ -126,7 +126,8 @@ export class AssetCreateComponent implements OnInit {
     this.asset.lastRecertificationDate = (this.asset.lastRecertificationDate === '') ? null : this.asset.lastRecertificationDate;
     this.asset.nextRecertificationDate = (this.asset.nextRecertificationDate === '') ? null : this.asset.nextRecertificationDate;
 
-    console.log("createAsset :::::::::::: " + this.asset);
+    console.log("createAsset :::::::::::: ");
+    console.log(this.asset);
 
     this.dataService.createAsset(this.asset)
     .then( asset => {
