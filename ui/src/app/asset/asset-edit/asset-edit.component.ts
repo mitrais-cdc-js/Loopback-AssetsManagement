@@ -22,7 +22,6 @@ import { of } from 'rxjs/observable/of';
 export class AssetEditComponent implements OnInit {
 
   asset = new Asset()
-  oldAssetData = new Asset()
   autoCalculate: boolean = false
   validReplacementDate: boolean = true
   categories = [];
@@ -72,17 +71,18 @@ export class AssetEditComponent implements OnInit {
   getAssetDetail(id) {
     this.dataService.getAsset(id)
     .then( asset => {
-      console.log(asset.scheduledReplacementDate);
+      console.log('load asset detail');
       asset.installedDate = (asset.installedDate === null || asset.installedDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.installedDate));
       asset.scheduledReplacementDate = (asset.scheduledReplacementDate === null || asset.scheduledReplacementDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.scheduledReplacementDate));
       asset.lastRecertificationDate = (asset.lastRecertificationDate === null || asset.lastRecertificationDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.lastRecertificationDate));
       asset.nextRecertificationDate = (asset.nextRecertificationDate === null || asset.nextRecertificationDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.nextRecertificationDate));
       asset.productionDate = (asset.productionDate === null || asset.productionDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.productionDate));
       asset.geolocation = (asset.geolocation === null) ? '' : asset.geolocation.lat + ',' + asset.geolocation.lng;
-    
+      
+      this.asset = null;
+
       this.asset = asset;
       console.log(this.asset["id"]);
-      this.oldAssetData = asset;
     })
     .catch(e => console.log(e));
   }
@@ -106,7 +106,6 @@ export class AssetEditComponent implements OnInit {
     console.log(this.changeStatus);
     
     console.log(this.asset);
-    console.log(this.oldAssetData);
 
     // return hasChangeForm.map((result:boolean) => {
     //   changeStatus = result;
