@@ -128,7 +128,14 @@ export class AssetEditComponent implements OnInit {
     hasChangeForm.then( changeStatus => {
       console.log("change form " + changeStatus);
       if (changeStatus == true){
-        return this.dialogService.confirm('Discard changes?');
+        var confirmDialog = this.dialogService.confirm('Discard changes?');
+        
+        confirmDialog.subscribe( returnConfirm => {
+          console.log(returnConfirm);
+          if (returnConfirm == true){
+            this.router.navigate(['/assets']);
+          }
+        })
       }else{
         this.router.navigate(['/assets']);
       }
