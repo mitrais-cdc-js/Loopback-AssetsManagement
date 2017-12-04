@@ -69,23 +69,22 @@ export class AssetEditComponent implements OnInit {
   }
 
   getAssetDetail(id) {
-    this.dataService.getAsset(id)
-    .then( asset => {
-      console.log('load asset detail');
-      asset.installedDate = (asset.installedDate === null || asset.installedDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.installedDate));
-      asset.scheduledReplacementDate = (asset.scheduledReplacementDate === null || asset.scheduledReplacementDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.scheduledReplacementDate));
-      asset.lastRecertificationDate = (asset.lastRecertificationDate === null || asset.lastRecertificationDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.lastRecertificationDate));
-      asset.nextRecertificationDate = (asset.nextRecertificationDate === null || asset.nextRecertificationDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.nextRecertificationDate));
-      asset.productionDate = (asset.productionDate === null || asset.productionDate === undefined) ? '' : this.utilityService.dateFormat(new Date(asset.productionDate));
-      asset.geolocation = (asset.geolocation === null) ? '' : asset.geolocation.lat + ',' + asset.geolocation.lng;
-      
-      this.asset = null;
-
-      this.asset = asset;
-      console.log(this.asset["id"]);
-    })
-    .catch(e => console.log(e));
-  }
+    
+      this.dataService.getAsset(id)
+      .then( existAsset => {
+        console.log('load asset detail');
+        existAsset.installedDate = (existAsset.installedDate === null || existAsset.installedDate === undefined) ? '' : this.utilityService.dateFormat(new Date(existAsset.installedDate));
+        existAsset.scheduledReplacementDate = (existAsset.scheduledReplacementDate === null || existAsset.scheduledReplacementDate === undefined) ? '' : this.utilityService.dateFormat(new Date(existAsset.scheduledReplacementDate));
+        existAsset.lastRecertificationDate = (existAsset.lastRecertificationDate === null || existAsset.lastRecertificationDate === undefined) ? '' : this.utilityService.dateFormat(new Date(existAsset.lastRecertificationDate));
+        existAsset.nextRecertificationDate = (existAsset.nextRecertificationDate === null || existAsset.nextRecertificationDate === undefined) ? '' : this.utilityService.dateFormat(new Date(existAsset.nextRecertificationDate));
+        existAsset.productionDate = (existAsset.productionDate === null || existAsset.productionDate === undefined) ? '' : this.utilityService.dateFormat(new Date(existAsset.productionDate));
+        existAsset.geolocation = (existAsset.geolocation === null) ? '' : existAsset.geolocation.lat + ',' + existAsset.geolocation.lng;
+        
+        this.asset = existAsset;
+        console.log(this.asset["id"]);
+      })
+      .catch(e => console.log(e));
+    }
 
   removeEmptyAttr(obj) {
     for (const propName in obj) {
