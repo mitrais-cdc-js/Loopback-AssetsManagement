@@ -14,4 +14,4 @@ A PBI can be considered as Done when:
 3.  Deployed in staging server.
 
 # DoD of Sprint.
-A sprint can be considered as Done when successfully deliver at least one story to DONE
+A sprint can be considered as Done when successfully deliver at least one story to DONE.
