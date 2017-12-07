@@ -1,0 +1,9 @@
+{
+  "name": "AssetManagement",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "description": "AssetManagement",
+  "dependencies": {
+    "protractor": "^5.2.1"
+  }
+}
