@@ -2,14 +2,15 @@
 	<div class="col-md-6">
 		<div class="asset-form">
 			<h3>Category</h3>
+			<alert></alert>
 			<form (ngSubmit)="onSubmit(categoryForm)" #categoryForm="ngForm">
 				<input type="hidden" name="id" [(ngModel)]="category.id">
 				<div class="form-group">
-					<label for="">Name</label>
+					<label for="">Name*</label>
 					<input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="category.name">
 				</div>
 				<div class="form-group">
-					<label for="">Description</label>
+					<label for="">Description*</label>
 					<input type="text" class="form-control" placeholder="Description" name="description" [(ngModel)]="category.description">
 				</div>
 				<div class="form-group">

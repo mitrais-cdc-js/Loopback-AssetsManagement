@@ -11,6 +11,10 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { CategoryViewComponent } from './category-view/category-view.component';
 
+// import alert service and component
+import { AlertComponent } from '../_directives/index';
+import { AlertService } from '../_services/index';
+
 const assetRouting: ModuleWithProviders = RouterModule.forChild([
 		{
 			path: 'categories',
@@ -43,10 +47,12 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 		CategoryComponent,
 		CategoryCreateComponent,
 		CategoryEditComponent,
-		CategoryViewComponent
+		CategoryViewComponent,
+		AlertComponent
 	],
 	providers: [
-		CategoryService
+		CategoryService,
+		AlertService
 	]
 })
 export class CategoriesModule { }
