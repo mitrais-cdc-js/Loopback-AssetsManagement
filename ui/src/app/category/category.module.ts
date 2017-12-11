@@ -9,6 +9,7 @@ import { CategoryComponent } from './category.component';
 import { CategoryService } from '../services/category.service';
 import { CategoryCreateComponent } from './category-create/category-create.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { CategoryViewComponent } from './category-view/category-view.component';
 
 const assetRouting: ModuleWithProviders = RouterModule.forChild([
 		{
@@ -22,7 +23,12 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 		{
     		path: 'categories/edit/:id',
     		component: CategoryEditComponent
-  		}
+		},
+		{
+			path: 'categories/:id',
+			component: CategoryViewComponent
+		}
+		  
 ]);
 
 
@@ -36,7 +42,8 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	declarations: [
 		CategoryComponent,
 		CategoryCreateComponent,
-		CategoryEditComponent
+		CategoryEditComponent,
+		CategoryViewComponent
 	],
 	providers: [
 		CategoryService

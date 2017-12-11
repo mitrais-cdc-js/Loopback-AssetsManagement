@@ -10,7 +10,7 @@ import { environment, config } from '../../environments/environment';
 import { ServerDataSource } from 'ng2-smart-table';
 
 import { Category } from './category';
-
+import { CustomParentNameComponent } from './customParentName.component';
 
 @Component({
   selector: 'app-category',
@@ -52,7 +52,13 @@ export class CategoryComponent implements OnInit {
       description: {
         title: 'Description',
         filter: false,
-      }
+      },
+      // parent_id: {
+      //   title: 'Parent',
+      //   filter: false,
+      //   type: 'custom',
+      //   renderComponent: CustomParentNameComponent,
+      // }
     }
   };
 
