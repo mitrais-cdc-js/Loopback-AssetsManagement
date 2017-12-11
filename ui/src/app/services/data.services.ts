@@ -170,6 +170,7 @@ export class DataService {
     }
 
     getAsset(id) {
+        let timeStamp = +new Date();
         return this.http.get(`${environment.apiUrl}/assets/` + id + `?tsp=${timeStamp}`)
         .map((res: Response) => res.json()).toPromise();
     }
