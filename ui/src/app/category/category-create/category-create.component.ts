@@ -58,7 +58,10 @@ export class CategoryCreateComponent implements OnInit {
 		this.categoryService.createCategory(newCategory)
 	    .then( category => {
 	      console.log(category);
-		  this.router.navigate(['/categories']);
+		  this.alertService.success('asset category created!');
+		  setTimeout((router: Router) => {
+			  this.router.navigate(['/categories']);
+		  }, 1000);
 	    }).catch( e => {
 		  console.log(e);
 		  this.alertService.error('Could not create asset category');
