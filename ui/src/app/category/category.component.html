@@ -1,15 +1,17 @@
 <h4>List of Categories</h4>
-<!-- <p>
-	<a routerLink="/categories/create" class="pull-right">New Category</a>
-</p> -->
+<p>
+	<a routerLink="/categories/create" class="pull-right btn btn-default btn-xs">New Category</a>
+</p>
 <p>&nbsp;</p>
 <p>
   <ng2-smart-table
     [settings]="settings"
     [source]="source"
     (createConfirm)="onCreateCall($event)"
-	  (editConfirm)="onEditCall($event)"
-	  (deleteConfirm)="onDeleteCall($event)">
+	(editConfirm)="onEditCall($event)"
+	(deleteConfirm)="onDeleteCall($event)"
+	(custom)="onCustom($event)"
+	>
   </ng2-smart-table>
 </p>
 <!-- <br/>

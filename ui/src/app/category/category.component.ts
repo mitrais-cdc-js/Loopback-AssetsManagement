@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { ActivatedRoute, Router, CanDeactivate } from '@angular/router';
 
 // services
 import { CategoryService } from '../services/category.service';
@@ -9,7 +10,7 @@ import { environment, config } from '../../environments/environment';
 import { ServerDataSource } from 'ng2-smart-table';
 
 import { Category } from './category';
-
+import { CustomParentNameComponent } from './customParentName.component';
 
 @Component({
   selector: 'app-category',
@@ -28,15 +29,36 @@ export class CategoryComponent implements OnInit {
     delete: {
       confirmDelete: true,
     },
+    actions: {
+			add: false,
+			edit: false,
+			delete: true,
+			custom: [
+				{
+					name: 'view',
+					title: 'View '
+				},
+				{
+					name: 'edit',
+					title: 'Edit '
+				}
+			]
+		},
     columns: {
       name: {
         title: 'Name',
-        filter: true,
+        filter: false,
       },
       description: {
         title: 'Description',
         filter: false,
-      }
+      },
+      // parent_id: {
+      //   title: 'Parent',
+      //   filter: false,
+      //   type: 'custom',
+      //   renderComponent: CustomParentNameComponent,
+      // }
     }
   };
 
@@ -44,7 +66,7 @@ export class CategoryComponent implements OnInit {
 
 
 	categories: Category[]
-  	constructor(http: Http, protected categoryService: CategoryService) {
+  	constructor(http: Http, protected categoryService: CategoryService, private router: Router) {
       this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/categories/category_paging`});
       this.source.setPaging(1, 2, true);
     }
@@ -61,8 +83,11 @@ export class CategoryComponent implements OnInit {
 
   onDeleteCall(event: any) {
     try {
-      this.categoryService.deleteCategory(event.data);
-      event.confirm.resolve(event.data);
+      if (confirm('Are you sure want to delete ' + event.data.name)) {
+        this.categoryService.deleteCategory(event.data);
+        this.getCategories();
+        event.confirm.resolve(event.data);
+      }
     } catch (e) {
       console.log((<Error>e).message);
       event.confirm.reject();
@@ -78,6 +103,28 @@ export class CategoryComponent implements OnInit {
       event.confirm.reject();
     }
   }
+
+
+  onCustom(event){
+		let category = event.data;
+		console.log(event.action);
+		if (event.action == 'view'){
+			this.router.navigate(['/categories/'+ category.id ]);
+		}else if (event.action == 'edit'){
+			this.router.navigate(['/categories/edit/'+ category.id ]);
+		}
+  }
+  
+  // deleteCategory(category) {
+	// 	if (confirm('Are you sure want to delete ' + category.id)) {
+	// 		this.categoryService.deleteCategory(category)
+	// 		.then( res => {
+	// 			console.log('deleted');
+	// 			this.getCategories();
+	// 		})
+	// 		.catch( err => console.log(err));
+	// 	}
+	// }
 
   	ngOnInit() {
   		console.log('category component');
