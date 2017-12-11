@@ -7,6 +7,7 @@ var app = module.exports = loopback();
 
 app.start = function() {
   // start the web server
+  app.set('etag', false);
   return app.listen(function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
