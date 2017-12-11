@@ -1,4 +1,4 @@
-var assetPage = require ('../AssetManagement/page/asset.po.js');
+var assetPage = require ('../e2e/page/asset.po.js');
 
 var actclickNewBtn = new assetPage();
 var actinputDesc = new assetPage();
