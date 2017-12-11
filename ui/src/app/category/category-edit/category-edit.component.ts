@@ -56,7 +56,10 @@ export class CategoryEditComponent implements OnInit {
 		this.categoryService.updateCategory(updateCategory)
 			.then( category => {
 				console.log(category);
-				this.router.navigate(['/categories']);
+				this.alertService.success('asset category updated!');
+				setTimeout((router: Router) => {
+					this.router.navigate(['/categories']);
+				}, 1000);
 			})
 			.catch( e => {
 				console.log(e);
