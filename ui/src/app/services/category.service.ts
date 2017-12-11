@@ -20,7 +20,8 @@ export class CategoryService {
 	}
 
 	getCategory(id) {
-        return this.http.get(`${environment.apiUrl}/categories/` + id)
+		let timeStamp = +new Date();
+        return this.http.get(`${environment.apiUrl}/categories/` + id + `?tsp=${timeStamp}`)
         .map((res: Response) => res.json()).toPromise();
     }
 
