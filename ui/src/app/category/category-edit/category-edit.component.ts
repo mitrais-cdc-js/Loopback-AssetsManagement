@@ -8,6 +8,8 @@ import { CategoryService } from '../../services/category.service';
 // class
 import { Category } from '../category';
 
+// alert service
+import { AlertService } from '../../_services/index';
 
 @Component({
 		selector: 'app-category-edit',
@@ -36,7 +38,7 @@ export class CategoryEditComponent implements OnInit {
 	]
 
 
-	constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService) { }
+	constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private alertService: AlertService) { }
 
 	ngOnInit() {
 		console.log(this.category);
@@ -58,6 +60,7 @@ export class CategoryEditComponent implements OnInit {
 			})
 			.catch( e => {
 				console.log(e);
+				this.alertService.error('Could not update asset category');
 			});
 	}
 

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 
 // services
 import { CategoryService } from '../../services/category.service';
+import { AlertService } from '../../_services/index';
 
 @Component({
 	selector: 'app-category-create',
@@ -37,7 +38,7 @@ export class CategoryCreateComponent implements OnInit {
 		}
 	]
 
-	constructor(protected categoryService: CategoryService, private router: Router) { }
+	constructor(protected categoryService: CategoryService, private router: Router,private alertService: AlertService) { }
 
 	ngOnInit() {
 		this.getCategories();
@@ -57,9 +58,10 @@ export class CategoryCreateComponent implements OnInit {
 		this.categoryService.createCategory(newCategory)
 	    .then( category => {
 	      console.log(category);
-	      this.router.navigate(['/categories']);
+		  this.router.navigate(['/categories']);
 	    }).catch( e => {
-	      console.log(e);
+		  console.log(e);
+		  this.alertService.error('Could not create asset category');
 	    });
 	}
 
