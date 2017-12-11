@@ -8,8 +8,10 @@
     [settings]="settings"
     [source]="source"
     (createConfirm)="onCreateCall($event)"
-	  (editConfirm)="onEditCall($event)"
-	  (deleteConfirm)="onDeleteCall($event)">
+	(editConfirm)="onEditCall($event)"
+	(deleteConfirm)="onDeleteCall($event)"
+	(custom)="onCustom($event)"
+	>
   </ng2-smart-table>
 </p>
 <!-- <br/>
