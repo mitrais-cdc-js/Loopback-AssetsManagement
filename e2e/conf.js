@@ -14,7 +14,7 @@ exports.config = {
   // They may include glob patterns.
   specs: [
           //'createAsset_spec.js',
-          //'updateAsset_spec.js',
+          'updateAsset_spec.js',
           //viewAsset_spec.js'
           //'assetCategory_spec.js',
           //'listAsset_spec.js',
