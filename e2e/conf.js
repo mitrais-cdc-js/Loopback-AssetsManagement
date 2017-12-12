@@ -24,7 +24,8 @@ exports.config = {
            //'catPage_spec.js',
            //'asset_spec.js',
            //'assetNav_spec.js'
-           'autoCallcReplacement_spec.js'
+           'autoCallcReplacement_spec.js',
+           'manageCategory_spec.js'
           ],
 
   // Options to be passed to Jasmine-node.
