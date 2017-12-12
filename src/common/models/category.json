@@ -19,6 +19,9 @@
     },
     "checklist": {
       "type": "string"
+    },
+    "createdAt": {
+      "type": "date"
     }
   },
   "validations": [],

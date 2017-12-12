@@ -148,7 +148,7 @@ describe('It should resolve the routes', function() {
 			})
 	})
 
-	after(function() {
-		process.exit()
-	})
+	// after(function() {
+	// 	process.exit()
+	// })
 })
