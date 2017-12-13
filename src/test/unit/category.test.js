@@ -36,6 +36,17 @@ describe('It should resolve category routes', function() {
 		request.post('/api/categories').send(category).expect(200, done)
 	})
 
+	it('to post a blank name category and fail', function(done) {
+		request.post('/api/categories').send({
+			"description": "category desc"
+		}).expect(422, done)
+	})
+
+	it('to post a blank description category and fail', function(done) {
+		request.post('/api/categories').send({
+			"name": "category name"
+		}).expect(422, done)
+	})
 
 	after(function() {
 		Category.findOne({where: {name: category.name }})
