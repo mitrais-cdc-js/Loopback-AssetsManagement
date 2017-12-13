@@ -4,17 +4,19 @@ var actInputName = new categoryPage ();
 var actInputDesc = new categoryPage ();
 var actClickSaveBtn = new categoryPage ();
 var exaccessCatList =  new categoryPage();
+var actDelAssetCat = new categoryPage ();
 
 beforeEach(function(){
     var accessHomepage = new categoryPage();
     accessHomepage.get ();
     //browser.get('http://13.228.106.128/');
-    var actclickCatPage = new categoryPage ();
-    actclickCatPage.clickcatlink();
+
 });
 
 describe ("manage asset category", function(){
     it("access view category", function(){
+        var actclickCatPage = new categoryPage ();
+        actclickCatPage.clickcatlink();
         //expect in correct url
         var exgetcatLink = new categoryPage ();
         exgetcatLink.getcatLink();
@@ -23,6 +25,8 @@ describe ("manage asset category", function(){
         exgetcatTitle.getcatLink();
     });
     it("create asset category and display success message", function(){  
+       var actclickCatPage = new categoryPage ();
+       actclickCatPage.clickcatlink();
        actnewCatBtn.clickNewCat();
        //expect correct create asset category page
        actnewCatBtn.accessCreateCat();
@@ -31,7 +35,8 @@ describe ("manage asset category", function(){
        actInputDesc.inputDesc ();
        actClickSaveBtn.clickSaveBtn ();
        //expect success message displayed
-       expect(element(by.css('.alert-success')).isDisplayed()).toBe(true);
+
+       expect(element(by.css('.alert-success')).isPresent()).toBe(true);
 
        browser.driver.sleep(1000);
        browser.waitForAngular();
@@ -41,6 +46,8 @@ describe ("manage asset category", function(){
 
     });
     it("create duplicate asset category and display fail message", function(){  
+        var actclickCatPage = new categoryPage ();
+        actclickCatPage.clickcatlink();
         actnewCatBtn.clickNewCat();
         //expect correct create asset category page
         actnewCatBtn.accessCreateCat();
@@ -59,6 +66,8 @@ describe ("manage asset category", function(){
  
      });
      it("leave mandatory blank and dispay fail message", function(){
+        var actclickCatPage = new categoryPage ();
+        actclickCatPage.clickcatlink();
         actnewCatBtn.clickNewCat();
         //expect correct create asset category page
         actnewCatBtn.accessCreateCat();
@@ -72,7 +81,20 @@ describe ("manage asset category", function(){
   
         //expect back to view category page
         exaccessCatList.accessCreateCat();
-
      });
-
+     it ("delete asset category", function(){ 
+        var actclickCatPage = new categoryPage ();
+        actclickCatPage.clickcatlink();
+        actDelAssetCat.clickDelCatBtn();
+        
+        var timeoutInMilliseconds = 1000;
+        browser.wait(protractor.ExpectedConditions.alertIsPresent(), timeoutInMilliseconds);
+    
+        var alert = browser.switchTo().alert();
+        alert.accept();
+    
+        browser.driver.sleep(1000);
+        browser.waitForAngular();
+    
+      });
 });

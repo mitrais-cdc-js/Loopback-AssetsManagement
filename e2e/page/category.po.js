@@ -2,6 +2,7 @@ var categoryPage = function (){
     //element view category
     var catLink = element (by.css('[href="/categories"]'));
     var newCatBtn = element (by.xpath('/html/body/div/div/app-root/app-category/p[1]/a'))
+    var DelCatBtn = element (by.xpath('/html/body/div/div/app-root/app-category/p[3]/ng2-smart-table/table/tbody/tr[1]/td[1]/ng2-st-tbody-edit-delete/a'));
 
     //element create category
     var name = element (by.xpath('/html/body/div/div/app-root/app-category-create/div/div[1]/div/form/div[1]/input'));
@@ -35,11 +36,11 @@ var categoryPage = function (){
     };
     //action: input category name
     this.inputName = function(){
-        name.sendKeys("Monitor_Auto");
+        name.sendKeys("AMonitor_Auto");
     };
     //action: input category description
     this.inputDesc = function (){
-        desc.sendKeys("Monitor,LCD_Auto");
+        desc.sendKeys("AMonitor,LCD_Auto");
     };
     //action: click save button
     this.clickSaveBtn = function(){
@@ -49,6 +50,10 @@ var categoryPage = function (){
     this.accessViewCat = function(){
         expect(browser.getCurrentUrl()).toEqual("http://13.228.106.128/categories");
        
+    };
+    //action:click delete button
+    this.clickDelCatBtn = function(){
+        DelCatBtn.click();
     };
 
 
