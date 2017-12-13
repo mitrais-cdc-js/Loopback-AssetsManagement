@@ -1,7 +1,21 @@
 'use strict';
 
 module.exports = function(Category) {
+	// pass this filter for nested category:
+	// endpoint: /api/Categories?filter
+	// {
+	// 	"include":{
+	// 	   "relation":"categories",
+	// 	   "scope":{
+	// 		  "include":{
+	// 			 "relation":"categories"
+	// 		  }
+	// 	   }
+	// 	}
+	//  }
+	// reference: https://github.com/strongloop/loopback/issues/2075
 
+	
 	Category.beforeRemote( 'catPaging', function( ctx, unused, next ) {
 		Category.count('', function (err, count) {
 			console.log(`Asset X-Total-Count: ${count}`);

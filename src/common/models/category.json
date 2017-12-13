@@ -1,72 +1,82 @@
 {
-  "name": "Category",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "description": {
-      "type": "string",
-      "required": true
-    },
-    "parent_id": {
-      "type": "string"
-    },
-    "checklist": {
-      "type": "string"
-    },
-    "createdAt": {
-      "type": "date"
-    }
-  },
-  "validations": [],
-  "relations": {
-    "assets": {
-      "type": "hasMany",
-      "model": "Asset",
-      "foreignKey": "categoryId"
-    }
-  },
-  "acls": [],
-  "methods": {
-    "catPaging": {
-      "accepts": [
-        {
-          "arg": "_sort",
-          "type": "string"
+	"name": "Category",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"required": true
+		},
+		"description": {
+			"type": "string",
+			"required": true
+		},
+		"parent_id": {
+			"type": "string"
+		},
+		"checklist": {
+			"type": "string"
+		},
+		"createdAt": {
+			"type": "date"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"assets": {
+			"type": "hasMany",
+			"model": "Asset",
+			"foreignKey": "categoryId"
         },
-        {
-          "arg": "_order",
-          "type": "string"
+        "categories": {
+            "type": "hasMany",
+            "model": "Category",
+            "foreignKey": "parent_id"
         },
-        {
-          "arg": "_limit",
-          "type": "number"
-        },
-        {
-          "arg": "_page",
-          "type": "number"
+        "category": {
+            "type": "belongsTo",
+            "model": "Category",
+            "foreignKey": "parent_id"
         }
-      ],
-      "returns": [
-        {
-          "arg": "result",
-          "type": "object",
-          "root": true
-        }
-      ],
-      "description": "Get list of categories and sort by name",
-      "http": [
-        {
-          "path": "/category_paging",
-          "verb": "get"
-        }
-      ]
-    }
-  }
+	},
+	"acls": [],
+	"methods": {
+		"catPaging": {
+			"accepts": [
+				{
+					"arg": "_sort",
+					"type": "string"
+				},
+				{
+					"arg": "_order",
+					"type": "string"
+				},
+				{
+					"arg": "_limit",
+					"type": "number"
+				},
+				{
+					"arg": "_page",
+					"type": "number"
+				}
+			],
+			"returns": [
+				{
+					"arg": "result",
+					"type": "object",
+					"root": true
+				}
+			],
+			"description": "Get list of categories and sort by name",
+			"http": [
+				{
+					"path": "/category_paging",
+					"verb": "get"
+				}
+			]
+		}
+	}
 }
