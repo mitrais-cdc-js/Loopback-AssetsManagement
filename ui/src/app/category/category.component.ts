@@ -85,7 +85,8 @@ export class CategoryComponent implements OnInit {
     try {
       if (confirm('Are you sure want to delete ' + event.data.name)) {
         this.categoryService.deleteCategory(event.data);
-        this.getCategories();
+        console.log('category deleted');
+        this.source.refresh();
         event.confirm.resolve(event.data);
       }
     } catch (e) {

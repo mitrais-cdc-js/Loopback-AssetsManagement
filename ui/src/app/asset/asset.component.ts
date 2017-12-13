@@ -39,7 +39,7 @@ export class AssetComponent implements OnInit {
 		actions: {
 			add: false,
 			edit: false,
-			delete: true,
+			delete: false,
 			custom: [
 				{
 					name: 'view',
@@ -48,6 +48,10 @@ export class AssetComponent implements OnInit {
 				{
 					name: 'edit',
 					title: 'Edit '
+				},
+				{
+					name: 'delete',
+					title: 'Delete'
 				}
 			]
 		},
@@ -256,7 +260,8 @@ export class AssetComponent implements OnInit {
 			this.dataService.deleteAsset(asset)
 			.then( res => {
 				console.log('deleted');
-				this.loadPage(this.currentPage);
+				// this.loadPage(this.currentPage);
+				this.source.refresh();
 			})
 			.catch( err => console.log(err));
 		}
