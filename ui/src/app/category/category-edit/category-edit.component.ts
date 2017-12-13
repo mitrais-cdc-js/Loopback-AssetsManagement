@@ -21,7 +21,8 @@ export class CategoryEditComponent implements OnInit {
 
 	category = new Category();
 	categories: Category[];
-
+	hasChild = false;
+	
 	checklists = [
 		{
 			id: "monitor",
@@ -43,7 +44,8 @@ export class CategoryEditComponent implements OnInit {
 	ngOnInit() {
 		console.log(this.category);
 		this.getCategory(this.route.snapshot.params['id']);
-		this.getCategories();
+		this.getParentCategories(this.route.snapshot.params['id']);
+		this.getChildCategories(this.route.snapshot.params['id']);
 	}
 
 	onSubmit(form: NgForm) { 
@@ -77,11 +79,26 @@ export class CategoryEditComponent implements OnInit {
 			.catch( e => console.log(e));
 	}
 
-	getCategories() {
-		this.categoryService.getCategories().subscribe(
+	getParentCategories(exceptId = null) {
+		this.categoryService.getParentCategories(exceptId).subscribe(
 			data => {
 				console.log(data);
 				this.categories = data;
+			},
+			err => {
+				console.log('Error occured.');
+			}
+		);
+	}
+
+	getChildCategories(parentId){
+		this.categoryService.getChildCategories(parentId).subscribe(
+			data => {
+				console.log(data)
+				if (data.length > 0){
+					this.hasChild = true;
+				}
+				console.log(this.hasChild);
 			},
 			err => {
 				console.log('Error occured.');

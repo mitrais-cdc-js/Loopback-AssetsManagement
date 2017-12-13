@@ -19,8 +19,15 @@ export class CategoryService {
 			.map((res: Response) => res.json());
 	}
 
-	getParentCategories(){
-		return this.http.get(`${environment.apiUrl}/categories?filter[where][parent_id]=`)
+	getParentCategories(exceptId = null){
+		console.log(exceptId);
+		return this.http.get(`${environment.apiUrl}/categories?filter[where][parent_id]=&filter[where][id][neq]=${exceptId}`)
+			.map((res: Response) => res.json());
+	}
+
+	getChildCategories(parentId){
+		console.log(parentId);
+		return this.http.get(`${environment.apiUrl}/categories?filter[where][parent_id]=${parentId}`)
 			.map((res: Response) => res.json());
 	}
 

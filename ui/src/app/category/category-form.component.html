@@ -15,7 +15,7 @@
 				</div>
 				<div class="form-group">
 					<label for="">Parent Category</label>
-					 <select class="form-control" [(ngModel)]="category.parent_id" name="parent_id">
+					 <select [disabled]="hasChild" class="form-control" [(ngModel)]="category.parent_id" name="parent_id">
                         <option *ngFor="let cat of categories" [ngValue]="cat.id">{{cat.name}}</option>
                     </select>
 				</div>
