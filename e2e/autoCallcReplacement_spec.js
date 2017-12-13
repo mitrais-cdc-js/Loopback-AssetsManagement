@@ -34,9 +34,9 @@ beforeEach(function(){
 
 });
 
-describe("create asset with replacement date", function(){
+describe("29660 auto callculation for replacement date", function(){
 
-  it("checkbox by default is checked and replacement date is read only", function (){
+  it("005, 006 checkbox by default is checked and 008 replacement date is read only", function (){
     //access asset page
     var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
@@ -49,7 +49,7 @@ describe("create asset with replacement date", function(){
     actviewReplDate.viewreplaceDate ();
   });
 
-  it("create asset auto callculation", function(){
+  it("001 create asset auto callculation", function(){
     //access asset page
     var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
@@ -72,7 +72,7 @@ describe("create asset with replacement date", function(){
      exgetViewListPage.getViewListPage();
   });
 
-  it ("view asset and validate auto callculation result", function (){
+  it ("001 view asset and validate auto callculation result", function (){
     //access asset page
     var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
@@ -85,7 +85,7 @@ describe("create asset with replacement date", function(){
      exautoCallcResult.viewautoCallcResult();
   });
 
-  it("edit asset with auto callculation", function(){  
+  it("009 edit asset with auto callculation", function(){  
      //access asset page
      var accessAssetPage = new assetPage();
      accessAssetPage.clickAssetLink ();
@@ -97,21 +97,44 @@ describe("create asset with replacement date", function(){
      actclickautoCBoxEdit.clickautoCBoxEdit();
      actclickupdateBtn.clickupdatetBtn();
 
-     browser.driver.sleep(1000);
+     browser.driver.sleep(2000);
      browser.waitForAngular();
      //expect: after successfully update asset apps redirected to view asset list page
      exgetViewListPage.getViewListPage();
   });
 
-  it ("delete asset from auto callculation", function(){ 
+  it("004 Replacement date should be greater equal to installed date when edit", function(){  
     //access asset page
     var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
-    actDelAsset.clickDelBtn();
-    
-    //browser.driver.sleep(1000);
-    //browser.waitForAngular();
 
+    actclickeditLink.clickeditLink();  
+      
+    //clear default replacement  
+    actclearreplaceDate.clearReplacementEdit();
+    //input manually for replacement date < installed date
+    actinputreplaceDate.inputReplacementEdit2();
+
+    //expect update button disable
+    var exupdateBtn = new assetPage ();
+    exupdateBtn.getDisableUpdateBtn();
+
+    //clear default input date   
+    actclearreplaceDate.clearReplacementEdit();
+    actinputreplaceDate.inputReplacementEdit();
+  
+    //expect create button enable
+    var exupdateBtn = new assetPage ();
+    exupdateBtn.getEnableUpdateBtn();
+ });
+
+  it ("000 delete asset from auto callculation", function(){ 
+    //access asset page
+    var accessAssetPage = new assetPage();
+    accessAssetPage.clickAssetLink ();
+
+    actDelAsset.clickDelBtn();
+ 
     var timeoutInMilliseconds = 1000;
     browser.wait(protractor.ExpectedConditions.alertIsPresent(), timeoutInMilliseconds);
 
@@ -130,7 +153,7 @@ describe("create asset with replacement date", function(){
     accessAssetPage.clickAssetLink ();
   });
 
-  it ("create asset with no auto callculation", function (){
+  it ("003, 007 create asset with no auto callculation", function (){
     //access asset page
     var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
@@ -160,7 +183,7 @@ describe("create asset with replacement date", function(){
      
   });
 
-  it ("delete asset from manual input replacement date", function(){
+  it ("000 delete asset from manual input replacement date", function(){
    //access asset page
    var accessAssetPage = new assetPage();
    accessAssetPage.clickAssetLink ();
@@ -184,7 +207,7 @@ describe("create asset with replacement date", function(){
      var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
   });
-  it("auto callculation but no installed date", function(){
+  it("002 no auto callculation but no installed date", function(){
     //access asset page
     var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
@@ -214,7 +237,7 @@ describe("create asset with replacement date", function(){
      exNoCallcResult.viewNoCallcResult();
   });
 
-  it ("delete asset from manual input replacement date", function(){
+  it ("000 delete asset from manual input replacement date", function(){
     //access asset page
     var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
@@ -237,6 +260,42 @@ describe("create asset with replacement date", function(){
     //access asset page in order to refresh browser
     var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
+  });
+  it("004 Replacement date should be greater equal to installed date when create", function (){
+  //access asset page
+   var accessAssetPage = new assetPage();
+   accessAssetPage.clickAssetLink ();
+   actclickNewBtn.clickNewBtn();
+   //expect: user already in correct url
+   //exgetCreatePage.getCreatePage();
+    
+   actinputDesc.inputDesc2();
+   actintlDate.inputintlDate();
+   actlifeSpan.inputlifeSpan();
+   actclickautoCBox.clickautoCBox();
+   //clear default input date   
+   actclearreplaceDate.clearreplaceDate();
+   //input manually for replacement date
+   actinputreplaceDate.inputreplaceDate2();
+
+   actinputMod.inputMod();
+   actinputSerial.inputSerial();
+   actinputinputBatch.inputBatch();
+   actinputProdDate.inputProdDate();
+
+   //expect update button disable
+     var exCreateBtn = new assetPage ();
+     exCreateBtn.getDisableCreateBtn();
+  
+  //clear default input date   
+  actclearreplaceDate.clearreplaceDate();
+  actinputreplaceDate.inputreplaceDate();
+   //expect: after successfully created asset apps redirected to view asset list page
+   //exgetViewListPage.getViewListPage();
+
+  //expect create button enable
+  var exCreateBtn = new assetPage ();
+  exCreateBtn.getEnableCreateBtn();
   });
 
 });

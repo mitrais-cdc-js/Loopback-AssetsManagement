@@ -14,7 +14,7 @@ var assetPage = function (){
        //elements view asset detail
        var assetLink = element (by.css('[href="/assets"]'));
        var viewLink = element(by.xpath('/html/body/div/div/app-root/app-asset/p[3]/ng2-smart-table/table/tbody/tr[1]/td[1]/ng2-st-tbody-custom/a[1]'));
-       var editLink = element (by.xpath('/html/body/div/div/app-root/app-asset/p[3]/ng2-smart-table/table/tbody/tr[1]/td[1]/ng2-st-tbody-custom/a[2]'));
+       var editLink = element (by.xpath('/html/body/div/div/app-root/app-asset/p[3]/ng2-smart-table/table/tbody/tr[1]/td[1]/ng2-st-tbody-custom/a[2]'));                             
        var newBtn = element (by.id('asset-new-btn'));
        var updatetBtn = element(by.id('asset-update-btn'));
        var delBtn = element (by.xpath('/html/body/div/div/app-root/app-asset/p[3]/ng2-smart-table/table/tbody/tr[1]/td[1]/ng2-st-tbody-edit-delete/a'));
@@ -35,7 +35,11 @@ var assetPage = function (){
        var autoCBox = element (by.xpath('/html/body/div/div/app-root/app-asset-create/div/div[1]/div/form/div[7]/input'));
        var autoCBoxEdit = element(by.xpath('/html/body/div/div/app-root/app-asset-edit/div/div[1]/div/form/div[7]/input'))
        var replaceDate = element (by.xpath('/html/body/div/div/app-root/app-asset-create/div/div[1]/div/form/div[8]/input'));
-     
+      
+       //element edit asset
+       var replacementEdit = element(by.xpath('/html/body/div/div/app-root/app-asset-edit/div/div[1]/div/form/div[8]/input'));
+       var updateBtn = element (by.id('asset-update-btn'));
+   
        //elements navigation for cancelation
        var createCancelBtn = element (by.id('asset-cancel-btn'));
        var viewBackBtn = element (by.id('asset-back-btn'));  
@@ -138,7 +142,7 @@ var assetPage = function (){
        };
         //action: fill replacement date manually < installed date
        this.inputreplaceDate2 = function (){
-        replaceDate.sendKeys ("01/01/2017");
+        replaceDate.sendKeys ("01/01/2016");
        };
        //action: click edit link
        this.clickeditLink = function(){
@@ -222,6 +226,34 @@ var assetPage = function (){
        this.getupdateResultTab = function(){
            expect(updateResultTab.getText()).toEqual("AutoPenCallc-update");
        };
-       
+       //expect: create button is enable
+       this.getEnableCreateBtn = function(){
+           expect(createBtn.isEnabled()).toBe(true)
+       };
+       //expect: create button is disable
+       this.getDisableCreateBtn = function(){
+           expect(createBtn.isEnabled()).toBe(false)
+       };
+       //action: edit input replacement date > installed date
+       this.inputReplacementEdit = function (){
+           replacementEdit.sendKeys("01/01/2018");
+       };
+       //action: edit input replacement date <installed date
+       this.inputReplacementEdit2 = function (){
+           replacementEdit.sendKeys("01/01/2016");
+       };
+        //action: clear value in edit replacement field
+        this.clearReplacementEdit = function (){
+           replacementEdit.clear();
+        };
+        //expect: update button is enable
+       this.getEnableUpdateBtn = function(){
+           expect(updateBtn.isEnabled()).toBe(true)
+       };
+       //expect: update button is disable
+       this.getDisableUpdateBtn = function(){
+           expect(updateBtn.isEnabled()).toBe(false)
+       };
+   
    };
    module.exports = assetPage
