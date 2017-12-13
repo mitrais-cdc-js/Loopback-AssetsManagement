@@ -31,16 +31,16 @@ beforeEach(function(){
     //access apps homepage
     var assetHomePage = new assetPage();
      assetHomePage.get ();
-    
-    //access asset page
-    var accessAssetPage = new assetPage();
-    accessAssetPage.clickAssetLink ();
 
 });
 
 describe("create asset with replacement date", function(){
 
   it("checkbox by default is checked and replacement date is read only", function (){
+    //access asset page
+    var accessAssetPage = new assetPage();
+    accessAssetPage.clickAssetLink ();
+
     actclickNewBtn.clickNewBtn();
     //expect: checkbox is displayed and default is checked
     actviewautoCBox.viewautoCBox ();
@@ -50,6 +50,10 @@ describe("create asset with replacement date", function(){
   });
 
   it("create asset auto callculation", function(){
+    //access asset page
+    var accessAssetPage = new assetPage();
+    accessAssetPage.clickAssetLink ();
+
      actclickNewBtn.clickNewBtn();
      //expect: user already in correct url
      exgetCreatePage.getCreatePage();
@@ -69,6 +73,10 @@ describe("create asset with replacement date", function(){
   });
 
   it ("view asset and validate auto callculation result", function (){
+    //access asset page
+    var accessAssetPage = new assetPage();
+    accessAssetPage.clickAssetLink ();
+
      //click view asset 
      checkViewAssetDetail.clickViewAsset ();
      //expect already in edit asset
@@ -78,7 +86,10 @@ describe("create asset with replacement date", function(){
   });
 
   it("edit asset with auto callculation", function(){  
-    
+     //access asset page
+     var accessAssetPage = new assetPage();
+     accessAssetPage.clickAssetLink ();
+
      actclickeditLink.clickeditLink();  
      //clear existing life span value  
      actclearLifeSpanEdit.clearLifeSpanEdit();
@@ -93,6 +104,9 @@ describe("create asset with replacement date", function(){
   });
 
   it ("delete asset from auto callculation", function(){ 
+    //access asset page
+    var accessAssetPage = new assetPage();
+    accessAssetPage.clickAssetLink ();
     actDelAsset.clickDelBtn();
     
     //browser.driver.sleep(1000);
@@ -117,6 +131,10 @@ describe("create asset with replacement date", function(){
   });
 
   it ("create asset with no auto callculation", function (){
+    //access asset page
+    var accessAssetPage = new assetPage();
+    accessAssetPage.clickAssetLink ();
+
      actclickNewBtn.clickNewBtn();
      //expect: user already in correct url
      exgetCreatePage.getCreatePage();
@@ -143,6 +161,10 @@ describe("create asset with replacement date", function(){
   });
 
   it ("delete asset from manual input replacement date", function(){
+   //access asset page
+   var accessAssetPage = new assetPage();
+   accessAssetPage.clickAssetLink ();
+
     actDelAsset.clickDelBtn();
     
     var timeoutInMilliseconds = 1000;
@@ -163,7 +185,9 @@ describe("create asset with replacement date", function(){
     accessAssetPage.clickAssetLink ();
   });
   it("auto callculation but no installed date", function(){
-    
+    //access asset page
+    var accessAssetPage = new assetPage();
+    accessAssetPage.clickAssetLink ();
     actclickNewBtn.clickNewBtn();
     //expect: user already in correct url
     exgetCreatePage.getCreatePage();
@@ -191,6 +215,10 @@ describe("create asset with replacement date", function(){
   });
 
   it ("delete asset from manual input replacement date", function(){
+    //access asset page
+    var accessAssetPage = new assetPage();
+    accessAssetPage.clickAssetLink ();
+    
     actDelAsset.clickDelBtn();
     
     var timeoutInMilliseconds = 1000;
@@ -207,7 +235,7 @@ describe("create asset with replacement date", function(){
     assetHomePage.get ();
     
     //access asset page in order to refresh browser
-     var accessAssetPage = new assetPage();
+    var accessAssetPage = new assetPage();
     accessAssetPage.clickAssetLink ();
   });
 
