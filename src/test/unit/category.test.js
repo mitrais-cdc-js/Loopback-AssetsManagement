@@ -61,5 +61,7 @@ describe('It should resolve category routes', function() {
 			}
 		})
 
+		process.exit()
+
 	})
 })
