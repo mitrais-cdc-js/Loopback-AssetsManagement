@@ -48,6 +48,41 @@ describe('It should resolve category routes', function() {
 		}).expect(422, done)
 	})
 
+	it('to update existing category', function(){
+	    
+		return Category.findOne({where: {name: category.name }})
+			.then(res => {
+
+				console.log("=> categoryId : " + res.id);
+		    	var categoryUpdate = {
+		    		"name": "2017 New Category Update",
+					"description": "Category description update"
+				}
+
+				return request.put('/api/categories/' + res.id).send(categoryUpdate)
+					.then( resUpdate => {
+						console.log("Status Code:");
+						expect(resUpdate.statusCode).to.be.equal(200);
+					})
+
+			});
+
+	})
+
+	it('to delete single category', function(){
+	
+		return Category.findOne({where: {name: "2017 New Category Update" }})
+			.then(res => {
+				console.log("==> categoryId to delete: " + res.id)
+
+				return request.delete('/api/categories/' + res.id)
+					.then( resDelete => {
+						console.log('deleted rows: ' + JSON.parse(resDelete.text).count);
+						expect(JSON.parse(resDelete.text).count).to.be.equal(1);
+					})
+			})
+	})
+
 	after(function() {
 		Category.findOne({where: {name: category.name }})
 		.then( res => {
