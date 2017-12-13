@@ -21,13 +21,15 @@ beforeEach(function(){
 	//access apps homepage
 	var assetHomePage = new assetPage();
 	assetHomePage.get ();
-	//access asset page
-	var accessAssetPage = new assetPage();
-	accessAssetPage.clickAssetLink ();   
+
 });
 
 describe ("update asset", function(){
     it("create asset", function(){
+	    //access asset page
+	    var accessAssetPage = new assetPage();
+	    accessAssetPage.clickAssetLink (); 
+
 		actclickNewBtn.clickNewBtn();
 		//expect: user already in correct url
 		exgetCreatePage.getCreatePage();
@@ -45,6 +47,10 @@ describe ("update asset", function(){
 		exgetViewListPage.getViewListPage();
 		});
 	it ("update mandatory field", function(){
+		//access asset page
+		var accessAssetPage = new assetPage();
+		accessAssetPage.clickAssetLink (); 
+
 		//click edit link
 		actclickeditLink.clickeditLink();
 		actinputDesc.clearDescEdit();
@@ -59,11 +65,17 @@ describe ("update asset", function(){
 	});
 
 	it ("view update result in asset list", function (){
+		//access asset page
+		var accessAssetPage = new assetPage();
+		accessAssetPage.clickAssetLink (); 
 		//expect update result already correct in View asset detail
         exupdateResult.getupdateResultTab();
 	});
 
-	xit ("view update result in view detail", function (){
+	it ("view update result in view detail", function (){
+		//access asset page
+		var accessAssetPage = new assetPage();
+		accessAssetPage.clickAssetLink (); 
 		//click view link
 		checkViewAssetDetail.clickViewAsset ();
 		//expect already in edit asset
@@ -74,6 +86,9 @@ describe ("update asset", function(){
 	});
 
 	it ("delete asset from update activy", function(){
+		//access asset page
+		var accessAssetPage = new assetPage();
+		accessAssetPage.clickAssetLink (); 
 		actDelAsset.clickDelBtn();
 		
 		var timeoutInMilliseconds = 1000;
