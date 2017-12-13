@@ -19,6 +19,11 @@ export class CategoryService {
 			.map((res: Response) => res.json());
 	}
 
+	getParentCategories(){
+		return this.http.get(`${environment.apiUrl}/categories?filter[where][parent_id]=`)
+			.map((res: Response) => res.json());
+	}
+
 	getCategory(id) {
 		let timeStamp = +new Date();
         return this.http.get(`${environment.apiUrl}/categories/` + id + `?tsp=${timeStamp}`)

@@ -41,7 +41,7 @@ export class CategoryCreateComponent implements OnInit {
 	constructor(protected categoryService: CategoryService, private router: Router,private alertService: AlertService) { }
 
 	ngOnInit() {
-		this.getCategories();
+		this.getParentCategories();
 	}
 
 	onSubmit(form: NgForm) {
@@ -69,8 +69,8 @@ export class CategoryCreateComponent implements OnInit {
 	}
 
 
-	getCategories() {
-		this.categoryService.getCategories().subscribe(
+	getParentCategories() {
+		this.categoryService.getParentCategories().subscribe(
 			data => {
 				console.log(data);
 				this.categories = data;
