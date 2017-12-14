@@ -53,12 +53,12 @@ export class CategoryComponent implements OnInit {
         title: 'Description',
         filter: false,
       },
-      // parent_id: {
-      //   title: 'Parent',
-      //   filter: false,
-      //   type: 'custom',
-      //   renderComponent: CustomParentNameComponent,
-      // }
+      parent_id: {
+        title: 'Parent',
+        filter: false,
+        type: 'custom',
+        renderComponent: CustomParentNameComponent,
+      }
     }
   };
 

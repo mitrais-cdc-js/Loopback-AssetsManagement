@@ -11,6 +11,7 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { CategoryViewComponent } from './category-view/category-view.component';
 
+import { CustomParentNameComponent } from './customParentName.component';
 // import alert service and component
 import { AlertComponent } from '../_directives/index';
 import { AlertService } from '../_services/index';
@@ -40,15 +41,19 @@ const assetRouting: ModuleWithProviders = RouterModule.forChild([
 	imports: [
 		CommonModule,
 		FormsModule,
-    assetRouting,
-    Ng2SmartTableModule,
+    	assetRouting,
+    	Ng2SmartTableModule,
+	],
+	entryComponents: [
+		CustomParentNameComponent
 	],
 	declarations: [
 		CategoryComponent,
 		CategoryCreateComponent,
 		CategoryEditComponent,
 		CategoryViewComponent,
-		AlertComponent
+		AlertComponent,
+		CustomParentNameComponent
 	],
 	providers: [
 		CategoryService,

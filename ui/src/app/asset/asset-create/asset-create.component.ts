@@ -73,7 +73,8 @@ export class AssetCreateComponent implements OnInit {
 			err => {
 				console.log(err)
 			}
-		)
+    )
+    console.log(this.categories);
 	}
 
 

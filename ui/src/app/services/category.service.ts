@@ -37,6 +37,12 @@ export class CategoryService {
         .map((res: Response) => res.json()).toPromise();
     }
 
+	getCategoryById(id) {
+		let timeStamp = +new Date();
+        return this.http.get(`${environment.apiUrl}/categories/` + id + `?tsp=${timeStamp}`)
+        .map((res: Response) => res.json());
+    }
+
 
 	createCategory(category: Category) {
 		console.log('createCategory called...');
