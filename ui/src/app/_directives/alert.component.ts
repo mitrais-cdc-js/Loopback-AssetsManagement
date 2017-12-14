@@ -23,7 +23,8 @@ export class AlertComponent {
             }
 
             // add alert to array
-            this.alerts.push(alert);
+            // this.alerts.push(alert);
+            this.alerts[0] = alert;
         });
     }
 

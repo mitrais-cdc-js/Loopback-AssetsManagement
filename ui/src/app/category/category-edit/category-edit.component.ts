@@ -65,7 +65,9 @@ export class CategoryEditComponent implements OnInit {
 			})
 			.catch( e => {
 				console.log(e);
-				this.alertService.error('Could not update asset category');
+				let error = e.json();
+				console.log(error.error.message);
+				this.alertService.error(error.error.message);
 			});
 	}
 
