@@ -52,7 +52,8 @@ export class CategoryCreateComponent implements OnInit {
 			name: inputFields.name,
 			description: inputFields.description,
 			parent_id: inputFields.parent_id,
-			checklist: inputFields.checklist
+			checklist: inputFields.checklist,
+			createdAt: new Date()
 		}
 		
 		this.categoryService.createCategory(newCategory)
