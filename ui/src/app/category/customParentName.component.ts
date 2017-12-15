@@ -32,13 +32,12 @@ export class CustomParentNameComponent implements ViewCell, OnInit {
 
 	ngOnInit() {
         // console.log(this.value);
-        // this.renderValue = "induk";
-        this.categoryService.getCategoryById(this.value).subscribe(
-            category => {
-                console.log(category.name);
-                this.renderValue = "test";
-                //
-            }
-        )
+        this.renderValue = "parent";
+        // this.categoryService.getCategoryById(this.value).subscribe(
+        //     category => {
+        //         console.log(category.name);
+        //         this.renderValue = category.name
+        //     }
+        // )
 	}
 }
