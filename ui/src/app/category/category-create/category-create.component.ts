@@ -65,7 +65,7 @@ export class CategoryCreateComponent implements OnInit {
 	    }).catch( e => {
 		  console.log(e);
 		  let error = e.json();
-		  console.log(error.error.message);
+		  console.log(error);
 		  this.alertService.error(error.error.message);
 	    });
 	}
