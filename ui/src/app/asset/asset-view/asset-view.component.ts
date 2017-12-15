@@ -36,12 +36,16 @@ export class AssetViewComponent implements OnInit {
 
 
   	dateFormat(dateString, type = 'date') {
-		const date = new Date(dateString);
-		const momentDate = moment(date, 'DD/MM/YYYY');
-		if (type === 'datetime') {
-			return momentDate.format('DD/MM/YYYY HH:mm:ss');
-		} else {
-			return momentDate.format('DD/MM/YYYY');
+		if (dateString){
+			const date = new Date(dateString);
+			const momentDate = moment(date, 'DD/MM/YYYY');
+			if (type === 'datetime') {
+				return momentDate.format('DD/MM/YYYY HH:mm:ss');
+			} else {
+				return momentDate.format('DD/MM/YYYY');
+			}
+		}else{
+			return '';
 		}
 	}
 
