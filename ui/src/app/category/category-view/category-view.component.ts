@@ -21,14 +21,15 @@ export class CategoryViewComponent implements OnInit {
   ngOnInit() {
     console.log(this.category);
     this.getCategory(this.route.snapshot.params['id']);
-    this.getParentName(this.route.snapshot.params['id']);
+    // this.getParentName(this.route.snapshot.params['id']);
   }
 
   getCategory(id){
 		this.categoryService.getCategory(id)
 			.then( category => {
 				console.log(category);
-				this.category = category;
+        this.category = category;
+        this.getParentName(this.category.parent_id);
 			})
 			.catch( e => console.log(e));
   }
