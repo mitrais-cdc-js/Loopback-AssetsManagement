@@ -67,7 +67,8 @@ export class CategoryCreateComponent implements OnInit {
 		  console.log(e);
 		  let error = e.json();
 		  console.log(error);
-		  this.alertService.error(error.error.message);
+		//   this.alertService.error(error.error.message);
+		this.alertService.error('Could not create the asset category');
 	    });
 	}
 
