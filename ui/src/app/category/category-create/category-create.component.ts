@@ -38,6 +38,8 @@ export class CategoryCreateComponent implements OnInit {
 		}
 	]
 
+	hasChild = false;
+
 	constructor(protected categoryService: CategoryService, private router: Router,private alertService: AlertService) { }
 
 	ngOnInit() {

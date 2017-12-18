@@ -5,6 +5,7 @@ export class Asset {
   public static readonly DATE_FORMAT = 'DD/MM/YYYY';
 
   constructor(
+          public id: string = '',
           public model: string = '',
           public serial: string = '',
           public batchNo: string = '',
