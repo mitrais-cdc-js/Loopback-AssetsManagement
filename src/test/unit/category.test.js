@@ -48,6 +48,29 @@ describe('It should resolve category routes', function() {
 		}).expect(422, done)
 	})
 
+	it('to create sub category', function(){
+		return Category.findOne({where: {name: category.name}})
+			.then( res => {
+				var newSubCategory = {
+					"name": "Sub 2017 New Sub Category",
+					"description": "Sub category description",
+					"parent_id": res.id
+				}
+
+				return request.post('/api/categories').send(newSubCategory)
+					.then( resNewSub => {
+						console.log("Subb-----");
+						request.delete('/api/categories/' + resNewSub.body.id).then(
+							resSubDelete => {
+								console.log(resSubDelete);
+							}
+						)
+						console.log("Status: --- " + resNewSub.statusCode);
+						expect(resNewSub.statusCode).to.be.equal(200);
+					})
+			})
+	})
+
 	it('to update existing category', function(){
 	    
 		return Category.findOne({where: {name: category.name }})
@@ -96,7 +119,7 @@ describe('It should resolve category routes', function() {
 			}
 		})
 
-		process.exit()
+		// process.exit()
 
 	})
 })
