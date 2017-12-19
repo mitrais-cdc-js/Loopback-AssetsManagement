@@ -103,7 +103,7 @@ pipeline {
                 sh 'mkdir -p Loopback/script'
 
                 // Copy 'ui/dist' to 'Loopback/frontend'.
-                sh 'cp -R ui/dist Loopback/frontend'
+                sh 'cp -R ui/dist/. Loopback/frontend'
             }
         }
     }
