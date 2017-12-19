@@ -5,7 +5,9 @@ pipeline {
     }
     stages {
         stage ('Checkout') {
-            checkout scm
+            steps {
+                checkout scm
+            }
         }
         stage ('Check environment') {
             steps {
