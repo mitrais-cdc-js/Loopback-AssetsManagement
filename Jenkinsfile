@@ -43,9 +43,6 @@ pipeline {
                         // Run xvfb server to simulate the browser as headless browser.
                         // Then run the unit test along with code coverage report.
                         def testOut = sh(script: """
-                        Xvfb :99 -screen 0 1024x768x16 &> xvfb.log &
-                        export DISPLAY=:99.0
-                        ps -ea
                         npm run test
                         node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha test/**/*.test.js
                         node_modules/.bin/istanbul check-coverage --statements 10 --branches 10 --functions 10 --lines 10
