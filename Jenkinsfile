@@ -30,7 +30,7 @@ pipeline {
                 sh 'mongod --fork --logpath /var/log/mongod.log'
             }
         }
-        stage('Unit test') {
+        stage('Run backend unit test') {
             steps {
                 dir ('src') {
                     script {
