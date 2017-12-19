@@ -102,8 +102,11 @@ pipeline {
                 // Recreate the 'LoopbackDeploy/script' folder.
                 sh 'mkdir -p LoopbackDeploy/script'
 
-                // Copy 'ui/dist' to 'LoopbackDeploy/frontend'.
+                // Copy 'ui/dist' contents to 'LoopbackDeploy/frontend'.
                 sh 'cp -R ui/dist/. LoopbackDeploy/frontend'
+
+                // Copy 'src' contents to 'LoopbackDeploy/backend'
+                sh 'cp -R src/. LoopbackDeploy/backend'
             }
         }
     }
