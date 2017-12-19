@@ -4,11 +4,6 @@ pipeline {
         CI = 'true' 
     }
     stages {
-        stage ('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage ('Check environment') {
             steps {
                 sh """
