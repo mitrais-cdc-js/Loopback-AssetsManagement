@@ -54,10 +54,10 @@ pipeline {
                 
             }
         }
-        // stage('Stop mongodb') { 
-        //     steps {
-        //         sh 'mongod --shutdown'
-        //     }
-        // }
+        stage('Stop mongodb') { 
+            steps {
+                sh 'mongod --shutdown'
+            }
+        }
     }
 }
