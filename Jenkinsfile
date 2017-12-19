@@ -116,6 +116,9 @@ pipeline {
 
                 // Remove 'node_modules' folder within 'LoopbackDeploy/backend' folder.
                 sh 'rm -rf LoopbackDeploy/backend/node_modules'
+
+                // Remove 'middleware.development.json' within 'LoopbackDeploy/backend/server/' folder.
+                sh 'rm -f LoopbackDeploy/backend/server/middleware.development.json'
             }
         }
     }
