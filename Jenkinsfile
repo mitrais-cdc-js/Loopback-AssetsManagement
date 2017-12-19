@@ -74,31 +74,33 @@ pipeline {
         }
         stage('Prepare the frontend and backend artifacts before deployment') { 
             steps {
+                // Go to 'ui' folder.
                 dir ('ui') {
                     // Remove 'dist' folder along with it's contents.
                     sh 'rm -rf dist'
 
                     // Build the ui project and generate 'dist' folder.
                     sh 'node_modules/.bin/ng build --env=prod'
+                }
+                
+                // Go to root folder of current project.
+                // Remove 'Loopback/frontend' folder along with it's contents.
+                sh 'rm -rf Loopback/frontend'
 
-                    // Remove 'Loopback/frontend' folder along with it's contents.
-                    sh 'rm -rf Loopback/frontend'
+                // Recreate the 'Loopback/frontend' folder.
+                sh 'mkdir -p Loopback/frontend'
 
-                    // Recreate the 'Loopback/frontend' folder.
-                    sh 'mkdir -p Loopback/frontend'
+                // Remove 'Loopback/backend' folder along with it's contents.
+                sh 'rm -rf Loopback/backend'
 
-                    // Remove 'Loopback/backend' folder along with it's contents.
-                    sh 'rm -rf Loopback/backend'
+                // Recreate the 'Loopback/backend' folder.
+                sh 'mkdir -p Loopback/backend'
+                
+                // Remove 'Loopback/script' folder along with it's contents.
+                sh 'rm -rf Loopback/script'
 
-                    // Recreate the 'Loopback/backend' folder.
-                    sh 'mkdir -p Loopback/backend'
-                    
-                    // Remove 'Loopback/script' folder along with it's contents.
-                    sh 'rm -rf Loopback/script'
-
-                    // Recreate the 'Loopback/script' folder.
-                    sh 'mkdir -p Loopback/script'
-                }     
+                // Recreate the 'Loopback/script' folder.
+                sh 'mkdir -p Loopback/script'     
             }
         }
     }
