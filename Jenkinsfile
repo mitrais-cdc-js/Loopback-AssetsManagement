@@ -102,14 +102,17 @@ pipeline {
                 // Recreate the 'LoopbackDeploy/script' folder.
                 sh 'mkdir -p LoopbackDeploy/script'
 
-                // Copy 'ui/dist' contents to 'LoopbackDeploy/frontend'.
+                // Copy 'ui/dist' contents to 'LoopbackDeploy/frontend' folder.
                 sh 'cp -R ui/dist/. LoopbackDeploy/frontend'
 
-                // Copy 'src' contents to 'LoopbackDeploy/backend'
+                // Copy 'src' contents to 'LoopbackDeploy/backend' folder.
                 sh 'cp -R src/. LoopbackDeploy/backend'
 
-                // Copy 'script' contents to 'LoopbackDeploy/script'
+                // Copy 'script' contents to 'LoopbackDeploy/script' folder.
                 sh 'cp -R script/. LoopbackDeploy/script'
+
+                // Copy appspec.yml file to 'LoopbackDeploy' folder.
+                sh 'cp appspec.yml LoopbackDeploy'
             }
         }
     }
