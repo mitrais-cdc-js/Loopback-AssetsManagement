@@ -84,26 +84,26 @@ pipeline {
                 }
 
                 // Go to root folder of current project.
-                // Remove 'Loopback/frontend' folder along with it's contents.
-                sh 'rm -rf Loopback/frontend'
+                // Remove 'LoopbackDeploy/frontend' folder along with it's contents.
+                sh 'rm -rf LoopbackDeploy/frontend'
 
-                // Recreate the 'Loopback/frontend' folder.
-                sh 'mkdir -p Loopback/frontend'
+                // Recreate the 'LoopbackDeploy/frontend' folder.
+                sh 'mkdir -p LoopbackDeploy/frontend'
 
-                // Remove 'Loopback/backend' folder along with it's contents.
-                sh 'rm -rf Loopback/backend'
+                // Remove 'LoopbackDeploy/backend' folder along with it's contents.
+                sh 'rm -rf LoopbackDeploy/backend'
 
-                // Recreate the 'Loopback/backend' folder.
-                sh 'mkdir -p Loopback/backend'
+                // Recreate the 'LoopbackDeploy/backend' folder.
+                sh 'mkdir -p LoopbackDeploy/backend'
                 
-                // Remove 'Loopback/script' folder along with it's contents.
-                sh 'rm -rf Loopback/script'
+                // Remove 'LoopbackDeploy/script' folder along with it's contents.
+                sh 'rm -rf LoopbackDeploy/script'
 
-                // Recreate the 'Loopback/script' folder.
-                sh 'mkdir -p Loopback/script'
+                // Recreate the 'LoopbackDeploy/script' folder.
+                sh 'mkdir -p LoopbackDeploy/script'
 
-                // Copy 'ui/dist' to 'Loopback/frontend'.
-                sh 'cp -R ui/dist/. Loopback/frontend'
+                // Copy 'ui/dist' to 'LoopbackDeploy/frontend'.
+                sh 'cp -R ui/dist/. LoopbackDeploy/frontend'
             }
         }
     }
