@@ -40,7 +40,6 @@ pipeline {
                 // Go to 'src' folder.
                 dir ('src') {
                     script {
-                        // Run xvfb server to simulate the browser as headless browser.
                         // Then run the unit test along with code coverage report.
                         def testOut = sh(script: """
                         npm run test
