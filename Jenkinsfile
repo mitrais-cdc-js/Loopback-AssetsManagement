@@ -107,6 +107,9 @@ pipeline {
 
                 // Copy 'src' contents to 'LoopbackDeploy/backend'
                 sh 'cp -R src/. LoopbackDeploy/backend'
+
+                // Copy 'script' contents to 'LoopbackDeploy/script'
+                sh 'cp -R script/. LoopbackDeploy/script'
             }
         }
     }
