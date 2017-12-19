@@ -113,6 +113,9 @@ pipeline {
 
                 // Copy appspec.yml file to 'LoopbackDeploy' folder.
                 sh 'cp appspec.yml LoopbackDeploy'
+
+                // Remove 'node_modules' folder within 'LoopbackDeploy/backend' folder.
+                sh 'rm -rf LoopbackDeploy/backend/node_modules'
             }
         }
     }
