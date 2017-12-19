@@ -72,6 +72,14 @@ pipeline {
                 sh 'mongod --shutdown'
             }
         }
+        stage('Run front end e2e test') { 
+            steps {
+                // Go to 'ui' folder.
+                dir ('ui') {
+                    sh 'npm run e2e'
+                }
+            }
+        }
         stage('Prepare the frontend and backend artifacts before deployment') { 
             steps {
                 // Go to 'ui' folder.

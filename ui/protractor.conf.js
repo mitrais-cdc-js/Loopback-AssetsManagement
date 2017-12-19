@@ -9,7 +9,11 @@ exports.config = {
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    // Comment out this below script to run e2e test with normal browser instead of headless.
+    chromeOptions: {
+      args: [ "no-sandbox", "headless", "disable-gpu", "window-size=800x600" ]
+    }
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',

@@ -18,8 +18,8 @@ describe('ui App', () => {
     expect(page.getAssetPageTitle()).toEqual('List of Assets');
   });
 
-  it('Asset table should have the fourth column as : Installed Date', () => {
-    expect(page.getColumnName(5)).toEqual('Installed Date');
-  });
+  // it('Asset table should have the fourth column as : Installed Date', () => {
+  //   expect(page.getColumnName(5)).toEqual('Installed Date');
+  // });
 
 });
