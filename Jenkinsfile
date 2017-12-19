@@ -85,19 +85,19 @@ pipeline {
                     sh 'rm -rf Loopback/frontend'
 
                     // Recreate the 'Loopback/frontend' folder.
-                    sh 'mkdir Loopback/frontend'
+                    sh 'mkdir -p Loopback/frontend'
 
                     // Remove 'Loopback/backend' folder along with it's contents.
                     sh 'rm -rf Loopback/backend'
 
                     // Recreate the 'Loopback/backend' folder.
-                    sh 'mkdir Loopback/backend'
+                    sh 'mkdir -p Loopback/backend'
                     
                     // Remove 'Loopback/script' folder along with it's contents.
                     sh 'rm -rf Loopback/script'
 
                     // Recreate the 'Loopback/script' folder.
-                    sh 'mkdir Loopback/script'
+                    sh 'mkdir -p Loopback/script'
                 }     
             }
         }
