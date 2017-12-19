@@ -82,7 +82,7 @@ pipeline {
                     // Build the ui project and generate 'dist' folder.
                     sh 'node_modules/.bin/ng build --env=prod'
                 }
-                
+
                 // Go to root folder of current project.
                 // Remove 'Loopback/frontend' folder along with it's contents.
                 sh 'rm -rf Loopback/frontend'
@@ -100,7 +100,10 @@ pipeline {
                 sh 'rm -rf Loopback/script'
 
                 // Recreate the 'Loopback/script' folder.
-                sh 'mkdir -p Loopback/script'     
+                sh 'mkdir -p Loopback/script'
+
+                // Copy 'ui/dist' to 'Loopback/frontend'.
+                sh 'cp -R ui/dist Loopback/frontend'
             }
         }
     }
