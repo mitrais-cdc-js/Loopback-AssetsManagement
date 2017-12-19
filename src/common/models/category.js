@@ -29,10 +29,10 @@ module.exports = function(Category) {
 		console.log(`IN custom: /api/category_paging?_sort=${_sort}&_order=${_order}&_limit=${_limit}&_page=${_page}`);
 
 		if(typeof(_sort) == 'undefined') {
-			_sort = "name";
+			_sort = "createdAt";
 		}
 		if(typeof(_order) == 'undefined') {
-			_order = "ASC";
+			_order = "DESC";
 		}
 		if(typeof(_limit) == 'undefined') {
 			_limit = 0;
@@ -45,7 +45,7 @@ module.exports = function(Category) {
 
 		var skip_calc = _page * _limit;
 
-		Category.find({ order: _sort + " " + _order, limit: _limit, skip: skip_calc })
+		Category.find({ order: _sort + " " + _order, limit: _limit, skip: skip_calc, include: {relation:"category"}})
 			.then( category => { callback(null, category); })
 			.catch( e => callback(null, e));
 	};

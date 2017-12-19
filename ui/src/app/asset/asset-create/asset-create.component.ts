@@ -73,7 +73,8 @@ export class AssetCreateComponent implements OnInit {
 			err => {
 				console.log(err)
 			}
-		)
+    )
+    console.log(this.categories);
 	}
 
 
@@ -125,7 +126,8 @@ export class AssetCreateComponent implements OnInit {
     this.asset.scheduledReplacementDate = (this.asset.scheduledReplacementDate === '') ? null : this.asset.scheduledReplacementDate;
     this.asset.lastRecertificationDate = (this.asset.lastRecertificationDate === '') ? null : this.asset.lastRecertificationDate;
     this.asset.nextRecertificationDate = (this.asset.nextRecertificationDate === '') ? null : this.asset.nextRecertificationDate;
-
+    this.asset.id = null;
+    
     console.log("createAsset :::::::::::: ");
     console.log(this.asset);
 

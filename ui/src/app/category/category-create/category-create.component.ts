@@ -38,6 +38,8 @@ export class CategoryCreateComponent implements OnInit {
 		}
 	]
 
+	hasChild = false;
+
 	constructor(protected categoryService: CategoryService, private router: Router,private alertService: AlertService) { }
 
 	ngOnInit() {
@@ -52,7 +54,8 @@ export class CategoryCreateComponent implements OnInit {
 			name: inputFields.name,
 			description: inputFields.description,
 			parent_id: inputFields.parent_id,
-			checklist: inputFields.checklist
+			checklist: inputFields.checklist,
+			createdAt: new Date()
 		}
 		
 		this.categoryService.createCategory(newCategory)
@@ -64,7 +67,10 @@ export class CategoryCreateComponent implements OnInit {
 		  }, 1000);
 	    }).catch( e => {
 		  console.log(e);
-		  this.alertService.error('Could not create asset category');
+		  let error = e.json();
+		  console.log(error);
+		//   this.alertService.error(error.error.message);
+		this.alertService.error('Could not create the asset category');
 	    });
 	}
 

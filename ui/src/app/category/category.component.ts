@@ -13,23 +13,23 @@ import { Category } from './category';
 import { CustomParentNameComponent } from './customParentName.component';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+	selector: 'app-category',
+	templateUrl: './category.component.html',
+	styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
 
-  settings = {
-    add: {
-      confirmCreate: true,
-    },
-    edit: {
-      confirmSave: true,
-    },
-    delete: {
-      confirmDelete: true,
-    },
-    actions: {
+	settings = {
+		add: {
+			confirmCreate: true,
+		},
+		edit: {
+			confirmSave: true,
+		},
+		delete: {
+			confirmDelete: true,
+		},
+		actions: {
 			add: false,
 			edit: false,
 			delete: true,
@@ -44,69 +44,74 @@ export class CategoryComponent implements OnInit {
 				}
 			]
 		},
-    columns: {
-      name: {
-        title: 'Name',
-        filter: false,
-      },
-      description: {
-        title: 'Description',
-        filter: false,
-      },
-      // parent_id: {
-      //   title: 'Parent',
-      //   filter: false,
-      //   type: 'custom',
-      //   renderComponent: CustomParentNameComponent,
-      // }
-    }
-  };
+		columns: {
+			name: {
+				title: 'Name',
+				filter: false,
+			},
+			description: {
+				title: 'Description',
+				filter: false,
+			},
+			parent_id: {
+				title: 'Parent',
+				filter: false,
+				valuePrepareFunction: (categories, category) => {
+					if (category.category){
+						return category.category.name
+					}else{
+						return ''
+					}
+				}    
+			}
+		}
+	};
 
-  source: ServerDataSource;
+	source: ServerDataSource;
 
 
 	categories: Category[]
-  	constructor(http: Http, protected categoryService: CategoryService, private router: Router) {
-      this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/categories/category_paging`});
-      this.source.setPaging(1, 2, true);
-    }
+		constructor(http: Http, protected categoryService: CategoryService, private router: Router) {
+			this.source = new ServerDataSource(http, { endPoint: `${environment.apiUrl}/categories/category_paging`});
+			this.source.setPaging(1, 2, true);
+		}
 
-  onCreateCall(event: any) {
-    try {
-      this.categoryService.createCategory(event.newData);
-      event.confirm.resolve(event.newData);
-    } catch (e) {
-      console.log((<Error>e).message);
-      event.confirm.reject();
-    }
-  }
+	onCreateCall(event: any) {
+		try {
+			this.categoryService.createCategory(event.newData);
+			event.confirm.resolve(event.newData);
+		} catch (e) {
+			console.log((<Error>e).message);
+			event.confirm.reject();
+		}
+	}
 
-  onDeleteCall(event: any) {
-    try {
-      if (confirm('Are you sure want to delete ' + event.data.name)) {
-        this.categoryService.deleteCategory(event.data);
-        console.log('category deleted');
-        this.source.refresh();
-        event.confirm.resolve(event.data);
-      }
-    } catch (e) {
-      console.log((<Error>e).message);
-      event.confirm.reject();
-    }
-  }
+	onDeleteCall(event: any) {
+		try {
+			if (confirm('Are you sure want to delete ' + event.data.name)) {
+				this.categoryService.deleteCategory(event.data);
+				console.log('category deleted');
+				this.source.refresh();
+				event.confirm.resolve(event.data);
+			}
+		} catch (e) {
+			console.log((<Error>e).message);
+			event.confirm.reject();
+		}
+	}
 
-  onEditCall(event: any) {
-    try {
-      this.categoryService.updateCategory(event.newData);
-      event.confirm.resolve(event.newData);
-    } catch (e) {
-      console.log((<Error>e).message);
-      event.confirm.reject();
-    }
-  }
+	onEditCall(event: any) {
+		try {
+			this.categoryService.updateCategory(event.newData);
+			event.confirm.resolve(event.newData);
+		} catch (e) {
+			console.log((<Error>e).message);
+			event.confirm.reject();
+		}
+	}
 
 
-  onCustom(event){
+	onCustom(event){
 		let category = event.data;
 		console.log(event.action);
 		if (event.action == 'view'){
@@ -114,9 +119,9 @@ export class CategoryComponent implements OnInit {
 		}else if (event.action == 'edit'){
 			this.router.navigate(['/categories/edit/'+ category.id ]);
 		}
-  }
-  
-  // deleteCategory(category) {
+	}
+	
+	// deleteCategory(category) {
 	// 	if (confirm('Are you sure want to delete ' + category.id)) {
 	// 		this.categoryService.deleteCategory(category)
 	// 		.then( res => {
@@ -127,16 +132,16 @@ export class CategoryComponent implements OnInit {
 	// 	}
 	// }
 
-  	ngOnInit() {
-  		console.log('category component');
-  		this.getCategories();
-  	}
+		ngOnInit() {
+			console.log('category component');
+			this.getCategories();
+		}
 
 
-  	getCategories() {
+		getCategories() {
 		this.categoryService.getCategories().subscribe(
 			data => {
-				console.log(data);
+				// console.log(data);
 				this.categories = data;
 			},
 			err => {
