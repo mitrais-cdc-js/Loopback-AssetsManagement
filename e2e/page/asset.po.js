@@ -176,7 +176,7 @@ var assetPage = function (){
        //expect: auto callculation no result/default date
        this.viewNoCallcResult = function (){
        var autoCallcResult = element (by.xpath('/html/body/div/div/app-root/app-asset-view/table/tbody/tr[7]/td[2]'));
-       expect(autoCallcResult.getText()).toEqual("01/01/1970");
+       expect(autoCallcResult.getText()).toEqual("");
        }; 
        //expect: asset created in edit page
        this.viewAssetDetail = function (){
