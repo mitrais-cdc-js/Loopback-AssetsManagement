@@ -39,16 +39,18 @@ pipeline {
                         export DISPLAY=:99.0
                         ps -ea
                         npm run test
+                        node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha test/**/*.test.js
+                        node_modules/.bin/istanbul check-coverage --statements 80 --branches 80 --functions 80 --lines 80
                         """, returnStdout: true).trim()
-                        // writeFile(file: 'coverage.txt', text: testOut)
-                        // publishHTML (target: [
-                        //     allowMissing: false,
-                        //     alwaysLinkToLastBuild: false,
-                        //     keepAll: true,
-                        //     reportDir: "coverage",
-                        //     reportFiles: "index.html",
-                        //     reportName: "Code coverage report"
-                        // ])
+                        writeFile(file: 'coverage.txt', text: testOut)
+                        publishHTML (target: [
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll: true,
+                            reportDir: "coverage/lcov-report",
+                            reportFiles: "index.html",
+                            reportName: "Code coverage report"
+                        ])
                     }
                 } 
                 
