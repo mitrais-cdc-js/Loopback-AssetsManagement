@@ -25,7 +25,14 @@
                         <option *ngFor="let check of checklists" [ngValue]="check.id">{{check.name}}</option>
                     </select>
 				</div>
-				<button type="submit" class="btn btn-primary btn-block">Save</button>
+				<div class="form-group">
+					<div class="col-md-6">
+						<button type="submit" id="category-save-btn" class="btn btn-primary btn-block">Save</button>
+					</div>
+					<div class="col-md-6">
+						<button type="button" id="category-cancel-btn" (click)="onCancel($event)" class="btn btn-default btn-block">Cancel</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
