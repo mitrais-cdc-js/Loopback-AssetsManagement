@@ -138,10 +138,21 @@ pipeline {
                 //         """
                 //     }
                 // }
-                // Push the artifacts to s3 bucket.
-                sh """
-                    aws deploy push --application-name mitrais-cdc-loopback-deploy --s3-location s3://mitrais-cdc-loopback-deploy-s3bucket/AssetsManagement.zip --source LoopbackDeploy\
-                """
+                
+                script {
+                    // Generate UUID for bucket object key.
+                    def verCode = UUID.randomUUID().toString()
+
+                    // Push the artifacts to s3 bucket.
+                    sh """
+                        aws deploy push --application-name mitrais-cdc-loopback-deploy --s3-location s3://mitrais-cdc-loopback-deploy-s3bucket/AssetsManagement-${verCode}.zip --source LoopbackDeploy\
+                    """
+
+                    // Deploy the artifacts from s3 to ec2 instance for staging.
+                    sh """
+                        aws deploy create-deployment  --application-name mitrais-cdc-loopback-deploy --deployment-group-name mitrais-cdc-loopback-deploy --s3-location bucket=mitrais-cdc-loopback-deploy-s3bucket,bundleType=zip,key=AssetsManagement-${verCode}
+                    """
+                }
             }
         }
     }
