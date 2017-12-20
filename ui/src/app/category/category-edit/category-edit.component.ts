@@ -56,20 +56,43 @@ export class CategoryEditComponent implements OnInit {
 	}
 
 	onCancel(event){
-		var hasChangeForm = false;
-		console.log(this.category);
-		for (var property in this.category){
-			if (this.category[property] != "" && this.category[property] != undefined){
-			hasChangeForm = true;
+		var hasChangeForm = this.compareCategoryValue();
+	
+		hasChangeForm.then( changeStatus => {
+			console.log("change form " + changeStatus);
+			if (changeStatus == true){
+				var confirmDialog = this.dialogService.confirm('Discard changes?');
+				
+				confirmDialog.subscribe( returnConfirm => {
+				console.log(returnConfirm);
+				if (returnConfirm == true){
+					this.router.navigate(['/categories']);
+				}
+				})
+			}else{
+				this.router.navigate(['/categories']);
 			}
-		}
+		});
+	}
 
-		console.log("change form " + hasChangeForm);
-		if (hasChangeForm == true){
-			return this.dialogService.confirm('Discard changes?');
-		}else{
-			this.router.navigate(['/categories']);
-		}
+	compareCategoryValue(){
+		var hasChangeForm = false;
+
+		return this.categoryService.getCategory(this.category.id)
+		  	.then( category => {
+
+			  	for (var property in this.category){
+			
+					if (this.category[property] != category[property]){
+				  		hasChangeForm = true;
+				  		console.log(property+ " -- change: " + this.category[property] + " | " + category[property]);
+					}
+				
+			  	}
+	
+			  	return hasChangeForm;
+	
+		  	});
 	}
 
 	onSubmit(form: NgForm) { 
