@@ -150,7 +150,7 @@ pipeline {
 
                     // Deploy the artifacts from s3 to ec2 instance for staging.
                     sh """
-                        aws deploy create-deployment  --application-name mitrais-cdc-loopback-deploy --deployment-group-name mitrais-cdc-loopback-deploy --s3-location bucket=mitrais-cdc-loopback-deploy-s3bucket,bundleType=zip,key=AssetsManagement-${verCode}
+                        aws deploy create-deployment  --application-name mitrais-cdc-loopback-deploy --deployment-group-name mitrais-cdc-loopback-deploy --s3-location bucket=mitrais-cdc-loopback-deploy-s3bucket,bundleType=zip,key=s3://mitrais-cdc-loopback-deploy-s3bucket/AssetsManagement-${verCode}.zip
                     """
                 }
             }
