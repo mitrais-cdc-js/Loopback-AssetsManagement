@@ -140,7 +140,7 @@ pipeline {
                 // }
                 // Push the artifacts to s3 bucket.
                 sh """
-                    aws deploy push --application-name mitrais-cdc-loopback-deploy --s3-location s3://mitrais-cdc-loopback-deploy-s3bucket/AssetsManagement-${verCode}.zip --source LoopbackDeploy\
+                    aws deploy push --application-name mitrais-cdc-loopback-deploy --s3-location s3://mitrais-cdc-loopback-deploy-s3bucket/AssetsManagement.zip --source LoopbackDeploy\
                 """
             }
         }
