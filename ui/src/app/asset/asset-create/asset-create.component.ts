@@ -95,7 +95,12 @@ export class AssetCreateComponent implements OnInit {
 
     console.log("change form " + hasChangeForm);
     if (hasChangeForm == true){
-      return this.dialogService.confirm('Discard changes?');
+      var confirmDialog = this.dialogService.confirm('Discard changes?');
+			confirmDialog.subscribe(response => {
+				if (response == true){
+					this.router.navigate(['/assets']);
+				}
+			})
     }else{
       this.router.navigate(['/assets']);
     }
