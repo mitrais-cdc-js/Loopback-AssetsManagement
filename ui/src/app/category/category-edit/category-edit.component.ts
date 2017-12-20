@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 
 // services
 import { CategoryService } from '../../services/category.service';
+import { DialogService }  from '../../dialog.service';
 
 // class
 import { Category } from '../category';
@@ -39,13 +40,36 @@ export class CategoryEditComponent implements OnInit {
 	]
 
 
-	constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private alertService: AlertService) { }
+	constructor(
+		private route: ActivatedRoute, 
+		private router: Router, 
+		private categoryService: CategoryService, 
+		private alertService: AlertService,
+		public dialogService: DialogService 
+	) { }
 
 	ngOnInit() {
 		console.log(this.category);
 		this.getCategory(this.route.snapshot.params['id']);
 		this.getParentCategories(this.route.snapshot.params['id']);
 		this.getChildCategories(this.route.snapshot.params['id']);
+	}
+
+	onCancel(event){
+		var hasChangeForm = false;
+		console.log(this.category);
+		for (var property in this.category){
+			if (this.category[property] != "" && this.category[property] != undefined){
+			hasChangeForm = true;
+			}
+		}
+
+		console.log("change form " + hasChangeForm);
+		if (hasChangeForm == true){
+			return this.dialogService.confirm('Discard changes?');
+		}else{
+			this.router.navigate(['/categories']);
+		}
 	}
 
 	onSubmit(form: NgForm) { 

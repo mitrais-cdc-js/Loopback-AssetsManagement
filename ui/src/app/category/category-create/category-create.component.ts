@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 // services
 import { CategoryService } from '../../services/category.service';
 import { AlertService } from '../../_services/index';
-
+import { DialogService }  from '../../dialog.service';
 @Component({
 	selector: 'app-category-create',
 	templateUrl: '../category-form.component.html',
@@ -40,7 +40,12 @@ export class CategoryCreateComponent implements OnInit {
 
 	hasChild = false;
 
-	constructor(protected categoryService: CategoryService, private router: Router,private alertService: AlertService) { }
+	constructor(
+		protected categoryService: CategoryService, 
+		private router: Router,
+		private alertService: AlertService,
+		public dialogService: DialogService
+	) { }
 
 	ngOnInit() {
 		this.getParentCategories();
@@ -74,6 +79,28 @@ export class CategoryCreateComponent implements OnInit {
 	    });
 	}
 
+	onCancel(event){
+		var hasChangeForm = false;
+		console.log(this.category);
+		for (var property in this.category){
+			if (this.category[property] != "" && this.category[property] != undefined){
+			hasChangeForm = true;
+			}
+		}
+
+		console.log("change form " + hasChangeForm);
+		if (hasChangeForm == true){
+			var confirmDialog = this.dialogService.confirm('Discard changes?');
+			confirmDialog.subscribe(response => {
+				if (response == true){
+					this.router.navigate(['/categories']);
+				}
+			})
+			console.log("dialog : " , confirmDialog);
+		}else{
+			this.router.navigate(['/categories']);
+		}
+	}
 
 	getParentCategories() {
 		this.categoryService.getParentCategories().subscribe(
