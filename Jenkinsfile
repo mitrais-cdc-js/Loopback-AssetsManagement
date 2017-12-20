@@ -139,11 +139,9 @@ pipeline {
                 //     }
                 // }
                 // Push the artifacts to s3 bucket.
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: aws_creds, secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh """
-                        aws deploy push --application-name mitrais-cdc-loopback-deploy --s3-location s3://mitrais-cdc-loopback-deploy-s3bucket/AssetsManagement-${verCode}.zip --source LoopbackDeploy\
-                    """
-                }
+                sh """
+                    aws deploy push --application-name mitrais-cdc-loopback-deploy --s3-location s3://mitrais-cdc-loopback-deploy-s3bucket/AssetsManagement-${verCode}.zip --source LoopbackDeploy\
+                """
             }
         }
     }
