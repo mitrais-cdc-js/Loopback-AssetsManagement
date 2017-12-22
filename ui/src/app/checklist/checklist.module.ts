@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ChecklistComponent } from './checklist.component';
+import { ChecklistCreateComponent } from './checklist-create/checklist-create.component';
+import { ChecklistEditComponent } from './checklist-edit/checklist-edit.component';
 
 const checklistRouting: ModuleWithProviders = RouterModule.forChild([
   {
@@ -20,7 +22,9 @@ const checklistRouting: ModuleWithProviders = RouterModule.forChild([
     checklistRouting
   ],
   declarations: [
-    ChecklistComponent
+    ChecklistComponent,
+    ChecklistCreateComponent,
+    ChecklistEditComponent
   ]
 })
 export class ChecklistModule { }
