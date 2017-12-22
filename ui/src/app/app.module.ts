@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+// import { AlertComponent } from './_directives/index';
+// import { AlertService } from './_services/index';
+
 import { AssetsModule } from './asset/asset.module';
 import { CategoriesModule } from './category/category.module';
 import { ChecklistModule } from './checklist/checklist.module';
@@ -45,12 +48,19 @@ const RootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     RootRouting,
   ],
   declarations: [
+    // AlertComponent,
     AppComponent,
     HeaderComponent,
     NavigationComponent,
     HomeComponent
   ],
-  providers: [DataService, UtilityService, DialogService,CanDeactivateGuard],
+  providers: [
+    // AlertService,
+    DataService, 
+    UtilityService, 
+    DialogService,
+    CanDeactivateGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
