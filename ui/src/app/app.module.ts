@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { AssetsModule } from './asset/asset.module';
 import { CategoriesModule } from './category/category.module';
+import { ChecklistModule } from './checklist/checklist.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,6 +21,7 @@ import { CanDeactivateGuard }       from './can-deactivate-guard.service';
 
 // 3rd part
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 
 
 // define routes
@@ -39,6 +41,7 @@ const RootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     HttpModule,
     AssetsModule,
     CategoriesModule,
+    ChecklistModule,
     RootRouting,
   ],
   declarations: [
