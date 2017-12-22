@@ -42,5 +42,9 @@
   "Category": {
     "dataSource": "mongo",
     "public": true
+  },
+  "Checklist": {
+    "dataSource": "mongo",
+    "public": true
   }
 }
